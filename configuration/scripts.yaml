@@ -12,7 +12,7 @@ desligar_geral:
           - switch.monitores
 #          - switch.carregador_douglas          
 #          - switch.carregador_luana          
-#          - switch.computador          
+#          - switch.pc          
 #          - switch.maquina_de_lavar          
     #climate
     - service: climate.turn_off
@@ -347,7 +347,7 @@ luzes_escritorio_efeito_disco:
       effect: 'colorstrobe'                  
 
 ###########################################################################################################################################################
-# Vídeos
+# Vídeos / Rádios
 ###########################################################################################################################################################          
 
 radio_cross:
@@ -363,7 +363,7 @@ radio_cross:
 # TV Samsung - Comandos
 ###########################################################################################################################################################  
 
-#samsung - diminuir volume
+# samsung - diminuir volume
 tv_samsung_diminuir_volume:
   sequence:
   - service: broadlink.send     
@@ -372,7 +372,7 @@ tv_samsung_diminuir_volume:
       packet:
       - "JgBGAJSVEjgSOBI4EhMRFBETEhMSExM3EjgSOBMSEhMSExITEhMSNxI4EhMSOBITEhMSExITEhMSExI4EhMSNxI4EjgSOBIADQUAAA=="
 
-#samsung - aumentar volume
+# samsung - aumentar volume
 tv_samsung_aumentar_volume:
   sequence:
   - service: broadlink.send     
@@ -381,7 +381,7 @@ tv_samsung_aumentar_volume:
       packet:
       - "JgCMAJWUEzcSOBM3EhMSExITEhMSExI4EjcTNxITEhMSExITEhMSOBI4EzcSExETEhMSExITEhMSExITEjgTNxM3EjgROBIABgiUlRM3EjgSOBMSEhMSExITEhMROBI4EjgSExITEhMSExITEjgSNxI4EhMSExITEhMSExITEhMSExI4EjgSNxI4EjgSAA0FAAAAAAAAAAAAAAAA"
 
-#samsung - mutar (silenciar)
+# samsung - mutar (silenciar)
 tv_samsung_mute:
   sequence:
   - service: broadlink.send     
@@ -390,7 +390,7 @@ tv_samsung_mute:
       packet:
       - "JgBGAJSVEjgSOBI4EhMSExITEhISExI4EjgSOBITEhMSExITEhMSOBI4EjcSOBITEhMSExITEhMSExITEhMSOBI4EjcSOBIADQUAAA=="
 
-#samsung - seta esquerda <-
+# samsung - seta esquerda <-
 tv_samsung_esquerda:
   sequence:
   - service: broadlink.send     
@@ -399,7 +399,7 @@ tv_samsung_esquerda:
       packet:
       - "JgAYAZWUEjgSOBI4ExISExITEhMSExI4EjcSOBITEhMTEhITEhMSExI4EhMSExITEjgROBITEjgSExI4EjgSOBITEhMSNxMABgeVkRU4EjgSOBITEhMSExITEhMSOBI3EjgSExITEhMSExITEhMSOBITEhMSExI3EjgSExI4EhMSOBI4EjgSExITETgSAAYIlJUSOBI4EjgSExITEhMSExITETgSOBM3EhMSExITEhMSExITEjcSExITEhMSOBI4EhMTNxITEjgROBI4EhMSExI4EgAGB5WVEjcSOBI4EhMSExITEhMSExI4EjcSOBITEhMSExITEhMSExI4EhMSExETEzcSOBITEjgTEhI4EjcSOBITEhMSOBIADQU="
 
-#samsung - seta direita ->
+# samsung - seta direita ->
 tv_samsung_direita:
   sequence:
   - service: broadlink.send     
@@ -408,7 +408,7 @@ tv_samsung_direita:
       packet:
       - "JgBGAJWVEjgSNxI4EhMSExITEhMSExI4EjgSOBETEhMSExITEhMSExI4EhMSExITEjgSOBETEjgSExM3EjgSOBITEhMSOBIADQUAAA=="      
 
-#samsung - seta cima
+# samsung - seta cima
 tv_samsung_cima:
   sequence:
   - service: broadlink.send     
@@ -417,7 +417,7 @@ tv_samsung_cima:
       packet:
       - "JgCMAJSVEzcTNxI4EhMSExITEhMSExE4EjgSOBITExISExITExISExITEhMSExETEjgSOBITEjgSOBI4EjcSOBITEhMSOBIABgiUlRM3EjgSOBITEhMSExETEhMSOBI4EjgSExITEhMSExITEhMSExETEhMSExI4EjgTEhI4EjgSOBI3EzcSExMSEjgSAA0FAAAAAAAAAAAAAAAA"     
 
-#samsung - seta cima
+# samsung - seta baixo
 tv_samsung_baixo:
   sequence:
   - service: broadlink.send     
@@ -429,7 +429,7 @@ tv_samsung_baixo:
 
 
 ###########################################################################################################################################################
-# TV Samsung - Comandos
+# Aspirador - Comandos por Zona
 ###########################################################################################################################################################  
 
 aspirador_cozinha:

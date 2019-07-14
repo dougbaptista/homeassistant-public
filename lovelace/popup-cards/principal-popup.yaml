@@ -195,7 +195,7 @@
                       - opacity: 0.9
                       - tap_action:
                           action: call-service
-                          service: remote.send_command
+                          service: script.tv_samsung_cima
 
                   - type: 'custom:button-card'
                     color_type: blank-card
@@ -249,7 +249,7 @@
                       - opacity: 0.9
                       - tap_action:
                           action: call-service
-                          service: remote.send_command
+                          service: script.tv_samsung_esquerda
                   
                   # Menu Meio
                   - type: 'custom:decluttering-card'
@@ -281,7 +281,7 @@
                       - opacity: 0.9
                       - tap_action:
                           action: call-service
-                          service: remote.send_command
+                          service: script.tv_samsung_direita
 
                   - type: 'custom:button-card'
                     color_type: blank-card
@@ -346,7 +346,7 @@
                       - opacity: 0.9
                       - tap_action:
                           action: call-service
-                          service: remote.send_command
+                          service: script.tv_samsung_baixo
 
                   - type: 'custom:button-card'
                     color_type: blank-card
@@ -2388,36 +2388,3 @@
           styles:
             card:
               - height: 10px
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
