@@ -6,7 +6,7 @@ Se você pretende fazer uma cópia do meu projeto, você precisa entender e apli
 
 ### Compartilhamento do Projeto
 
-Nesse primeiro momento, só estou compartilhando a parte do lovelace. Realizarei demais ajustes no projeto e aos poucos vou compartilhando os demais arquivos. Mas o que compartilho é o suficiente para a parte do design.
+As automações do meu projeto são todas através do Node-RED, com exceção de apenas uma que é quando iniciar o HA. Por equanto ainda estou configurando as automações e relizando muitos ajustes. Caso alguém que conheça alguma automação minha, basta solicitar que eu passo via clipboard o fluxo da autoamação.
 
 ### CARDS
 
