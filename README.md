@@ -6,7 +6,7 @@ Se você pretende fazer uma cópia do meu projeto, você precisa entender e apli
 
 ### Compartilhamento do Projeto
 
-Nesse primeiro momento, só estou compartilhando a parte do lovelace. Realizarei demais ajustes no projeto e aos poucos vou compartilhando os demais arquivos. Mas o que compartilho é o suficiente para a parte do design.
+As automações do meu projeto são todas através do Node-RED, com exceção de apenas uma que é quando iniciar o HA. Por equanto ainda estou configurando as automações e relizando muitos ajustes. Caso alguém que conheça alguma automação minha, basta solicitar que eu passo via clipboard o fluxo da autoamação.
 
 ### CARDS
 
@@ -36,7 +36,7 @@ Nem todos os cards estarão disponíveis no HACS, porém você pode instalar man
 - [Lovelace Xiaomi Vacuum Card](https://github.com/benct/lovelace-xiaomi-vacuum-card): Instalação pelo HACS. Apenas para gerenciar as ações do aspirador Vacuum da Xiaomi. Se você não vai aplicar, não é necessário. Futuramente pretendo experimentar o mesmo cartão que o jimz011 está utilizando no projeto dele.
 - [Swipe Card](https://github.com/bramkragten/swipe-card): Instalação pelo HACS. Estou utilizando esse card para arrastar e mostrar outras informações. No meu projeto utilizo por exemplo na página principal com o consumo e arrasto para ver o consumo dos equipamentos por mês, por dia e total. Não é necessário.
 
-#### Lista de Cards do meu projeto- Não suportado pelo HACS (Necessita de instalação manual)
+#### Lista de Cards do meu projeto - Não suportado pelo HACS (Necessita de instalação manual)
 
 - [Card-Tools](https://github.com/thomasloven/lovelace-card-tools): Instalação manual através do HACS. É um requisito para utilizar outros cartões. É obrigado a ter esse cartão instalado.
 - [Popup-Card](https://github.com/thomasloven/lovelace-card-tools): Instalação manual através do HACS. Esse cartão é o que faz a mágica para abrir as janelas/modais no meu projeto. Sem isso, os botões da página principal não irão funcionar.
@@ -45,16 +45,31 @@ Nem todos os cards estarão disponíveis no HACS, porém você pode instalar man
 
 ### Imagens e Vídeo
 
+<img src="https://github.com/dougbaptista/homeassistant-public/blob/master/screenshots/01.jpg">
+<img src="https://github.com/dougbaptista/homeassistant-public/blob/master/screenshots/02.jpg">
+<img src="https://github.com/dougbaptista/homeassistant-public/blob/master/screenshots/03.jpg">
+<img src="https://github.com/dougbaptista/homeassistant-public/blob/master/screenshots/04.jpg">
+<img src="https://github.com/dougbaptista/homeassistant-public/blob/master/screenshots/05.jpg">
+<img src="https://github.com/dougbaptista/homeassistant-public/blob/master/screenshots/06.jpg">
+<img src="https://github.com/dougbaptista/homeassistant-public/blob/master/screenshots/07.jpg">
+<img src="https://github.com/dougbaptista/homeassistant-public/blob/master/screenshots/08.jpg">
+<img src="https://github.com/dougbaptista/homeassistant-public/blob/master/screenshots/09.jpg">
+<img src="https://github.com/dougbaptista/homeassistant-public/blob/master/screenshots/10.jpg">
+
 Para que quiser ver algumas telas do meu projeto, pode ser visualizado no vídeo abaixo. Recomendo assistir se realmente tiver interesse em copiar alguma parte do projeto.
+
+Vídeo em breve.
 
 ### Dúvidas
 
 Por favor, se você tiver dúvida entre no grupo do [telegram](https://t.me/HomeAssistantbrasil) onde eu e várias outras pessoas compartilham conhecimentos sobre o HA e ajudam na medida do possível nas questões.
 
+Também foi criado uma página para compartilhar informações através de artigos. [https://www.home-assistant.wiki.br/](https://www.home-assistant.wiki.br/)
+
 ### Agradecimentos
 
 - @remontti - Por me ajudar muito a entrar no mundo do Home Assistant, através do seu projeto é que entendi o "poder" do HA.
 - @jimz011 - Por compartilhar todo seu projeto, além disso responder todas as minhas dúvidas. Meu projeto é "ctrl+c" e "ctrl+v" do projeto dele.
-- @PatteTech - Foi graças a seus vídeos, grupos que me fez entrar no mundo da automação, ajudam muitas pessoas como eu que querem começar e tem diversas dúvidas.
+- Canal Youtube Patte Tech - Foi graças a seus vídeos, grupos que me fez entrar no mundo da automação, ajudam muitas pessoas como eu que querem começar e tem diversas dúvidas.
 - @marciogranzotto - Por compartilhar suas automações incríveis, como pegar as taxas de energia elétrica da empresa CELESC.
 - @htcheroportugal - Co-Fundador CPHA, uma comunidade portuguesa muito forte com projetos utilizando o HA, e para nós brasileiros é muito importante, pois entendemos perfeitamente seus tutoriais, vídeos etc. São muito atenciosos e organizados. Sempre que precisei me ajudaram de várias formas.
