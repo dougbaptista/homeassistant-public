@@ -1,0 +1,245 @@
+###################################################################################################################
+# ██╗  ██╗ ██████╗ ███╗   ███╗███████╗     █████╗ ███████╗███████╗██╗███████╗████████╗ █████╗ ███╗   ██╗████████╗ #
+# ██║  ██║██╔═══██╗████╗ ████║██╔════╝    ██╔══██╗██╔════╝██╔════╝██║██╔════╝╚══██╔══╝██╔══██╗████╗  ██║╚══██╔══╝ #
+# ███████║██║   ██║██╔████╔██║█████╗      ███████║███████╗███████╗██║███████╗   ██║   ███████║██╔██╗ ██║   ██║    #
+# ██╔══██║██║   ██║██║╚██╔╝██║██╔══╝      ██╔══██║╚════██║╚════██║██║╚════██║   ██║   ██╔══██║██║╚██╗██║   ██║    #
+# ██║  ██║╚██████╔╝██║ ╚═╝ ██║███████╗    ██║  ██║███████║███████║██║███████║   ██║   ██║  ██║██║ ╚████║   ██║    #
+# ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝    ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═══╝   ╚═╝    #                                                                                   
+###################################################################################################################
+homeassistant:
+  name: !secret name
+  time_zone: !secret timezone
+  latitude: !secret latitude
+  longitude: !secret longitude
+  unit_system: metric
+  elevation: 7
+
+  # Arquivo de customização
+  customize: !include configuration/customize.yaml
+
+  # Metodo de autenticação
+  auth_providers:
+   - type: trusted_networks 
+     trusted_networks: 
+      - 127.0.0.1 
+      - ::1 
+      - 192.168.0.0/24
+   - type: homeassistant
+
+# Lovelace Mode
+lovelace:
+  mode: yaml
+
+# Cloud
+cloud:
+
+# Informações sobre o sistema e seus componentes. Também permite executar ferramentas de diagnóstico para diagnosticar problemas.
+system_health:
+
+# Enables the frontend
+frontend: !include configuration/frontend.yaml
+
+# Enables configuration UI
+config:
+
+hassio:
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+http:
+  base_url: !secret base_url
+  ssl_certificate: /ssl/fullchain.pem
+  ssl_key: /ssl/privkey.pem
+
+updater:
+
+# Descubra alguns dispositivos automaticamente
+discovery:
+  ignore:
+    - yeelight
+
+# Permite que você emita comandos de voz do frontend em navegadores ativados
+conversation:
+
+# Suporte para rastrear mudanças de estado ao longo do tempo
+history:
+  include:
+    domains:
+      - sensor
+      - switch
+      - light
+      - binary_sensor
+  exclude:
+    entities:
+      - sensor.last_boot
+      - sensor.date
+      - sensor.time
+
+# Ver todos os eventos em um diário de bordo
+logbook:
+  include:
+    domains:
+      - sensor
+      - switch
+      - light
+      - script
+      - media_player
+
+# Mostrando a localização de dispositivos rastreados no mapa
+map:
+
+# Pessoa - https://www.home-assistant.io/components/person/
+person:
+
+# Nível de registro de atividades
+logger:
+  default: warning
+
+# Mosquitto - https://www.home-assistant.io/addons/mosquitto/
+mqtt: 
+  broker: !secret broker
+  port: !secret broker_port
+  username: !secret broker_user
+  password: !secret broker_pass
+  discovery: true
+  discovery_prefix: homeassistant  
+
+# Armazenamento do Banco de dados (MariaDB)
+recorder:
+  db_url: !secret maria_db
+
+# Permite que outros componentes do Home Assistant processem fluxos de vídeo e áudio.
+ffmpeg:
+  ffmpeg_bin: /usr/bin/ffmpeg
+
+# Player
+media_extractor:
+
+# Includes
+scene: !include configuration/scene.yaml
+script: !include configuration/scripts.yaml
+switch: !include configuration/switch.yaml
+zone: !include configuration/zones.yaml
+climate: !include configuration/climate.yaml
+automation: !include configuration/automations.yaml
+sensor: !include configuration/sensor.yaml
+binary_sensor: !include configuration/binary_sensor.yaml
+shell_command: !include configuration/shell_command.yaml
+light: !include configuration/light.yaml
+utility_meter: !include configuration/utility_meter.yaml
+group: !include configuration/groups.yaml
+life360: !include configuration/life360.yaml
+proximity: !include configuration/proximity.yaml
+yeelight: !include configuration/yeelight.yaml
+media_player: !include configuration/media_player.yaml
+camera: !include configuration/camera.yaml
+alarm_control_panel: !include configuration/alarm_control_panel.yaml
+
+# Includes Inputs
+input_text: !include configuration/input_text.yaml
+input_number: !include configuration/input_number.yaml
+input_select: !include configuration/input_select.yaml
+input_boolean: !include configuration/input_boolean.yaml
+
+# Custom componente para Broadlink - https://github.com/smartHomeHub/SmartIR
+smartir:
+  update_branch: rc
+
+# Text to speech - https://www.home-assistant.io/components/tts/
+tts:
+
+# Google (google_say) - https://www.home-assistant.io/components/google_translate/
+  - platform: google_translate
+    language: 'pt-br'
+    cache: true
+    cache_dir: /tmp/tts
+    time_memory: 300
+
+# Watson TTS - https://www.home-assistant.io/components/watson_tts/
+  - platform: watson_tts
+    watson_url: https://gateway-wdc.watsonplatform.net/text-to-speech/api
+    watson_apikey: !secret watson_apikey
+    voice: pt-BR_IsabelaVoice
+
+# device_tracker - https://www.home-assistant.io/components/device_tracker/
+device_tracker: !include configuration/device_tracker.yaml
+
+# Telegram Bot - https://www.home-assistant.io/components/telegram_bot/
+telegram_bot:
+  - platform: polling
+    api_key: !secret tg_api_key
+    parse_mode: html
+    allowed_chat_ids:
+      - !secret tg_chat_id_doug
+      - !secret tg_chat_id_luana
+      - !secret tg_chat_id_senai
+
+# Parse mode HTML
+# <b>bold</b>, <strong>bold</strong>
+# <i>italic</i>, <em>italic</em>
+# <a href="teste">link</a>
+# <code>online</code>
+# <pre>pre-formatted</pre>    
+
+# Notificações - https://www.home-assistant.io/components/notify/
+notify: !include configuration/notify.yaml
+
+# Acompanhe o sol - https://www.home-assistant.io/components/sun/
+sun:
+
+# Previsao do tempo
+weather:
+  - platform: darksky
+    api_key: !secret api_darksky
+    mode: daily
+
+# https://www.home-assistant.io/components/speedtestdotnet/
+speedtestdotnet:
+  scan_interval:
+    minutes: 30
+  monitored_conditions:
+    - ping
+    - download
+    - upload
+
+# https://www.home-assistant.io/components/xiaomi_aqara/
+xiaomi_aqara:
+  gateways:
+    - mac: !secret mac_xiaomi_gateway
+      key: !secret key_xiaomi_gateway
+      host: !secret ip_xiaomi_gateway
+
+# Streaming - https://www.home-assistant.io/components/stream/
+stream:
+
+# Vacuum cleaner robots - https://www.home-assistant.io/components/vacuum/
+vacuum:
+  - platform: xiaomi_miio
+    name: Aspirador Xiaomi Vacuum
+    host: !secret ip_vacuum_cleaner
+    token: !secret token_vacuum
+
+# DialogFlow - https://www.home-assistant.io/components/dialogflow/
+dialogflow:
+intent_script: !include configuration/intent.yaml
+
+# IFTT - https://www.home-assistant.io/components/ifttt/
+ifttt:
+  key: !secret ifttt_key
+
+# https://www.home-assistant.io/components/calendar.google/
+google:
+  client_id: !secret client_id_calendario
+  client_secret: !secret client_secret_calendario
+
+# Google Home / Assistant - https://www.home-assistant.io/components/google_assistant/
+google_assistant: !include configuration/google_assistant.yaml
+
+# Backup - https://github.com/samccauley/addon-hassiogooglebackup
+rest_command:
+  google_backup:
+    url: !secret url_backup
+    timeout: '300'    
+
+# HACS - https://github.com/custom-components/hacs
+hacs:
+  token: !secret hacs_token    

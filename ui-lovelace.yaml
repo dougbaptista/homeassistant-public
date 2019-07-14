@@ -1,0 +1,43 @@
+###########################################################################################################################                           
+# Resources
+###########################################################################################################################                           
+resources:
+  !include lovelace/gerais/resources.yaml
+
+###########################################################################################################################                           
+# Compact Custom Header - https://github.com/maykar/compact-custom-header
+###########################################################################################################################                           
+cch:
+  menu: overflow
+  main_config: true
+  options: clock
+  notifications: hide
+  voice: hide
+  header: true
+  chevrons: false
+  notify_indicator_color: "#e80000"
+  swipe: true
+  swipe_wrap: false
+  background: 'rgba(0,0,0,0.3)'
+  clock_format: 12   
+  default_tab: 0
+
+###########################################################################################################################                           
+# Decluttering Templates - https://github.com/custom-cards/decluttering-card
+###########################################################################################################################                           
+decluttering_templates:
+  !include lovelace/gerais/decluttering_templates.yaml
+
+###########################################################################################################################                           
+# Views - https://www.home-assistant.io/lovelace/views/
+###########################################################################################################################                           
+title: Home
+#background: var(--background-image)
+background: center / cover url("/local/imgs/bg/back02.jpg")    
+views:
+  - !include lovelace/principal.yaml
+  - !include lovelace/seguranca.yaml
+  - !include lovelace/climatizacao.yaml
+  - !include lovelace/luzes.yaml
+  - !include lovelace/dispositivos.yaml
+  - !include lovelace/informacoes.yaml
