@@ -45,7 +45,20 @@ Nem todos os cards estarão disponíveis no HACS, porém você pode instalar man
 
 ### Imagens e Vídeo
 
+<img src="https://github.com/dougbaptista/homeassistant-public/blob/master/screenshots/01.jpg">
+<img src="https://github.com/dougbaptista/homeassistant-public/blob/master/screenshots/02.jpg">
+<img src="https://github.com/dougbaptista/homeassistant-public/blob/master/screenshots/03.jpg">
+<img src="https://github.com/dougbaptista/homeassistant-public/blob/master/screenshots/04.jpg">
+<img src="https://github.com/dougbaptista/homeassistant-public/blob/master/screenshots/05.jpg">
+<img src="https://github.com/dougbaptista/homeassistant-public/blob/master/screenshots/06.jpg">
+<img src="https://github.com/dougbaptista/homeassistant-public/blob/master/screenshots/07.jpg">
+<img src="https://github.com/dougbaptista/homeassistant-public/blob/master/screenshots/08.jpg">
+<img src="https://github.com/dougbaptista/homeassistant-public/blob/master/screenshots/09.jpg">
+<img src="https://github.com/dougbaptista/homeassistant-public/blob/master/screenshots/10.jpg">
+
 Para que quiser ver algumas telas do meu projeto, pode ser visualizado no vídeo abaixo. Recomendo assistir se realmente tiver interesse em copiar alguma parte do projeto.
+
+Vídeo em breve.
 
 ### Dúvidas
 
