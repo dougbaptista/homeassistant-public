@@ -68,6 +68,6 @@ Por favor, se você tiver dúvida entre no grupo do [telegram](https://t.me/Home
 
 - @remontti - Por me ajudar muito a entrar no mundo do Home Assistant, através do seu projeto é que entendi o "poder" do HA.
 - @jimz011 - Por compartilhar todo seu projeto, além disso responder todas as minhas dúvidas. Meu projeto é "ctrl+c" e "ctrl+v" do projeto dele.
-- @PatteTech - Foi graças a seus vídeos, grupos que me fez entrar no mundo da automação, ajudam muitas pessoas como eu que querem começar e tem diversas dúvidas.
+- Canal Youtube Patte Tech - Foi graças a seus vídeos, grupos que me fez entrar no mundo da automação, ajudam muitas pessoas como eu que querem começar e tem diversas dúvidas.
 - @marciogranzotto - Por compartilhar suas automações incríveis, como pegar as taxas de energia elétrica da empresa CELESC.
 - @htcheroportugal - Co-Fundador CPHA, uma comunidade portuguesa muito forte com projetos utilizando o HA, e para nós brasileiros é muito importante, pois entendemos perfeitamente seus tutoriais, vídeos etc. São muito atenciosos e organizados. Sempre que precisei me ajudaram de várias formas.
