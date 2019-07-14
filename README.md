@@ -73,3 +73,4 @@ Também foi criado uma página para compartilhar informações através de artig
 - Canal Youtube Patte Tech - Foi graças a seus vídeos, grupos que me fez entrar no mundo da automação, ajudam muitas pessoas como eu que querem começar e tem diversas dúvidas.
 - @marciogranzotto - Por compartilhar suas automações incríveis, como pegar as taxas de energia elétrica da empresa CELESC.
 - @htcheroportugal - Co-Fundador CPHA, uma comunidade portuguesa muito forte com projetos utilizando o HA, e para nós brasileiros é muito importante, pois entendemos perfeitamente seus tutoriais, vídeos etc. São muito atenciosos e organizados. Sempre que precisei me ajudaram de várias formas.
+- Canal Youtube Teclog - Compartilhou e ensinou utilizar os sensores PZEM+Sonoff para medir a energia em tempo real, totalmente em português.
