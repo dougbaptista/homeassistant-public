@@ -29,15 +29,16 @@ cards:
               card:
                 - width: 10px
 
-          - type: picture-entity
+          - type: picture-glance
             style: |
               ha-card {
                 border-radius: 12px;
                 overflow: hidden;
               }
-            entity: camera.cozinha_stream
-            title: Camera's  
-            aspect_ratio: 16x9
+            entities:
+              - light.luz_cozinha
+            camera_image: camera.cozinha_stream
+            title: Cozinha  
 
           - type: 'custom:button-card'
             color_type: blank-card
