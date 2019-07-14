@@ -8,7 +8,7 @@ Se você pretende fazer uma cópia do meu projeto, você precisa entender e apli
 
 As automações do meu projeto são todas através do Node-RED, com exceção de apenas uma que é quando iniciar o HA. Por equanto ainda estou configurando as automações e relizando muitos ajustes. Caso alguém que conheça alguma automação minha, basta solicitar que eu passo via clipboard o fluxo da autoamação.
 
-### CARDS
+### Cards Personalizados
 
 Antes de começar, precisa entender os cards que estou utilizando, e o motivo de utilizar para verificar se será preciso aplicar em seu projeto. E caso não utilize, será necessário realizar os ajustes no projeto.
 
