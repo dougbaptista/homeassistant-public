@@ -1,0 +1,67 @@
+###########################################################################################################################################################
+# Broad Cozinha
+###########################################################################################################################################################
+- platform: broadlink
+  friendly_name: 'Broad Pró Cozinha'
+  host: !secret ip_broadpro_cozinha
+  mac: !secret mac_broadpro_cozinha
+  timeout: 300
+  type: rm2_pro_plus
+   
+  switches:
+    ar_cozinha:
+      friendly_name: "Ar Cozinha"
+      command_on: 'JgDKAJGOEzQSERI0EzQSERIREzMTERIREjQTEBMREjQSNBMREjQSERMzExESNBMzEzQSNBM0EjQTEBM0EhESERMQExATERIREjQTEBM0EhESERMQExESNBIREzMTERI0EzMTNBI0E6mRjxI0ExESNBI0ExESERI0ExATERI0EhETEBM0EjQTEBM0EhESNBMREjQSNBM0EjQTNBI0EhETNBIREhESERMQExATERI0EhETMxMREhESERMQEzQSERI0ExATNBI0EzMTNBIADQUAAAAAAAAAAAAAAAAAAA=='
+      command_off: 'JgDKAJGOEzQREhMzEzQSERIREzMTERIRETUTEBMQEjUSNBMQEzQSERI0EjURNRI0ExERNRI0EjUSERESEhETEBM0EhESERI0EzQSNBMQExATERIREhESERIREhETNBI0EzMTNBI0E6mRjxE1ExATMxI1EhESERI1EhESERI0ExATEBM0EjQTEBI1ERISNBMzEzQSNBIREzQSNBI0ExATEBMREhESNBIRExASNRI0EjQTEBMREhESERIREhESERMQEzQSNBMzEzQSNBIADQUAAAAAAAAAAAAAAAAAAA=='
+
+###########################################################################################################################################################
+# Broad Escritório
+###########################################################################################################################################################
+- platform: broadlink
+  friendly_name: 'Broad Mini Escritório'
+  host: !secret ip_broadmini_escritorio
+  mac: !secret mac_broadmini_escritorio
+  timeout: 300
+  type: rm_mini
+
+  switches:
+    ar_escritorio:
+      friendly_name: "Ar Escritório"
+      command_on: 'JgDKAJGQEjYSEhI2EjYSEhISEjYSExETETcRExETETcRNxETETcRNxETETcRNxE3ETcRNxE3ERMRNxETERMRExETEhISEhI2EjYSEhISEhISExETERMRExETETcRNxE3ETcRNxE3EquRkBI2EhISNhI2EhISEhI2EhISEhI2EhISExE2EjYSExE2EjYSEhI2EjYSNhI2EjYSNhISEjYSEhISEhISExETERMRNhI2EhMRExETERMRExETERMSExE2EjYSNhI2ETcRNxEADQUAAAAAAAAAAAAAAAAAAA=='
+      command_off: 'JgDOAJGRETcRFBA3ETcRExETETcRExISETcRExISEjYSNhISEjYSEhI2EjYSNhI2EhISNhI2EjYSEhITEhESEhI2EhMRExE3ETcSNRITERMRExETEhIRFBESEhMRNhI2EjYSNhI2EqyQkRE3ERMRNxE3ERMRExE3ERMRExE3ERMSEhE3ETcRExE3EhIRNxI2EjYRNxEUEDcRNxE3ERMRExETEhISNhISEhISNhI2EjYSEhISExESExETEhIRFBATETcRNxE3ETcRNxEABJcJAA0FAAAAAAAAAAAAAA=='
+
+###########################################################################################################################################################
+# Broad Quarto Principal
+###########################################################################################################################################################
+- platform: broadlink
+  friendly_name: 'Broad Mini Quarto'
+  host: !secret ip_broadmini_quarto_principal
+  mac: !secret mac_broadmini_quarto_principal
+  timeout: 300
+  type: rm_mini
+   
+  switches:
+
+    ar_quarto:
+      friendly_name: "Ar Quarto"
+      command_on: 'JgBoARQAAk5iAAEoERARMRERDxIPERAREBEQERARDzIREBEQETEREBAREDIQMRExEjEPMhAREBEQERAREBEQERAREBAREBEQERAREBAREBEQERAREBEQERAREBEQEQ8SEBEQEBEQERAREBAREBEREBAQERARMhAyDzIQMhFiYwABKBExEBEQERAREBAREBEQERAREBExERAQERAyEBEQMhAxETERMRExEDEREBEQEhAQERARDxIPERAREBEREBEQERAQERAREBAREBEQEg8REBERDxIPEg8REBEQERAREBEQERAREBAREBEQERAREBEQEBEQY2MAASgQMhAREBEQERAREBEQERAQERARMREQERAQMhAREDERMhARDzMPMhAyETEQMRExEjARMRAREBEQERAyEDIPMw8REBEREBEQERAQEREQEBEQMRExERAQMxAxEBEQERAREBEQERAREBEQEBExETERMRAxEQANBQ=='
+      command_off: 'JgBoARMAAk5jAAEoEBEQMhAREBEQERAREBEPEg8SDzIREBEQETEQMhAQETERMRExEDIQMhAREBEPEg8SEBAREBEQERAREBAREBEQERAREBARERAREBEPEg8SDxEQERARERAREBAREBEQERAQERAREBEQERAREQ8SDzIQMhFiYwABKBExERAQERAQERAREBEQERAQERExEBEQERAyEBEQMg8yETERMRAyEDEREBEQEREQEQ8SDxIPERAREBEQERAREBEQERAQERAREBEQERAREBAREBEQERAREBEQERAREBEPEhAREBAREBEQERAREBAREBEQY2IAASkQMhAREBEQERARDxIPEhAQERARMREQEBEQMhAxETERMg8SDzIQMhAyEDIQMRExETEQMhAQERARERAyEDIPMhAREBEREBAREBEQERAQERARMRExEBEQMhAyEBEQEQ8SDxIQEBEQERAREBEQEBEQMhAxEQANBQ=='
+
+    soundbar_samsung:
+      friendly_name: "Soundbar Samsung"
+      command_on: 'JgCgAJeSEg8SDxIPEg8SMBIwEg8SDxIwEjASMBIwEg8SDxIPEg4TkhIPEg8SDxIPEg8SDxIPEg8SMBIwEjASDxIwEjASMBIwEg8SDxIPEjASAAcelpMSDxIPEg8SDxIwEjASDxIPEjASMBIwEi8TDxIPEg8SDhOSEg8SDxIPEg8SDxIPEg8SDxIwEjASMBIPEjASMBIwEjASDxIPEg8SMBIADQUAAAAAAAAAAA=='
+      command_off: 'JgCgAJSVEBEREBAREBEQMhAyERAREBAyEDIQMhAyERAQERAREBAQlREQEBEQERAREBEQERAREBEQMhAyETEREBExETEQMhExERAQERAREDIQAAcglJUREBEQEBEQERAyEDIQERAREDISMBAyEDIREBAREBEQEBCVERAQERAREBEQERAREBEPEhAyEDIQMhEQETERMRExEDIQEREQEBEQMhAADQUAAAAAAAAAAA=='
+
+
+###########################################################################################################################################################
+# PC
+###########################################################################################################################################################
+- platform: wake_on_lan
+  mac_address: !secret mac_pc_principal
+  name: "PC Principal"
+  host: !secret ip_pc_principal
+  turn_off:
+    service: hassio.addon_stdin
+    data:
+      addon: core_rpc_shutdown
+      input: PC-Principal

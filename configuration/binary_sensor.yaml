@@ -1,0 +1,71 @@
+##################################################################################################################################
+# ██████╗ ██╗███╗   ██╗ ██████╗                                                                                                  #
+# ██╔══██╗██║████╗  ██║██╔════╝                                                                                                  #
+# ██████╔╝██║██╔██╗ ██║██║  ███╗                                                                                                 #
+# ██╔═══╝ ██║██║╚██╗██║██║   ██║                                                                                                 #
+# ██║     ██║██║ ╚████║╚██████╔╝                                                                                                 #
+# ╚═╝     ╚═╝╚═╝  ╚═══╝ ╚═════╝                                                                                                  #                    
+##################################################################################################################################
+- platform: ping
+  host: !secret ip_internet
+  name: Internet
+  
+- platform: ping
+  host: !secret ip_roteador
+  name: Roteador
+
+- platform: ping
+  host: !secret ip_pc_principal
+  name: PC Principal
+
+#########################  Broadlinks  ###########################
+
+- platform: ping
+  host: !secret ip_broadpro_cozinha
+  name: Broadlink Pró Cozinha
+  
+- platform: ping
+  host: !secret ip_broadmini_quarto_principal
+  name: Broadlink Mini Quarto
+
+- platform: ping
+  host: !secret ip_broadmini_escritorio
+  name: Broadlink Mini Escritório
+
+#########################  TV's  ###########################
+
+- platform: ping
+  host: !secret ip_tv_lg
+  name: TV LG
+
+- platform: ping
+  host: !secret ip_tv_samsung
+  name: TV Samsung
+
+#########################  Cameras  ###########################
+
+- platform: ping
+  host: !secret ip_cam_cozinha
+  name: Câmera Cozinha
+  
+- platform: ping
+  host: !secret ip_cam_garagem
+  name: Câmera Garagem
+  
+- platform: ping
+  host: !secret ip_cam_fundos
+  name: Câmera Fundos
+
+#########################  Celualres  ###########################
+
+- platform: ping
+  host: !secret ip_cel_douglas
+  name: Celular Douglas
+
+- platform: ping
+  host: !secret ip_cel_luana
+  name: Celular Luana
+
+- platform: ping
+  host: !secret ip_cel_mae
+  name: Celular Mãe

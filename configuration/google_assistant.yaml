@@ -1,0 +1,122 @@
+  project_id: !secret google_assistant_project_id
+  api_key: !secret google_assistant_api_key
+  expose_by_default: false
+  entity_config:
+
+    # Cozinha
+    switch.microondas:
+      expose: true
+      room: Cozinha
+    light.luz_cozinha:
+      expose: true
+      room: Cozinha
+    climate.ar_cozinha:
+      expose: true
+      room: Cozinha
+    camera.cozinha:
+      expose: true
+      room: Cozinha
+    switch.carregador_tablet_hyundai:
+      expose: true
+      room: Cozinha
+
+    # Área externa
+    light.luz_garagem:
+      expose: true
+      room: Área Externa
+    light.luz_quintal:
+      expose: true
+      room: Área Externa
+    light.luz_frente:
+      expose: true
+      room: Área Externa
+    switch.maquina_de_lavar:
+      expose: true
+      room: Área Externa
+
+    # HA
+    group.all_lights:
+      expose: true
+      room: HA
+    script.ativar_alarme:
+      room: HA
+      expose: true   
+    script.desligar_geral:
+      room: HA
+      expose: true   
+    light.luzes_externas:
+      room: HA
+      expose: true   
+    input_boolean.checar_consumo:
+      room: HA
+      expose: true   
+    input_boolean.visitas:
+      room: HA
+      expose: true   
+
+    input_boolean.checar_sensores:
+      room: HA
+      expose: true   
+    input_boolean.checar_temperatura:
+      room: HA
+      expose: true   
+
+    # Quarto Principal
+    light.luz_quarto:
+      expose: true
+      room: Quarto
+    climate.ar_quarto:
+      expose: true
+      room: Quarto
+    media_player.tv_samsung:
+      expose: true
+      room: Quarto
+    light.led_quarto:
+      expose: true
+      room: Quarto
+    switch.carregador_luana:
+      expose: true
+      room: Quarto
+    switch.carregador_douglas:
+      expose: true
+      room: Quarto
+
+    script.cozinha_camera_stream:     
+      room: Quarto
+      expose: true
+    script.luz_quarto_efeito_disco:     
+      room: Quarto
+      expose: true
+
+    # Escritório
+    climate.ar_escritorio:
+      expose: true
+      room: Escritório
+    light.luz_escritorio:
+      expose: true
+      room: Escritório
+    light.gateway_light_7c49eb19486c:
+      expose: true
+      room: Escritório
+    switch.pc_principal:
+      expose: true
+      room: Escritório
+    switch.sonoff_pow_monitores:
+      expose: true
+      room: Escritório      
+    light.led_escritorio:
+      expose: true
+      room: Escritório
+
+    # Corredor
+    light.luz_corredor:
+      expose: true
+      room: Corredor   
+
+    # Sala
+    media_player.tv_lg:
+      expose: true
+      room: Sala     
+    input_boolean.vacuum_aspirador: 
+      expose: true
+      room: Sala     

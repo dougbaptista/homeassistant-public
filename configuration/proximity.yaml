@@ -1,0 +1,18 @@
+  home:
+    devices:
+      - device_tracker.life360_douglas
+      - device_tracker.life360_luana
+    tolerance: 50
+    unit_of_measurement: km
+
+  senai:
+    devices:
+      - device_tracker.life360_douglas
+    tolerance: 50
+    unit_of_measurement: km
+    
+  bekko:
+    devices:
+      - device_tracker.life360_luana
+    tolerance: 50
+    unit_of_measurement: km

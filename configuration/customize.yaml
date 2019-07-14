@@ -1,0 +1,386 @@
+# CLIMA ######################################
+sun.sun:
+  friendly_name: Sol
+sensor.yr_symbol:
+  friendly_name: Clima
+  
+# DARK SKY ######################################
+
+sensor.dark_sky_wind_speed:
+  friendly_name: Vento
+sensor.dark_sky_humidity:
+  friendly_name: Umidade
+sensor.dark_sky_temperature:
+  friendly_name: Temp
+  
+sensor.dark_sky_uv_index:
+  friendly_name: Índice de UV
+sensor.dark_sky_cloud_coverage:
+  friendly_name: Nuvens
+sensor.dark_sky_pressure:
+  friendly_name: Pressão
+sensor.dark_sky_visibility:
+  friendly_name: Visibilidade
+sensor.dark_sky_daytime_high_temperature:
+  friendly_name: Máxima
+sensor.dark_sky_overnight_low_temperature:
+  friendly_name: Mínima
+sensor.dark_sky_hourly_summary:
+  friendly_name: Resumo 24h
+sensor.dark_sky_daily_summary:
+  friendly_name: Resumo da semana
+  
+# SPOTIFY ######################################
+sensor.spotify_source:
+  hidden: true
+sensor.spotify_volume:
+  hidden: true
+sensor.spotify_shuffle:
+  hidden: true
+
+# DISPOSITIVOS ######################################
+binary_sensor.internet:
+  icon: mdi:earth
+binary_sensor.pc_principal:
+  icon: mdi:desktop-classic  
+binary_sensor.camera_cozinha:
+  icon: mdi:cctv
+binary_sensor.camera_garagem:
+  icon: mdi:cctv
+binary_sensor.camera_fundos:
+  icon: mdi:cctv
+binary_sensor.tv_lg:
+  icon: mdi:television
+binary_sensor.tv_samsung:
+  icon: mdi:television
+binary_sensor.note_luana:
+  icon: mdi:laptop
+
+# SENSORES ######################################
+
+# bateria celular
+sensor.bateria_douglas:
+  icon: mdi:battery
+sensor.bateria_luana:
+  icon: mdi:battery
+
+# geral
+binary_sensor.door_window_sensor_158d0002890f27:
+  friendly_name: Sensor Porta Principal
+  device_class: door
+  icon: fas:door-closed
+binary_sensor.door_window_sensor_158d000106f81f:
+  friendly_name: Sensor Portão Garagem
+  device_class: door
+  icon: fas:door-closed
+
+sensor.alarme_casa:
+  templates:
+    icon_color: if (state === 'Ligado') return '#fbcd41'; else return '#0567d2';
+
+binary_sensor.switch_158d00026a8ada:
+  friendly_name: Botão Xiaomi
+binary_sensor.cube_158d00027d44ee:
+  friendly_name: Cubo Xiaomi
+
+# Sensores Xiaomi ######################################
+
+# Cozinha
+binary_sensor.motion_sensor_158d00032bd286:  
+  friendly_name: Sensor Movimento Cozinha  
+sensor.temperature_158d00031b049b:
+  friendly_name: Temperatura Cozinha
+sensor.humidity_158d00031b049b:
+  friendly_name: Umidade Cozinha
+sensor.pressure_158d00031b049b:
+  friendly_name: Pressão Cozinha
+sensor.illumination_158d00032bd286:
+  friendly_name: Iluminação Cozinha
+
+# Quarto Principal
+binary_sensor.motion_sensor_158d00026726e9:
+  friendly_name: Sensor Movimento Quarto Principal  
+sensor.temperature_158d00020e355a:
+  friendly_name: Temperatura Quarto Principal
+sensor.humidity_158d00020e355a:
+  friendly_name: Umidade Quarto Principal
+
+# Escritório
+sensor.temperature_158d0002d778da:
+  friendly_name: Temperatura Escritório
+sensor.humidity_158d0002d778da:
+  friendly_name: Umidade Escritório
+sensor.pressure_158d0002d778da:
+  friendly_name: Pressão Escritório
+sensor.illumination_7c49eb19486c:
+  friendly_name: Gateway Xiaomi - Iluminação
+
+# Banheiro
+binary_sensor.water_leak_sensor_158d00028a0c55:
+  friendly_name: Sensor de Água
+sensor.temperature_158d0002ead129:
+  friendly_name: Temperatura Banheiro
+sensor.humidity_158d0002ead129:
+  friendly_name: Umidade Banheiro
+
+# Sala
+sensor.temperature_158d0002e6ace5:
+  friendly_name: Temperatura Sala
+sensor.humidity_158d0002e6ace5:
+  friendly_name: Umidade Sala
+
+# Corredor
+binary_sensor.motion_sensor_158d0002fd5556:
+  friendly_name: Sensor Movimento Corredor
+
+# Garagem
+binary_sensor.motion_sensor_158d0002ecf633:
+  friendly_name: Sensor Movimento Garagem
+
+# SONOFF e BROADLINK ######################################
+binary_sensor.sonoff_rf_bridge:
+  icon: mdi:radar
+binary_sensor.broadlink_mini_quarto:
+  icon: mdi:remote
+binary_sensor.broadlink_pro_cozinha:
+  icon: mdi:remote
+binary_sensor.broadlink_mini_escritorio:
+  icon: mdi:remote
+
+switch.refrigerador:
+  icon: mdi:fridge-outline
+switch.microondas:
+  icon: mdi:microwave
+switch.maquina_de_lavar:
+  friendly_name: Máquina de Lavar 
+  icon: mdi:washing-machine
+switch.carregador_luana:
+  friendly_name: Carregador Luana  
+  icon: mdi:power-socket-us  
+switch.carregador_douglas:
+  friendly_name: Carregador Douglas  
+  icon: mdi:power-socket-us  
+switch.carregador_tablet_hyundai:
+  friendly_name: Carregador Tablet Hyundai  
+  icon: mdi:power-socket-us
+
+# CONSUMO ######################################
+sensor.refrigerador_hoje_r:
+  icon: mdi:currency-usd  
+sensor.refrigerador_ontem_r:
+  icon: mdi:currency-usd  
+sensor.refrigerador_total_r:
+  icon: mdi:currency-usd  
+
+sensor.maquina_de_lavar_hoje_r:
+  icon: mdi:currency-usd  
+sensor.maquina_de_lavar_ontem_r:
+  icon: mdi:currency-usd  
+sensor.maquina_de_lavar_total_r:
+  icon: mdi:currency-usd  
+
+sensor.ar_escritorio_hoje_r:
+  icon: mdi:currency-usd  
+sensor.ar_escritorio_ontem_r:
+  icon: mdi:currency-usd  
+sensor.ar_escritorio_total_r:
+  icon: mdi:currency-usd  
+
+sensor.ar_suite_hoje_r:
+  icon: mdi:currency-usd  
+sensor.ar_suite_ontem_r:
+  icon: mdi:currency-usd  
+sensor.ar_suite_total_r:
+  icon: mdi:currency-usd  
+ 
+sensor.monitores_hoje_r:
+  icon: mdi:currency-usd  
+sensor.monitores_ontem_r:
+  icon: mdi:currency-usd  
+sensor.monitores_total_r:
+  icon: mdi:currency-usd  
+
+sensor.pc_hoje_r:
+  icon: mdi:currency-usd  
+sensor.pc_ontem_r:
+  icon: mdi:currency-usd  
+sensor.pc_total_r:
+  icon: mdi:currency-usd  
+
+sensor.ar_cozinha_hoje_r:
+  icon: mdi:currency-usd  
+sensor.ar_cozinha_ontem_r:
+  icon: mdi:currency-usd  
+sensor.ar_cozinha_total_r:
+  icon: mdi:currency-usd  
+
+#
+
+sensor.refrigerador_energy_today:
+  icon: mdi:power-socket-us  
+sensor.refrigerador_energy_yesterday:
+  icon: mdi:power-socket-us  
+sensor.refrigerador_energy_total:
+  icon: mdi:power-socket-us  
+
+sensor.ar_escritorio_energy_today:
+  icon: mdi:power-socket-us  
+sensor.ar_escritorio_energy_yesterday:
+  icon: mdi:power-socket-us  
+sensor.ar_escritorio_energy_total:
+  icon: mdi:power-socket-us  
+
+sensor.ar_suite_energy_today:
+  icon: mdi:power-socket-us  
+sensor.ar_suite_energy_yesterday:
+  icon: mdi:power-socket-us  
+sensor.ar_suite_energy_total:
+  icon: mdi:power-socket-us  
+
+sensor.ar_cozinha_energy_today:
+  icon: mdi:power-socket-us  
+sensor.ar_cozinha_energy_yesterday:
+  icon: mdi:power-socket-us  
+sensor.ar_cozinha_energy_total:
+  icon: mdi:power-socket-us  
+
+sensor.maquina_lavar_energy_today:
+  icon: mdi:power-socket-us  
+sensor.maquina_lavar_energy_yesterday:
+  icon: mdi:power-socket-us  
+sensor.maquina_lavar_energy_total:
+  icon: mdi:power-socket-us  
+
+sensor.sonoff_pc_energy_today:
+  icon: mdi:power-socket-us  
+sensor.sonoff_pc_energy_yesterday:
+  icon: mdi:power-socket-us  
+sensor.sonoff_pc_energy_total:
+  icon: mdi:power-socket-us  
+
+sensor.sonoff_pow_monitores_energy_today:
+  icon: mdi:power-socket-us  
+sensor.sonoff_pow_monitores_energy_yesterday:
+  icon: mdi:power-socket-us  
+sensor.sonoff_pow_monitores_energy_total:
+  icon: mdi:power-socket-us  
+
+sensor.consumo_mensal_reais:
+  friendly_name: Consumo Mensal
+  icon: mdi:currency-usd  
+sensor.consumo_mensal_reais_utility_meter:
+  friendly_name: Consumo Mensal UM
+  icon: mdi:currency-usd  
+
+# SCRIPTS ######################################
+script.desligar_geral:
+  friendly_name: Desligar Tudo
+script.cozinha_camera_stream:
+  friendly_name: Câmera Cozinha
+  icon: mdi:camcorder
+script.luz_quarto_efeito_disco:
+  friendly_name: Efeito Quarto Principal
+  icon: mdi:lightbulb-outline
+
+# AR CONDICIONADO  ######################################
+switch.ar_cozinha:
+  friendly_name: AR Cozinha
+  hidden: true
+  icon: mdi:air-conditioner
+switch.ar_quarto:
+  friendly_name: AR Quarto Principal
+  hidden: true
+  icon: mdi:air-conditioner
+switch.ar_escritorio:
+  friendly_name: AR Escritório
+  hidden: true
+  icon: mdi:air-conditioner
+
+switch.ar_quarto_sonoff:
+  friendly_name: AR Quarto Principal Sonoff
+  hidden: true
+  icon: mdi:air-conditioner
+switch.ar_cozinha_sonoff:
+  friendly_name: AR Cozinha Sonoff
+  hidden: true
+  icon: mdi:air-conditioner
+switch.ar_escritorio_sonoff:
+  friendly_name: AR Escritório
+  hidden: true
+  icon: mdi:air-conditioner
+
+# PC E MONITORES ######################################  
+switch.sonoff_pow_monitores:
+  friendly_name: Monitores
+  icon: mdi:monitor-multiple  
+switch.pc:
+  icon: mdi:desktop-classic  
+switch.sonoff_pc:
+  icon: mdi:desktop-classic  
+
+# TV QUARTO ######################################
+media_player.tv_samsung:
+  friendly_name: TV Samsung
+  icon: mdi:television
+switch.tv_samsung_6_series_58:
+  friendly_name: Samsung 6 Series (58)
+  icon: mdi:television
+
+# SPEEDTEST ######################################
+sensor.speedtest_ping:
+  friendly_name: Ping
+  icon: mdi:pulse
+sensor.speedtest_download:
+  friendly_name: Download
+  icon: mdi:arrow-down-bold
+sensor.speedtest_upload:
+  friendly_name: Upload
+  icon: mdi:arrow-up-bold   
+
+# SISTEMA HA E RASPBERRY ######################################
+sensor.home_assistant_v2_db:
+  friendly_name: Banco Dados
+  icon: mdi:database
+  homebridge_hidden: true
+sensor.disk_use:
+  friendly_name: Uso do MicroSD 
+  icon: mdi:harddisk
+sensor.last_boot:
+  friendly_name: Última Atualização
+  icon: mdi:update
+  homebridge_hidden: true
+sensor.processor_use:
+  friendly_name: Uso do Prcessador
+  homebridge_hidden: true
+sensor.memory_use_percent:
+  friendly_name: Percentual da Memória
+  icon: mdi:chip
+  homebridge_hidden: true  
+
+# 17TRACKER ######################################
+sensor.seventeentrack_packages_in_transit:
+  friendly_name: Pacotes em transito
+  icon: mdi:package-variant
+sensor.seventeentrack_packages_returned:
+  friendly_name: Pacotes retornados
+  icon: mdi:package-variant
+
+# CELULARES ######################################
+binary_sensor.celular_douglas:
+  icon: mdi:cellphone-android
+binary_sensor.celular_luana:
+  icon: mdi:cellphone-android
+binary_sensor.celular_mae:
+  icon: mdi:cellphone-android
+      
+# GRUPOS ######################################
+group.all_automations:
+  friendly_name: Automações
+group.all_scripts:
+  hidden: true
+  friendly_name: Scripts
+group.all_lights:
+  friendly_name: Luzes
+  icon: mdi:lightbulb
+group.calendar:
+  friendly_name: Calendários

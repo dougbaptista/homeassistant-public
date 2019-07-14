@@ -1,0 +1,864 @@
+# DARKSKY ################################
+- platform: darksky
+  api_key: !secret api_darksky
+  language: 'pt'
+  units: ca
+  monitored_conditions:
+    - temperature
+    - wind_speed
+    - cloud_cover
+    - humidity
+    - pressure
+    - visibility
+    - hourly_summary
+    - daily_summary
+    - uv_index
+
+# CLIMA ################################
+- platform: yr
+
+- platform: template
+  sensors:
+    yrwthr:
+      value_template: '{%set list2 = "0","Céu Limpo","Bom","Parcialmente Nublado","Nublado","Pancadas de Chuva","Pancadas de Chuva e Trovão","Granizo com efeito de Chuva","Chuvisco","Chuva","Chuva Pesada","Chuva Pesada e Trovão","Granizo","Neve","Neve e Trovão","Névoa","0","0","0","0","Chuvisco e Trovão","Chuvisco de Neve e Trovaão","Chuva e Trovão","Granizo e Trovão","Chuva Leve e Trovão","Chuva Forte e Trovão","Chuvisco Leve e Trovão","Chuvisco Forte e Trovão","Névoa Leve e Trovão","Névoa Pesada e Trovão","Chuva Leve e Trovão","Granizo Leve e Trovão","Granizo Forte e Trovão","Pouca Neve e Trovão","Muita Neve e Trovão","0","0","0","0","0","Chuva Leve","Chuva Forte","Chuvisco Leve","Chuvisco Forte","Nevasca Leve","Nevasca Pesada","Chuva Leve","Granizo Leve","Granizo Pesado","Neve Leve","Neve Pesada"%}{{list2[states.sensor.yr_symbol.state|int]}}'
+      entity_picture_template: "{{ state_attr('sensor.yr_symbol','entity_picture') }}"
+
+- platform: moon
+
+# SYSTEM MONITOR ################################
+- platform: systemmonitor
+  resources:
+  - type: disk_free
+    arg: /
+  - type: disk_use
+    arg: /
+  - type: disk_use_percent
+    arg: /
+  - type: memory_free
+  - type: memory_use
+  - type: memory_use_percent
+  - type: processor_use
+  - type: last_boot
+
+- platform: version
+  name: Versão
+
+############  Database size ############   
+- platform: filesize
+  file_paths:
+    - /config/home-assistant_v2.db
+
+- platform: command_line
+  name: db_file_size
+  command: "du -m /config/home-assistant_v2.db | cut -f1"
+  unit_of_measurement: 'MB'
+  value_template: '{{ value | int - 1 }}'
+
+############  The uptime unraid ##############
+- platform: command_line
+  name: uptime unraid
+  command: "uptime -p"   
+
+############  load unraid ##############
+- platform: command_line
+  name: load unraid
+  command: "cat /proc/loadavg"    
+
+# TIME ################################
+- platform: uptime
+  name: Uptime
+  unit_of_measurement: hours #days, hours or minutes
+      
+- platform: time_date
+  display_options:
+    - 'time'
+    - 'date'
+    - 'time_utc'
+ 
+#https://www.home-assistant.io/components/sensor.dnsip/    
+- platform: dnsip
+  scan_interval: 300 #5 min
+
+###########################################################################################################################################################
+# Device Trackers
+########################################################################################################################################################### 
+
+- platform: template
+  sensors:
+
+    #Douglas - Status Inglês
+    bateria_douglas_status_ingles:
+      value_template:  '{{ states.device_tracker.life360_douglas.attributes.battery_charging }}'
+      device_class: battery
+
+    #Luana - Status Inglês
+    bateria_luana_status_ingles:
+      friendly_name: Luana - Status Bateria
+      value_template: '{{ states.device_tracker.life360_luana.attributes.battery_charging }}'
+
+    #--------------------------------------------------------------------------------------------------------------------------------#
+
+    #Douglas - Nível da Bateria
+    bateria_douglas:
+      friendly_name: Bateria Douglas
+      unit_of_measurement: '%'
+      value_template: '{{ states.device_tracker.life360_douglas.attributes.battery|int }}'
+      device_class: battery
+
+    #Luana - Nível da Bateria
+    bateria_luana:
+      friendly_name: Bateria Luana    
+      unit_of_measurement: '%'
+      value_template:  '{{ states.device_tracker.life360_luana.attributes.battery|int }}'
+      device_class: battery
+
+    #--------------------------------------------------------------------------------------------------------------------------------#
+
+    #Douglas - Status
+    bateria_status_douglas:
+      friendly_name: Status Bateria Douglas
+      value_template: >-
+        {% if is_state('sensor.bateria_douglas_status_ingles', "False") %}
+          Descarregando
+        {% else %}
+          Carregando
+        {% endif %}
+      icon_template: >-
+        {% if is_state('sensor.bateria_douglas_status_ingles', "False") %}
+          mdi:battery-outline
+        {% else %}
+          mdi:battery-charging
+        {% endif %}
+
+    #Luana - Status
+    bateria_status_luana:
+      friendly_name: Status Bateria Luana
+      value_template: >-
+        {% if is_state('sensor.bateria_luana_status_ingles', "False") %}
+          Descarregando
+        {% else %}
+          Carregando
+        {% endif %}
+      icon_template: >-
+        {% if is_state('sensor.bateria_luana_status_ingles', "False") %}
+          mdi:battery-outline
+        {% else %}
+          mdi:battery-charging
+        {% endif %}
+
+    #Tablet Hyundai - Status
+    bateria_status_tablet_hyndai:
+      friendly_name: Status Bateria Tablet Hyundai
+      value_template: >-
+        {% if is_state('sensor.bateria_tablet_hyundai_status_ingles', "False") %}
+          Descarregando
+        {% else %}
+          Carregando
+        {% endif %}
+      icon_template: >-
+        {% if is_state('sensor.bateria_tablet_hyundai_status_ingles', "False") %}
+          mdi:battery-outline
+        {% else %}
+          mdi:battery-charging
+        {% endif %}
+
+    #--------------------------------------------------------------------------------------------------------------------------------#
+
+    #Douglas - Dirigindo Inglês
+    dirigindo_douglas_status_ingles:
+      friendly_name: Douglas - Status Dirigindo Inglês
+      value_template:  '{{ states.device_tracker.life360_douglas.attributes.driving }}'
+      icon_template: >-
+          mdi:speedometer
+          
+    #Luana - Dirigindo Inglês
+    dirigindo_luana_status_ingles:
+      friendly_name: Luana - Status Dirigindo Inglês
+      value_template: '{{ states.device_tracker.life360_luana.attributes.driving }}'
+      icon_template: >-
+          mdi:speedometer
+
+    #--------------------------------------------------------------------------------------------------------------------------------#
+
+    #Douglas - Dirigindo
+    dirigindo_douglas_status:
+      friendly_name: Douglas - Status Dirigindo
+      value_template: >-
+        {% if is_state('sensor.dirigindo_douglas_status_ingles', "False") %}
+          Não dirigindo
+        {% else %}
+          Dirigindo
+        {% endif %}
+      icon_template: >-
+        {% if is_state('sensor.dirigindo_douglas_status_ingles', "False") %}
+          mdi:walk
+        {% else %}
+          mdi:car
+        {% endif %}
+
+    #Luana - Dirigindo
+    dirigindo_luana_status:
+      friendly_name: Luana - Status Dirigindo
+      value_template: >-
+        {% if is_state('sensor.dirigindo_luana_status_ingles', "False") %}
+          Não dirigindo
+        {% else %}
+          Dirigindo
+        {% endif %}
+      icon_template: >-
+        {% if is_state('sensor.dirigindo_luana_status_ingles', "False") %}
+          mdi:walk
+        {% else %}
+          mdi:car
+        {% endif %}
+
+    #--------------------------------------------------------------------------------------------------------------------------------#
+
+    #Douglas - Dirigindo Inglês
+    velocidade_douglas:
+      friendly_name: Douglas - Status Dirigindo
+      value_template:  '{{ states.device_tracker.life360_douglas.attributes.speed }}'
+
+    #Luana - Dirigindo Inglês
+    velocidade_luana:
+      friendly_name: Luana - Status Dirigindo
+      value_template: '{{ states.device_tracker.life360_luana.attributes.speed }}'      
+
+    #--------------------------------------------------------------------------------------------------------------------------------#
+
+    #Douglas - Dirigindo Inglês
+    move_douglas_ingles:
+      friendly_name: Douglas - Status Dirigindo
+      value_template:  '{{ states.device_tracker.life360_douglas.attributes.moving }}'
+
+    #Luana - Dirigindo Inglês
+    move_luana_ingles:
+      friendly_name: Luana - Status Dirigindo
+      value_template: '{{ states.device_tracker.life360_luana.attributes.moving }}'   
+
+    #--------------------------------------------------------------------------------------------------------------------------------#
+
+    #Douglas - Em Casa / Ausente
+    douglas_status_local:
+      friendly_name: Douglas - Status Local
+      value_template: >-
+        {% if is_state('person.doug', "home") %}
+          Casa
+        {% else %}
+          Ausente
+        {% endif %}
+
+    #Luana - Em Casa / Ausente
+    luana_status_local:
+      friendly_name: Luana - Status Local
+      value_template: >-
+        {% if is_state('person.lu', "home") %}
+          Casa
+        {% else %}
+          Ausente
+        {% endif %}
+
+###########################################################################################################################################################
+# Localização
+###########################################################################################################################################################
+- platform: template
+  sensors:
+    localizacao_douglas:
+      friendly_name: 'Localização Douglas'      
+      value_template: >-
+        {% if is_state('person.doug', "home") %}
+          Casa
+        {% else %}
+          Ausente
+        {% endif %}
+
+- platform: template
+  sensors:
+    localizacao_luana:
+      friendly_name: 'Localização Luana'      
+      value_template: >-
+        {% if is_state('person.lu', "home") %}
+          Casa
+        {% else %}
+          Ausente
+        {% endif %}
+
+- platform: template
+  sensors:
+    localizacao_joao:
+      friendly_name: 'Localização João'      
+      value_template: >-
+        {% if is_state('device_tracker.life360_joao', "home") %}
+          Casa
+        {% else %}
+          Ausente
+        {% endif %}      
+        
+###########################################################################################################################################################
+# Google Geocode
+###########################################################################################################################################################
+- platform: google_geocode
+  name: Geocode Douglas
+  origin: device_tracker.life360_douglas
+  options: street_number, street, city
+  display_zone: show
+  gravatar: !secret gmail_user
+  api_key: !secret api_key_geocode  
+
+- platform: google_geocode
+  name: Geocode Luana
+  origin: device_tracker.life360_luana
+  options: street_number, street, city
+  display_zone: show
+  gravatar: !secret gmail_user
+  api_key: !secret api_key_geocode    
+
+###########################################################################################################################################################
+# E-mails
+###########################################################################################################################################################
+- platform: imap
+  server: imap.gmail.com
+  port: 993
+  username: !secret gmail_user
+  password: !secret gmail_senha
+
+###########################################################################################################################################################
+# SPOTIFY
+###########################################################################################################################################################
+- platform: template
+  sensors:
+    spotify_volume:
+      friendly_name: "Spotify Volume"
+      value_template: "{{ states.media_player.spotify.attributes.volume_level }}"
+- platform: template
+  sensors:
+    spotify_shuffle:
+      friendly_name: "Spotify Shuffle"
+      value_template: "{{ states.media_player.spotify.attributes.shuffle }}"
+- platform: template
+  sensors:
+    spotify_source:
+      friendly_name: "Spotify Source"
+      value_template: "{{ states.media_player.spotify.attributes.source }}"
+
+###########################################################################################################################################################
+# Autenticação - Last IP Login
+###########################################################################################################################################################
+# https://github.com/custom-components/sensor.authenticated
+- platform: authenticated
+
+###########################################################################################################################################################
+# Versões HA
+###########################################################################################################################################################
+## Check Latest HA Version
+- platform: scrape
+  resource: https://www.home-assistant.io
+  name: HA - Última versão disponível
+  select: ".current-version h1"
+  value_template: '{{ value.split(":")[1] }}'
+
+## Check HA Version Installed    
+- platform: template
+  sensors:
+    installed_ha_version:
+      friendly_name: 'HA - Versão Instalada'  
+      value_template: '{% if is_state("77.rpi", "home") %}0.83.3{% else %}On{% endif %}'
+
+###########################################################################################################################################################
+#  Alarme Casa
+###########################################################################################################################################################
+- platform: template
+  sensors:
+    ## Alarme
+    alarme_casa:
+      friendly_name: Alarme Casa
+      entity_id: input_boolean.alarme_casa_status
+      value_template: >-
+        {% if is_state('input_boolean.alarme_casa_status', 'on') %}
+          Ligado
+        {% elif is_state('input_boolean.alarme_casa_status', 'off') %}
+          Desligado      
+        {% else %}
+          Indisponível
+        {% endif %}
+      icon_template: >-
+        {% if is_state('input_boolean.alarme_casa_status', 'on') %}
+          mdi:alarm-light       
+        {% elif is_state('input_boolean.alarme_casa_status', 'off') %}
+          mdi:alarm-off
+        {% else %}
+          mdi:alert
+        {% endif %}        
+
+###########################################################################################################################################################
+# 17track.net - https://www.home-assistant.io/components/seventeentrack/
+###########################################################################################################################################################
+- platform: seventeentrack
+  username: !secret 17track_username
+  password: !secret 17track_password
+
+###########################################################################################################################################################
+# Github - https://www.home-assistant.io/components/github/
+###########################################################################################################################################################
+- platform: github
+  access_token: !secret github_access_token
+  repositories:
+    - path: 'home-assistant/home-assistant'
+
+###########################################################################################################################################################
+# Waze Travel Time - https://www.home-assistant.io/components/waze_travel_time/
+###########################################################################################################################################################
+- platform: waze_travel_time
+  name: 'Douglas Caminho para o SENAI'
+  origin: person.doug
+  destination: zone.senai
+  region: 'IL'
+  
+- platform: waze_travel_time
+  name: 'Luana Caminho para Casa'
+  origin: person.lu
+  destination: zone.casa
+  region: 'IL'
+
+- platform: waze_travel_time
+  name: 'Luana Caminho para Békko'
+  origin: person.lu
+  destination: zone.bekko
+  region: 'IL'
+
+- platform: waze_travel_time
+  name: 'Douglas Caminho para Casa'
+  origin: person.doug
+  destination: zone.casa
+  region: 'IL' 
+
+###########################################################################################################################################################
+# Contagem Regressiva
+###########################################################################################################################################################
+- platform: date_countdown
+  name: Data Nascimento Letícia
+  date: "06-08-2019 18:00"
+
+- platform: date_countdown
+  name: Data Inauguração Apartamento Milão
+  date: "01-06-2020 00:00"  
+
+- platform: date_countdown
+  name: Data Aniversário Douglas
+  date: "01-08-2019 00:00"  
+
+- platform: date_countdown
+  name: Data Aniversário Luana
+  date: "24-09-2019 00:00"    
+
+- platform: date_countdown
+  name: Data Aniversário Tia Rosana
+  date: "09-10-2019 00:00"  
+
+- platform: date_countdown
+  name: Data Aniversário Mãe Douglas
+  date: "13-10-2019 00:00"    
+
+- platform: date_countdown
+  name: Data Aniversário Pai Douglas
+  date: "20-10-2019 00:00"      
+
+- platform: date_countdown
+  name: Data Aniversário Renata
+  date: "09-11-2019 00:00"   
+
+- platform: date_countdown
+  name: Data Aniversário Casamento
+  date: "13-03-2020 00:00"    
+
+- platform: date_countdown
+  name: Data Aniversário Silvio
+  date: "13-05-2020 00:00"      
+
+###########################################################################################################################################################
+# Aspirador Vaccum Xiaomi
+###########################################################################################################################################################
+- platform: template
+  sensors:
+    vacuum_status:
+        value_template: >
+          {%- if states.vacuum.aspirador_xiaomi_vacuum.attributes.status == "Charging" %}
+            Carregando
+          {% elif states.vacuum.aspirador_xiaomi_vacuum.attributes.status == "cleaning" %}
+            Limpando
+          {% elif states.vacuum.aspirador_xiaomi_vacuum.attributes.status == "paused" %}
+            Pausado
+          {% elif states.vacuum.aspirador_xiaomi_vacuum.attributes.status == "returning" %}
+            Voltando para base
+          {% elif states.vacuum.aspirador_xiaomi_vacuum.attributes.status == "Idle" %}
+            Parado
+          {% else %}
+            {{ states.vacuum.aspirador_xiaomi_vacuum.attributes.status }}
+          {%- endif %}
+        friendly_name: Status
+        icon_template: >
+          {% set val =  states.vacuum.aspirador_xiaomi_vacuum.attributes.status  %}
+          {% if val == 'Charging' %}
+            mdi:battery-charging
+          {% elif val == 'Cleaning' %}
+            mdi:move-resize
+          {% elif val == 'Returning home' %}
+            mdi:keyboard-return
+          {% elif val == 'Idle' %}
+            mdi:dots-horizontal
+          {% elif val == 'Paused' %}
+            mdi:pause-circle
+          {% else %}
+            mdi:help-circle
+          {% endif %}
+
+    vacuum_battery_level:
+        value_template: >
+          {{ states.vacuum.aspirador_xiaomi_vacuum.attributes.battery_level }}
+        friendly_name: Bateria
+        unit_of_measurement: '%'
+        icon_template: '{{ states.vacuum.aspirador_xiaomi_vacuum.attributes.battery_icon }}'
+
+    vacuum_main_brush_left:
+        value_template: >
+          {{ states.vacuum.aspirador_xiaomi_vacuum.attributes.main_brush_left }}
+        friendly_name: Escova principal
+        unit_of_measurement: 'horas'
+
+    vacuum_side_brush_left:
+        value_template: >
+          {{ states.vacuum.aspirador_xiaomi_vacuum.attributes.side_brush_left }}
+        friendly_name: Escova lateral
+        unit_of_measurement: 'horas'
+
+    vacuum_filter_left:
+        value_template: >
+          {{ states.vacuum.aspirador_xiaomi_vacuum.attributes.filter_left }}
+        friendly_name: Filtro
+        unit_of_measurement: 'horas'
+
+    vacuum_cleaned_area:
+      friendly_name: "Área da última limpeza"
+      unit_of_measurement: 'm²'
+      entity_id:
+        - vacuum.aspirador_xiaomi_vacuum
+      value_template: '{{ states.vacuum.aspirador_xiaomi_vacuum.attributes.cleaned_area }}'
+      icon_template: 'mdi:ruler'
+
+    vacuum_cleaner_error_sensor:
+      friendly_name: Sensor de erros do Aspirador Vacuum
+      value_template: >-
+        {% if states.vacuum.aspirador_xiaomi_vacuum.attributes.error is defined %}
+          {{states.vacuum.aspirador_xiaomi_vacuum.attributes.error}}
+        {% else %}
+          Sem erros
+        {% endif %}
+
+###########################################################################################################################################################
+# Consumo em R$ - Somando (PZEM)
+###########################################################################################################################################################
+- platform: template
+  sensors:
+
+    # Consumo total
+    consumo_total_r:
+      friendly_name: 'Consumo Total'      
+      unit_of_measurement: "R$"
+      value_template: '{{ ((states.sensor.sonoff_energia_energy_total.state | float * (states.sensor.custo_de_energia_mais_150kwh.state | float))) | round(2) }}'
+
+    # Consumo total - ONTEM
+    consumo_total_anterior_r:
+      friendly_name: 'Consumo de Ontem'      
+      unit_of_measurement: "R$"
+      value_template: '{{ ((states.sensor.sonoff_energia_energy_yesterday.state | float * (states.sensor.custo_de_energia_mais_150kwh.state | float))) | round(2) }}'
+
+    # Consumo total - HOJE
+    consumo_total_diario_r:
+      friendly_name: 'Consumo de Hoje'      
+      unit_of_measurement: "R$"
+      value_template: '{{ ((states.sensor.sonoff_energia_energy_today.state | float * (states.sensor.custo_de_energia_mais_150kwh.state | float))) | round(2) }}'
+
+###########################################################################################################################################################
+# Consumo Mensal atualizado por MQTT
+###########################################################################################################################################################
+- platform: mqtt
+  state_topic: "casa/power/mensal"
+  name: "Consumo Mês Atual"
+  unit_of_measurement: "kWh"
+
+###########################################################################################################################################################
+# Taxas do site da CELESC
+###########################################################################################################################################################
+
+# Taxa com custo abaixo de 150 Kwh - Atualizada pelo NODE-RED consultando o site da CELESC
+- platform: mqtt
+  state_topic: "casa/power/taxa1"
+  name: "Custo de energia menos 150kWh"
+  unit_of_measurement: "R$"
+
+# Taxa com custo acima de 150 Kwh - Atualizada pelo NODE-RED consultando o site da CELESC
+- platform: mqtt
+  state_topic: "casa/power/taxa2"
+  name: "Custo de energia mais 150kWh"
+  unit_of_measurement: "R$"
+
+- platform: template
+  sensors:
+
+    # Define a taxa ideal - Verifica se a taxa da celesc não veio nula
+    taxa_energia:
+      friendly_name: "Taxa de Energia"
+      unit_of_measurement: 'R$'
+      value_template: >
+        {% set energy = states('sensor.consumo_mes_atual') | float(default=-1) %}
+        {% if energy != -1 %}
+          {{states('sensor.custo_de_energia_menos_150kwh')|float if energy < 150 else states('sensor.custo_de_energia_mais_150kwh')|float}}
+        {% else %}
+          {{ states('sensor.taxa_energia') }}
+        {% endif %}
+
+###########################################################################################################################################################
+# Consumo PZEM em R$
+###########################################################################################################################################################
+
+    # Converte o consumo em R$ (Modo 1)
+    consumo_mensal_reais:
+      friendly_name: "Consumo Mensal R$"
+      unit_of_measurement: 'R$'
+      value_template: >
+        {% set energy = states('sensor.consumo_mes_atual') | float(default=-1) %}
+        {% if energy != -1 %}
+          {% if energy < 150 %} 
+              {{'%.2f'|format(energy * states('sensor.custo_de_energia_menos_150kwh')|float)}}
+            {%- else -%} 
+              {{'%.2f'|format((150 * states('sensor.custo_de_energia_menos_150kwh')|float) + (energy - 150 * states('sensor.custo_de_energia_mais_150kwh')|float))}}
+            {%- endif %}
+        {% else %}
+          {{ states('sensor.consumo_mensal_reais') }}
+        {% endif %}
+
+    # Converte o consumo em R$ (Modo 2)
+    consumo_mensal_reais_utility_meter:
+      friendly_name: "Consumo Mensal 2 R$"
+      unit_of_measurement: 'R$'
+      value_template: >
+        {% set energy = states('sensor.energia_mensal') | float(default=-1) %}
+        {% if energy != -1 %}
+          {% if energy < 150 %} 
+              {{'%.2f'|format(energy * states('sensor.custo_de_energia_menos_150kwh')|float)}}
+            {%- else -%} 
+              {{'%.2f'|format((150 * states('sensor.custo_de_energia_menos_150kwh')|float) + (energy - 150 * states('sensor.custo_de_energia_mais_150kwh')|float))}}
+            {%- endif %}
+        {% else %}
+          {{ states('sensor.consumo_mensal_reais_utility_meter') }}
+        {% endif %}
+
+###########################################################################################################################################################
+# Consumo - Refrigerador R$
+###########################################################################################################################################################
+- platform: template
+  sensors:
+
+    # Hoje R$ 
+    refrigerador_hoje_r:
+      friendly_name: 'Refrigerador Hoje'      
+      unit_of_measurement: "R$"
+      value_template: '{{ ((states.sensor.refrigerador_energy_today.state | float * (states.sensor.custo_de_energia_mais_150kwh.state | float))) | round(2) }}'
+
+    # Ontem R$
+    refrigerador_ontem_r:
+      friendly_name: 'Refrigerador Ontem'      
+      unit_of_measurement: "R$"
+      value_template: '{{ ((states.sensor.refrigerador_energy_yesterday.state | float * (states.sensor.custo_de_energia_mais_150kwh.state | float))) | round(2) }}'
+
+    # Mês R$
+    refrigerador_mes_r:
+      friendly_name: "Consumo Refrigerador Mensal"
+      unit_of_measurement: 'R$'
+      value_template: '{{ ((states.sensor.energia_refrigerador_mes.state | float * (states.sensor.custo_de_energia_mais_150kwh.state | float))) | round(2) }}'
+
+    # Total R$
+    refrigerador_total_r:
+      friendly_name: 'Refrigerador Total'      
+      unit_of_measurement: "R$"
+      value_template: '{{ ((states.sensor.refrigerador_energy_total.state | float * (states.sensor.custo_de_energia_mais_150kwh.state | float))) | round(2) }}'
+
+###########################################################################################################################################################
+# Consumo - Máquina de Lavar R$ 
+###########################################################################################################################################################
+- platform: template
+  sensors:
+
+    #Hoje R$ 
+    maquina_de_lavar_hoje_r:
+      friendly_name: 'Consumo Máquina de Lavar Hoje'      
+      unit_of_measurement: "R$"
+      value_template: '{{ ((states.sensor.maquina_lavar_energy_today.state | float * (states.sensor.custo_de_energia_mais_150kwh.state | float))) | round(2) }}'
+
+    #Ontem R$
+    maquina_de_lavar_ontem_r:
+      friendly_name: 'Consumo Máquina de Lavar Ontem'      
+      unit_of_measurement: "R$"
+      value_template: '{{ ((states.sensor.maquina_lavar_energy_yesterday.state | float * (states.sensor.custo_de_energia_mais_150kwh.state | float))) | round(2) }}'
+
+    # Mês R$
+    maquina_de_lavar_mes_r:
+      friendly_name: 'Consumo Máquina de Lavar Mensal'      
+      unit_of_measurement: 'R$'
+      value_template: '{{ ((states.sensor.energia_maquina_de_lavar_mes.state | float * (states.sensor.custo_de_energia_mais_150kwh.state | float))) | round(2) }}'
+
+    #Total R$
+    maquina_de_lavar_total_r:
+      friendly_name: 'Consumo Máquina de Lavar Total'      
+      unit_of_measurement: "R$"
+      value_template: '{{ ((states.sensor.maquina_lavar_energy_total.state | float * (states.sensor.custo_de_energia_mais_150kwh.state | float))) | round(2) }}'
+
+###########################################################################################################################################################
+# Consumo - AR Quarto R$ 
+###########################################################################################################################################################
+- platform: template
+  sensors:
+
+    #Hoje R$ 
+    ar_suite_hoje_r:
+      friendly_name: 'Consumo AR Suíte Hoje'      
+      unit_of_measurement: "R$"
+      value_template: '{{ ((states.sensor.ar_suite_energy_today.state | float * (states.sensor.custo_de_energia_mais_150kwh.state | float))) | round(2) }}'
+
+    #Ontem R$
+    ar_suite_ontem_r:
+      friendly_name: 'Consumo AR Suíte Ontem'      
+      unit_of_measurement: "R$"
+      value_template: '{{ ((states.sensor.ar_suite_energy_yesterday.state | float * (states.sensor.custo_de_energia_mais_150kwh.state | float))) | round(2) }}'
+
+    # Mês R$
+    ar_suite_mes_r:
+      friendly_name: 'Consumo AR Suíte Mensal'      
+      unit_of_measurement: 'R$'
+      value_template: '{{ ((states.sensor.energia_ar_suite_mes.state | float * (states.sensor.custo_de_energia_mais_150kwh.state | float))) | round(2) }}'
+
+    #Total R$
+    ar_suite_total_r:
+      friendly_name: 'Consumo AR Suíte Total'      
+      unit_of_measurement: "R$"
+      value_template: '{{ ((states.sensor.ar_suite_energy_total.state | float * (states.sensor.custo_de_energia_mais_150kwh.state | float))) | round(2) }}'
+
+###########################################################################################################################################################
+# Consumo - AR Escritório R$
+###########################################################################################################################################################
+- platform: template
+  sensors:
+
+    #Hoje R$ 
+    ar_escritorio_hoje_r:
+      friendly_name: 'Consumo AR Escritório Hoje'      
+      unit_of_measurement: "R$"
+      value_template: '{{ ((states.sensor.ar_escritorio_energy_today.state | float * (states.sensor.custo_de_energia_mais_150kwh.state | float))) | round(2) }}'
+
+    #Ontem R$
+    ar_escritorio_ontem_r:
+      friendly_name: 'Consumo AR Escritório Ontem'      
+      unit_of_measurement: "R$"
+      value_template: '{{ ((states.sensor.ar_escritorio_energy_yesterday.state | float * (states.sensor.custo_de_energia_mais_150kwh.state | float))) | round(2) }}'
+
+    # Mês R$
+    ar_escritorio_mes_r:
+      friendly_name: 'Consumo AR Escritório Mensal'      
+      unit_of_measurement: 'R$'
+      value_template: '{{ ((states.sensor.energia_ar_escritorio_mes.state | float * (states.sensor.custo_de_energia_mais_150kwh.state | float))) | round(2) }}'
+
+    #Total R$
+    ar_escritorio_total_r:
+      friendly_name: 'Consumo AR Escritório Total'      
+      unit_of_measurement: "R$"
+      value_template: '{{ ((states.sensor.ar_escritorio_energy_total.state | float * (states.sensor.custo_de_energia_mais_150kwh.state | float))) | round(2) }}'
+
+###########################################################################################################################################################
+# Consumo - AR Cozinha R$
+###########################################################################################################################################################
+- platform: template
+  sensors:
+
+    #Hoje R$ 
+    ar_cozinha_hoje_r:
+      friendly_name: 'Consumo AR Cozinha Hoje'      
+      unit_of_measurement: "R$"
+      value_template: '{{ ((states.sensor.ar_cozinha_energy_today.state | float * (states.sensor.custo_de_energia_mais_150kwh.state | float))) | round(2) }}'
+
+    #Ontem R$
+    ar_cozinha_ontem_r:
+      friendly_name: 'Consumo AR Cozinha Ontem'      
+      unit_of_measurement: "R$"
+      value_template: '{{ ((states.sensor.ar_cozinha_energy_yesterday.state | float * (states.sensor.custo_de_energia_mais_150kwh.state | float))) | round(2) }}'
+
+    # Mês R$
+    ar_cozinha_mes_r:
+      friendly_name: 'Consumo AR Cozinha Mensal'      
+      unit_of_measurement: 'R$'
+      value_template: '{{ ((states.sensor.energia_ar_cozinha_mes.state | float * (states.sensor.custo_de_energia_mais_150kwh.state | float))) | round(2) }}'
+
+    #Total R$
+    ar_cozinha_total_r:
+      friendly_name: 'Consumo AR Cozinha Total'      
+      unit_of_measurement: "R$"
+      value_template: '{{ ((states.sensor.ar_cozinha_energy_total.state | float * (states.sensor.custo_de_energia_mais_150kwh.state | float))) | round(2) }}'
+
+###########################################################################################################################################################
+# Consumo - Monitores R$
+###########################################################################################################################################################
+- platform: template
+  sensors:
+
+    #Hoje R$ 
+    monitores_hoje_r:
+      friendly_name: 'Consumo Monitores Hoje'      
+      unit_of_measurement: "R$"
+      value_template: '{{ ((states.sensor.sonoff_pow_monitores_energy_today.state | float * (states.sensor.custo_de_energia_mais_150kwh.state | float))) | round(2) }}'
+
+    #Ontem R$
+    monitores_ontem_r:
+      friendly_name: 'Consumo Monitores Ontem'      
+      unit_of_measurement: "R$"
+      value_template: '{{ ((states.sensor.sonoff_pow_monitores_energy_yesterday.state | float * (states.sensor.custo_de_energia_mais_150kwh.state | float))) | round(2) }}'
+
+    # Mês R$
+    monitores_mes_r:
+      friendly_name: 'Consumo Monitores Mensal'      
+      unit_of_measurement: 'R$'
+      value_template: '{{ ((states.sensor.energia_monitores_mes.state | float * (states.sensor.custo_de_energia_mais_150kwh.state | float))) | round(2) }}'
+
+    #Total R$
+    monitores_total_r:
+      friendly_name: 'Consumo Monitores Total'      
+      unit_of_measurement: "R$"
+      value_template: '{{ ((states.sensor.sonoff_pow_monitores_energy_total.state | float * (states.sensor.custo_de_energia_mais_150kwh.state | float))) | round(2) }}'
+
+###########################################################################################################################################################
+# Consumo - PC R$
+###########################################################################################################################################################
+- platform: template
+  sensors:
+
+    #Hoje R$ 
+    pc_hoje_r:
+      friendly_name: 'Consumo PC Hoje'      
+      unit_of_measurement: "R$"
+      value_template: '{{ ((states.sensor.sonoff_pc_energy_today.state | float * (states.sensor.custo_de_energia_mais_150kwh.state | float))) | round(2) }}'
+
+    #Ontem R$
+    pc_ontem_r:
+      friendly_name: 'Consumo PC Ontem'      
+      unit_of_measurement: "R$"
+      value_template: '{{ ((states.sensor.sonoff_pc_energy_yesterday.state | float * (states.sensor.custo_de_energia_mais_150kwh.state | float))) | round(2) }}'
+
+    # Mês R$
+    pc_mes_r:
+      friendly_name: 'Consumo PC Mensal'      
+      unit_of_measurement: 'R$'
+      value_template: '{{ ((states.sensor.energia_pc_mes.state | float * (states.sensor.custo_de_energia_mais_150kwh.state | float))) | round(2) }}'
+
+    #Total R$
+    pc_total_r:
+      friendly_name: 'Consumo PC Total'      
+      unit_of_measurement: "R$"
+      value_template: '{{ ((states.sensor.sonoff_pc_energy_total.state | float * (states.sensor.custo_de_energia_mais_150kwh.state | float))) | round(2) }}'

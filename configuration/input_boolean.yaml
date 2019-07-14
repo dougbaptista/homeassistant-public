@@ -1,0 +1,116 @@
+###########################################################################################################################                           
+# Utilizado como Variáveis
+###########################################################################################################################   
+
+# Alarme da casa ################################
+  alarme_casa_status:
+    name: Status
+    initial: off
+
+# Luz Hub Vermelha ################################
+  hub_vermelho:
+    name: Luz Hub Vermelho
+    initial: off     
+
+# Sensores de Movimento ################################
+  movimento_quarto:
+    name: Movimento Quarto
+    initial: off    
+
+# Sensores de Movimento Iluminação ################################
+  movimento_quarto_iluminacao:
+    name: Movimento Quarto Iluminação
+    initial: off    
+
+# Sensores de Movimento ################################
+  movimento_cozinha:
+    name: Movimento Cozinha
+    initial: off    
+
+# Pessoas em casa ################################
+  pessoas_em_casa:
+    name: Pessoas em Casa
+    initial: on    
+
+# Pessoas em casa ################################
+  todos_em_casa:
+    name: Todos em Casa
+    initial: on    
+
+# Site SENAI ################################
+  site_senai:
+    name: Site SENAI
+    initial: on    
+
+# Checar Watson TTS ################################
+  checar_watson_tts:
+    name: Checar Watson TTS
+    initial: off      
+
+# Movimento Suspeito ################################
+  movimento_suspeito:
+    name: Movimento Suspeito
+    initial: off     
+
+# Visitas ################################
+  visitas:
+    name: Visitas
+    initial: off                   
+
+###########################################################################################################################                           
+# Utilizado para Integrar com o Google
+###########################################################################################################################  
+
+# Checar Sensores ################################
+  checar_sensores:
+    name: Checar sensores
+    initial: off  
+
+# Checar Sensores ################################
+  checar_temperatura:
+    name: Checar temperatura
+    initial: off  
+
+# Checar Consumo ################################
+  checar_consumo:
+    name: Checar Consumo
+    initial: off       
+
+# Aspirador ################################
+  vacuum_aspirador:
+    name: Aspirador
+    initial: off  
+
+###########################################################################################################################                           
+# Utilizado para Lovelace (Popup)
+###########################################################################################################################  
+
+# Ligados Agora ################################
+  lovelace_ligados_agora:
+    name: Ligados Agora
+    initial: off      
+
+# Cenas ################################
+  lovelace_scenes:
+    name: Cenas
+    initial: off      
+
+# Manutenções ################################
+  lovelace_manutencao:
+    name: Manutenções
+    initial: off      
+
+# Vacuum Aspirador ################################
+  lovelace_vacuum_cleaner:
+    name: Vacuum Aspirador
+    initial: off          
+
+# Remoto ################################
+  lovelace_remoto:
+    name: Remoto
+    initial: off      
+
+# Automação ################################
+  lovelace_consumo:
+    name: Consumo
+    initial: off      

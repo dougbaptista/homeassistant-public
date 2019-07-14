@@ -1,0 +1,109 @@
+default:
+  speech:
+    text: >
+      {{ [
+      "Olá, sou a assistente nº 1 e estou as suas ordens.",
+      "Olá, seu desejo uma ordem, o que você deseja?",
+      "Estou pronta para o que der e vier, o que posso fazer por você?",
+      "Olá mestre, em que posso ser útil?",
+      "Olá, sou sua assistente, o que você deseja?",
+      ] | random }}
+
+# Temperatura Cozinha ##################################################################
+TemperaturaCozinha:
+  speech:
+    text: >
+      A temperatura da cozinha é de {{ states("sensor.temperature_158d00031b049b")}} graus.
+      {%- if is_state('climate.ar_cozinha', 'on') -%} 
+        O ar condicionado da cozinha já está ligado
+      {%- else -%}
+        O ar condicionado da cozinha não está ligado, deseja ligar?
+      {% endif %}      
+
+Temperaturacozinha.ArCozinhaSim:
+  speech:
+    text: >
+        OK, ligando o ar condicionado da cozinha.
+  action:
+    - service: climate.turn_on
+      entity_id: 
+        - climate.ar_cozinha
+
+Temperaturacozinha.ArCozinhaNao:
+  speech:
+    text: OK. Assim você economiza.
+
+# Localização Luana ##################################################################
+LocalLuana:
+  speech:
+    text: >
+      {%- if is_state('device_tracker.life360_luana', 'home') -%}
+        Luana está em casa.
+      {%- else -%}
+        Luana está em {{ states("device_tracker.life360_luana") }}. Deseja saber o endereço?
+      {% endif %}
+
+LocalLuana.EnderecoLuanaSim:
+  speech:
+    text: >
+      A localização de Luana é {{ states("sensor.geocode_luana") }}.
+      Deseja mandar uma notificação ela?
+
+LocalLuana.EnderecoLuanaNao:
+  speech:
+    text: >
+      Ok. Deseja algo mais?
+
+LocalLuana.EnderecoLuanaSim.NotificacaoSim:
+  speech:
+    text: Ok mensagem enviada via telegram.
+  action:
+    - service: notify.telegramluana
+      data_template:
+        message: Luana, o Douglas deseja falar com você.
+
+LocalLuana.EnderecoLuanaSim.NotificacaoNao:
+  speech:
+    text: Tudo bem. Deseja algo mais?
+
+# Localização Douglas ##################################################################
+LocalDouglas:
+  speech:
+    text: >
+      {%- if is_state('device_tracker.life360_douglas', 'home') -%}
+        Douglas está em casa.
+      {%- else -%}
+        Douglas está em {{ states("device_tracker.life360_douglas") }}
+      {% endif %}
+
+# Outros ##################################################################
+CustoTotalConsumo:
+  speech:
+    text: O custo total de consumo é de {{ states("sensor.consumo_total_r")}} reais.
+
+NascimentoLeticia:
+  speech:
+    text: Faltam {{ states("sensor.contagem_bebe")}} para Letícia nascer.
+
+VelocidadeInternet:
+  speech:
+    text: >
+      A velocidade da internet está em {{ states("sensor.speedtest_download")}} megabites.
+      {% if states('sensor.speedtest_download')|float < 10 %}
+        Eita, está lento heim. Está na hora de resolver isso.
+      {%- else -%}
+        Está acima de 10 mega, então está normal.
+      {% endif %}      
+
+PacotesEmTransito:
+  speech:
+    text: Você tem {{ states("sensor.seventeentrack_packages_in_transit")}} pacotes que estão a caminho.
+
+encerrar:
+  speech:
+    text: >
+      {{ [
+      "OK. Se precisar de algo é só me chamar.",
+      "Até logo!",
+      "Foi um prazer poter te ajudar. Até mais!",
+      ] | random }}

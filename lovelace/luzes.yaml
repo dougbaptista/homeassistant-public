@@ -1,0 +1,242 @@
+###########################################################################################################################
+# ██╗     ██╗   ██╗███████╗███████╗███████╗                                                                               #
+# ██║     ██║   ██║╚══███╔╝██╔════╝██╔════╝                                                                               #
+# ██║     ██║   ██║  ███╔╝ █████╗  ███████╗                                                                               #
+# ██║     ██║   ██║ ███╔╝  ██╔══╝  ╚════██║                                                                               #
+# ███████╗╚██████╔╝███████╗███████╗███████║                                                                               #
+# ╚══════╝ ╚═════╝ ╚══════╝╚══════╝╚══════╝                                                                               #
+###########################################################################################################################
+title: Luzes
+icon: 'mdi:lamp'
+path: 'luzes'
+
+popup_cards:
+  !include popup-cards/light-popup.yaml
+
+cards:
+  - type: vertical-stack
+    cards:
+
+      # Escritório -----------------------------------# 
+      - type: custom:decluttering-card
+        template: header_text
+        variables:
+          - content: '##### Escritório'
+
+      - type: horizontal-stack
+        cards:
+
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+
+          - type: custom:decluttering-card
+            template: light_button_card
+            variables:
+              - entity: light.luz_escritorio
+              - name: Principal
+              - icon: ceiling-light
+
+          - type: custom:decluttering-card
+            template: light_button_card
+            variables:
+              - entity: light.gateway_light_7c49eb19486c
+              - name: Gateway
+              - icon: lightbulb-on-outline
+
+          - type: custom:decluttering-card
+            template: light_button_card
+            variables:
+              - entity: light.led_escritorio
+              - name: Led
+              - icon: led-variant-outline
+
+          - type: custom:button-card
+            color_type: blank-card
+            aspect_ratio: 1/1
+
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+      
+      # Quarto -----------------------------------# 
+      - type: custom:decluttering-card
+        template: header_text
+        variables:
+          - content: '##### Quarto Principal'
+      
+      - type: horizontal-stack
+        cards:
+
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+
+          - type: custom:decluttering-card
+            template: light_button_card
+            variables:
+              - entity: light.luz_quarto
+              - name: Principal
+              - icon: ceiling-light
+              - lock: false
+
+          - type: custom:decluttering-card
+            template: light_button_card
+            variables:
+              - entity: light.led_quarto
+              - name: Led
+              - icon: led-variant-outline
+              - lock: false
+
+          - type: custom:button-card
+            color_type: blank-card
+            aspect_ratio: 1/1
+
+          - type: custom:button-card
+            color_type: blank-card
+            aspect_ratio: 1/1
+
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+      
+      # Área Externa -----------------------------------# 
+      - type: custom:decluttering-card
+        template: header_text
+        variables:
+          - content: '##### Área Externa'
+      
+      - type: horizontal-stack
+        cards:
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+
+          - type: custom:decluttering-card
+            template: light_button_card
+            variables:
+              - entity: light.luz_garagem
+              - name: Garagem
+              - icon: lightbulb
+
+          - type: custom:decluttering-card
+            template: light_button_card
+            variables:
+              - entity: light.luz_quintal
+              - name: Quintal
+              - icon: lightbulb
+
+          - type: custom:decluttering-card
+            template: light_button_card
+            variables:
+              - entity: light.luz_frente
+              - name: Frente
+              - icon: lightbulb
+
+          - type: custom:button-card
+            color_type: blank-card
+            aspect_ratio: 1/1
+
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+  
+  - type: vertical-stack
+    cards:
+
+      # Cozinha -----------------------------------# 
+      - type: custom:decluttering-card
+        template: header_text
+        variables:
+          - content: '##### Cozinha'
+
+      - type: horizontal-stack
+        cards:
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+
+          - type: custom:decluttering-card
+            template: light_button_card
+            variables:
+              - entity: light.luz_cozinha
+              - name: Principal
+              - icon: ceiling-light
+
+          - type: custom:button-card
+            color_type: blank-card
+            aspect_ratio: 1/1
+
+          - type: custom:button-card
+            color_type: blank-card
+            aspect_ratio: 1/1
+
+          - type: custom:button-card
+            color_type: blank-card
+            aspect_ratio: 1/1
+                        
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+      
+      # Corredor -----------------------------------# 
+      - type: custom:decluttering-card
+        template: header_text
+        variables:
+          - content: '##### Corredor'
+      
+      - type: horizontal-stack
+        cards:
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+
+          - type: custom:decluttering-card
+            template: switch_button_card
+            variables:
+              - entity: light.luz_corredor
+              - name: Corredor
+              - icon: ceiling-light
+              - size: 30%
+
+          - type: custom:button-card
+            color_type: blank-card
+            aspect_ratio: 1/1
+
+          - type: custom:button-card
+            color_type: blank-card
+            aspect_ratio: 1/1
+                        
+          - type: custom:button-card
+            color_type: blank-card
+            aspect_ratio: 1/1
+                        
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+
+      - type: 'custom:button-card'
+        color_type: blank-card
+        styles:
+          card:
+            - height: 10px

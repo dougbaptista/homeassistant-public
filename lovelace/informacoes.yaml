@@ -1,0 +1,974 @@
+###########################################################################################################################
+# ██╗███╗   ██╗███████╗ ██████╗ ██████╗ ███╗   ███╗ █████╗  ██████╗ ██████╗ ███████╗███████╗                              #
+# ██║████╗  ██║██╔════╝██╔═══██╗██╔══██╗████╗ ████║██╔══██╗██╔════╝██╔═══██╗██╔════╝██╔════╝                              #
+# ██║██╔██╗ ██║█████╗  ██║   ██║██████╔╝██╔████╔██║███████║██║     ██║   ██║█████╗  ███████╗                              #
+# ██║██║╚██╗██║██╔══╝  ██║   ██║██╔══██╗██║╚██╔╝██║██╔══██║██║     ██║   ██║██╔══╝  ╚════██║                              #
+# ██║██║ ╚████║██║     ╚██████╔╝██║  ██║██║ ╚═╝ ██║██║  ██║╚██████╗╚██████╔╝███████╗███████║                              #
+# ╚═╝╚═╝  ╚═══╝╚═╝      ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚══════╝╚══════╝                              #
+###########################################################################################################################                           
+title: Informações          
+icon: 'mdi:information'
+path: info
+
+cards:
+
+  # Botão Home - Para voltar a view Principal ------------------------------------------# 
+  - type: conditional
+    conditions:
+      - entity: input_select.geral
+        state: Home
+
+    card:                   
+      type: vertical-stack
+      cards:
+        - type: horizontal-stack
+          cards:
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px 
+
+            - type: 'custom:decluttering-card'
+              template: switch_button_card
+              variables:
+                - entity: input_boolean.lovelace_manutencao
+                - name: Home
+                - icon: home
+                - aspect_ratio: 4/1
+                - show_label: false
+                - show_state: false
+                - show_icon: false
+                - opacity: 0.9
+                - tap_action:
+                    action: navigate
+                    navigation_path: /lovelace/home
+                    haptic: light 
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px 
+
+  # Botão Home - Para listar as Opções ------------------------------------------# 
+  - type: conditional
+    conditions:
+      - entity: input_select.geral
+        state_not: Home
+
+    card:                   
+      type: vertical-stack
+      cards:
+
+        - type: horizontal-stack
+          cards:
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px 
+
+            - type: 'custom:decluttering-card'
+              template: switch_button_card
+              variables:
+                - entity: input_boolean.lovelace_manutencao
+                - name: Home
+                - icon: home
+                - aspect_ratio: 4/1
+                - show_label: false
+                - show_state: false
+                - show_icon: false
+                - opacity: 0.9
+                - tap_action:
+                    action: call-service
+                    service: input_select.select_option
+                    service_data:
+                      option: Home
+                      entity_id: input_select.geral
+                    haptic: light     
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px 
+
+  # Botões (Opções) ------------------------------------------# 
+  - type: conditional
+    conditions:
+      - entity: input_select.geral
+        state: Home
+
+    card:
+      type: vertical-stack
+      cards:
+        - type: horizontal-stack
+          cards:
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px
+
+            # Botão Climatização
+            - type: custom:decluttering-card
+              template: switch_button_card
+              variables:
+                - entity: input_boolean.lovelace_manutencao
+                - name: Climatização
+                - icon: thermometer
+                - show_state: false
+                - opacity: 0.9
+                - tap_action:
+                    action: call-service
+                    service: input_select.select_option
+                    service_data:
+                      option: Climatização
+                      entity_id: input_select.geral
+                    haptic: light
+
+            # Botão Datas
+            - type: custom:decluttering-card
+              template: switch_button_card
+              variables:
+                - entity: input_boolean.lovelace_manutencao
+                - name: Importante
+                - label: Datas
+                - icon: calendar
+                - show_state: false
+                - opacity: 0.9
+                - tap_action:
+                    action: call-service
+                    service: input_select.select_option
+                    service_data:
+                      option: Datas
+                      entity_id: input_select.geral
+                    haptic: light
+
+            # Botão Links
+            - type: custom:decluttering-card
+              template: switch_button_card
+              variables:
+                - entity: input_boolean.lovelace_manutencao
+                - name: Links
+                - icon: link-variant
+                - show_state: false
+                - opacity: 0.9
+                - tap_action:
+                    action: call-service
+                    service: input_select.select_option
+                    service_data:
+                      option: Links
+                      entity_id: input_select.geral
+                    haptic: light
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px
+
+        - type: horizontal-stack
+          cards:
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px
+            
+            # Botão Lavanderia
+            - type: custom:decluttering-card
+              template: switch_button_card
+              variables:
+                - entity: input_boolean.lovelace_manutencao
+                - name: Área de Serviço
+                - label: Lavanderia
+                - icon: washing-machine
+                - show_state: false
+                - opacity: 0.9
+                - tap_action:
+                    action: call-service
+                    service: input_select.select_option
+                    service_data:
+                      option: Lavanderia
+                      entity_id: input_select.geral
+                    haptic: light
+
+            # Botão Energia
+            - type: custom:decluttering-card
+              template: switch_button_card
+              variables:
+                - entity: input_boolean.lovelace_manutencao
+                - name: Energia
+                - label: Geral
+                - icon: power
+                - show_state: false
+                - opacity: 0.9
+                - tap_action:
+                    action: call-service
+                    service: input_select.select_option
+                    service_data:
+                      option: Energia
+                      entity_id: input_select.geral
+                    haptic: light
+
+            # Botão Download
+            - type: custom:decluttering-card
+              template: switch_button_card
+              variables:
+                - entity: input_boolean.lovelace_manutencao
+                - name: Download
+                - icon: arrow-down-bold-box
+                - show_state: false
+                - opacity: 0.9
+                - tap_action:
+                    action: call-service
+                    service: input_select.select_option
+                    service_data:
+                      option: Download
+                      entity_id: input_select.geral
+                    haptic: light
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px
+
+  # Climatização ------------------------------------------# 
+  - type: conditional
+    conditions:
+      - entity: input_select.geral
+        state: Climatização
+    card:
+      type: vertical-stack
+      cards:
+
+        # Temperatura    
+        - type: custom:decluttering-card
+          template: header_text
+          variables:
+            - content: '##### Temperatura'
+
+        - type: horizontal-stack
+          cards:
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px 
+
+            - type: custom:decluttering-card
+              template: mini-graph-card
+              variables:
+                - entity: temperature_158d00031b049b
+                - name: Cozinha
+                - line_color: '#ffb414'
+                - decimals: 2
+
+            - type: custom:decluttering-card
+              template: mini-graph-card
+              variables:
+                - entity: temperature_158d00020e355a
+                - name: Quarto Principal
+                - line_color: '#ffb414'
+                - decimals: 2
+
+            - type: custom:decluttering-card
+              template: mini-graph-card
+              variables:
+                - entity: temperature_158d0002d778da
+                - name: Escritório
+                - line_color: '#ffb414'
+                - decimals: 2
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px
+
+        - type: horizontal-stack
+          cards:
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px 
+
+            - type: custom:decluttering-card
+              template: mini-graph-card
+              variables:
+                - entity: temperature_158d0002ead129
+                - name: Banheiro
+                - line_color: '#ffb414'
+
+            - type: custom:decluttering-card
+              template: mini-graph-card
+              variables:
+                - entity: temperature_158d0002e6ace5
+                - name: Sala de Estar
+                - line_color: '#ffb414'
+
+            - type: custom:button-card
+              color_type: blank-card
+              aspect_ratio: 1/1
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px 
+        
+        # Umidade    
+        - type: custom:decluttering-card
+          template: header_text
+          variables:
+            - content: '##### Umidade'
+        
+        - type: horizontal-stack
+          cards:
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px 
+
+            - type: custom:decluttering-card
+              template: mini-graph-card
+              variables:
+                - entity: humidity_158d00031b049b
+                - name: Cozinha
+                - line_color: '#1427ff'
+
+            - type: custom:decluttering-card
+              template: mini-graph-card
+              variables:
+                - entity: humidity_158d00020e355a
+                - name: Quarto Principal
+                - line_color: '#1427ff'
+
+            - type: custom:decluttering-card
+              template: mini-graph-card
+              variables:
+                - entity: humidity_158d0002d778da
+                - name: Escritório
+                - line_color: '#1427ff'
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px
+        
+        - type: horizontal-stack
+          cards:
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px 
+
+            - type: custom:decluttering-card
+              template: mini-graph-card
+              variables:
+                - entity: humidity_158d0002ead129
+                - name: Banheiro
+                - line_color: '#1427ff'
+
+            - type: custom:decluttering-card
+              template: mini-graph-card
+              variables:
+                - entity: humidity_158d0002e6ace5
+                - name: Sala de Estar
+                - line_color: '#1427ff'
+
+            - type: custom:button-card
+              color_type: blank-card
+              aspect_ratio: 1/1
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px 
+        
+        # Pressão do ar
+        - type: custom:decluttering-card
+          template: header_text
+          variables:
+            - content: '##### Pressão do ar'
+
+        - type: horizontal-stack
+          cards:
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px 
+
+            - type: custom:decluttering-card
+              template: mini-graph-card
+              variables:
+                - entity: pressure_158d00031b049b
+                - name: Cozinha
+                - line_color: '#00d8ff'
+                - font_size: 53
+                - height: 120
+
+            - type: custom:decluttering-card
+              template: mini-graph-card
+              variables:
+                - entity: pressure_158d0002d778da
+                - name: Escritório
+                - line_color: '#00d8ff'
+                - font_size: 53
+                - height: 120
+
+            - type: custom:button-card
+              color_type: blank-card
+              aspect_ratio: 1/1
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px
+        
+        - type: 'custom:button-card'
+          color_type: blank-card
+          styles:
+            card:
+              - height: 10px
+
+        # Iluminação
+        - type: custom:decluttering-card
+          template: header_text
+          variables:
+            - content: '##### Iluminação'
+
+        - type: horizontal-stack
+          cards:
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px 
+
+            - type: custom:decluttering-card
+              template: mini-graph-card
+              variables:
+                - entity: illumination_158d00032bd286
+                - name: Cozinha
+                - line_color: '#6e01c1'
+
+            - type: custom:decluttering-card
+              template: mini-graph-card
+              variables:
+                - entity: illumination_7c49eb19486c
+                - name: Escritório
+                - line_color: '#6e01c1'
+
+            - type: custom:button-card
+              color_type: blank-card
+              aspect_ratio: 1/1
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px
+        
+        - type: 'custom:button-card'
+          color_type: blank-card
+          styles:
+            card:
+              - height: 10px
+
+  # Datas ------------------------------------------# 
+  - type: conditional
+    conditions:
+      - entity: input_select.geral
+        state: Datas
+    card:
+
+      type: vertical-stack
+      cards:
+        - type: custom:decluttering-card
+          template: header_text
+          variables:
+            - content: '##### Datas Importantes'
+
+        - type: horizontal-stack
+          cards:
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px
+
+            - type: entities
+              style: |
+                ha-card {
+                  background: var(--homekit-white);
+                  --paper-item-icon-color: black;
+                  color: black;
+                  border-radius: 12px;
+                }
+              entities:
+
+                - entity: sensor.data_aniversario_douglas
+                  icon: mdi:human-male
+                  name: Aniversário Douglas
+
+                - entity: sensor.data_aniversario_luana
+                  icon: mdi:human-female
+                  name: Aniversário Luana
+
+                - entity: sensor.data_aniversario_mae_douglas
+                  name: Aniverário Mãe Douglas
+                  icon: mdi:gift
+
+                - entity: sensor.data_aniversario_pai_douglas
+                  name: Aniverário Pai Douglas
+                  icon: mdi:gift
+
+                - entity: sensor.data_aniversario_renata
+                  name: Aniversário Renata
+                  icon: mdi:gift
+
+                - entity: sensor.data_aniversario_tia_rosana
+                  name: Aniversário Tia Rosana
+                  icon: mdi:gift
+
+                - entity: sensor.data_aniversario_tia_rosana
+                  name: Aniversário Silvio
+                  icon: mdi:gift
+
+                - entity: sensor.data_inauguracao_apartamento_milao
+                  name: Entrega do Apartamento
+                  icon: mdi:domain
+
+                - entity: sensor.data_nascimento_leticia
+                  name: Nascimento da Letícia
+                  icon: mdi:baby-buggy
+
+                - entity: sensor.data_aniversario_casamento
+                  name: Aniversário de Casamento
+                  icon: mdi:ring
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px
+
+  # Links ------------------------------------------# 
+  - type: conditional
+    conditions:
+      - entity: input_select.geral
+        state: Links
+    card:
+      type: vertical-stack
+      cards:
+
+        # Waze
+        - type: custom:decluttering-card
+          template: header_text
+          variables:
+            - content: '##### Waze Navegação'
+
+        - type: horizontal-stack
+          cards:
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px 
+
+            - type: entities
+              style: |
+                ha-card {
+                  background: var(--homekit-white);
+                  border-radius: 12px;
+                  color: black;
+                  --paper-item-icon-color: black;
+                }
+              entities:
+                - type: weblink
+                  name: Waze Trabalho
+                  icon: 'mdi:briefcase'
+                  url: https://www.waze.com/pt-BR/livemap?ll=-28.4848615%2C-49.0161761&navigate=yes&zoom=16&from=-28.4738831%2C-49.0011291&at=now
+                  
+                - type: weblink
+                  name: Waze Casa
+                  icon: 'mdi:home-variant-outline'
+                  url: https://www.waze.com/pt-BR/livemap?ll=44.79056320%2C1.47207170&navigate=yes&zoom=16#
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px 
+
+        # Outros links
+        - type: custom:decluttering-card
+          template: header_text
+          variables:
+            - content: '##### Outros'
+
+        - type: horizontal-stack
+          cards:
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px 
+
+            - type: entities
+              style: |
+                ha-card {
+                  background: var(--homekit-white);
+                  border-radius: 12px;
+                  color: black;
+                  --paper-item-icon-color: black;
+                }
+              entities:
+
+                - type: weblink
+                  name: Home Assistant Beta
+                  url: https://rc--home-assistant-docs.netlify.com/
+              
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px 
+
+        - type: 'custom:button-card'
+          color_type: blank-card
+          styles:
+            card:
+              - height: 10px
+
+  # Máquina de Lavar ------------------------------------------# 
+  - type: conditional
+    conditions:
+      - entity: input_select.geral
+        state: Lavanderia
+    card:                   
+      type: vertical-stack
+      cards:
+
+        - type: custom:decluttering-card
+          template: header_text
+          variables:
+            - content: '##### Máquina de Lavar'
+
+        - type: horizontal-stack
+          cards:
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px
+
+            - type: 'custom:decluttering-card'
+              template: laundry_elements
+              variables:
+                - image: washingmachine.jpg
+                - entity_status: opcoes_maquina_de_lavar
+                - entity: maquina_de_lavar
+                - entity_energy: maquina_lavar_energy_power
+                - entity_energy_today: maquina_lavar_energy_today
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px
+
+  # Energia ------------------------------------------# 
+  - type: conditional
+    conditions:
+      - entity: input_select.geral
+        state: Energia
+    card:
+      type: vertical-stack
+      cards:
+
+        # Geral    
+        - type: custom:decluttering-card
+          template: header_text
+          variables:
+            - content: '##### Geral'
+
+        - type: horizontal-stack
+          cards:
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px 
+
+            - type: custom:decluttering-card
+              template: mini-graph-card
+              variables:
+                - entity: sonoff_energia_energy_current
+                - name: Current
+                - line_color: '#ffb414'
+                - decimals: 4
+
+            - type: custom:decluttering-card
+              template: mini-graph-card
+              variables:
+                - entity: sonoff_energia_energy_power
+                - name: Power
+                - line_color: '#1427ff'
+
+            - type: custom:decluttering-card
+              template: mini-graph-card
+              variables:
+                - entity: sonoff_energia_energy_voltage
+                - name: Voltage
+                - line_color: '#00ff95'
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px
+
+        - type: horizontal-stack
+          cards:
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px 
+
+            - type: custom:decluttering-card
+              template: mini-graph-card
+              variables:
+                - entity: sonoff_energia_energy_today
+                - name: Hoje
+                - line_color: '#bf00ff'
+                - decimals: 4
+
+            - type: custom:decluttering-card
+              template: mini-graph-card
+              variables:
+                - entity: sonoff_energia_energy_yesterday
+                - name: Ontem
+                - line_color: '#bf00ff'
+                - decimals: 4
+
+            - type: custom:decluttering-card
+              template: mini-graph-card
+              variables:
+                - entity: sonoff_energia_energy_total
+                - name: Total
+                - line_color: '#bf00ff'
+                - decimals: 4
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px 
+       
+        # Consumo    
+        - type: custom:decluttering-card
+          template: header_text
+          variables:
+            - content: '##### Consumo'
+        
+        - type: horizontal-stack
+          cards:
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px 
+
+            - type: custom:decluttering-card
+              template: mini-graph-card
+              variables:
+                - entity: consumo_total_diario_r
+                - name: Hoje
+                - line_color: '#c20202'
+
+            - type: custom:decluttering-card
+              template: mini-graph-card
+              variables:
+                - entity: consumo_total_anterior_r
+                - name: Ontem
+                - line_color: '#c20202'
+
+            - type: custom:button-card
+              color_type: blank-card
+              aspect_ratio: 1/1
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px
+        
+        - type: horizontal-stack
+          cards:
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px 
+
+            - type: custom:decluttering-card
+              template: mini-graph-card
+              variables:
+                - entity: consumo_mensal_reais
+                - name: Mês Atual
+                - line_color: '#c20202'
+
+            - type: custom:decluttering-card
+              template: mini-graph-card
+              variables:
+                - entity: consumo_mensal_reais_utility_meter
+                - name: Mensal
+                - line_color: '#c20202'
+
+            - type: custom:button-card
+              color_type: blank-card
+              aspect_ratio: 1/1
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px 
+        
+        # Energia Mensal    
+        - type: custom:decluttering-card
+          template: header_text
+          variables:
+            - content: '##### Energia Mensal'
+        
+        - type: horizontal-stack
+          cards:
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px 
+
+            - type: custom:decluttering-card
+              template: mini-graph-card
+              variables:
+                - entity: consumo_mes_atual
+                - name: Mês Atual
+                - line_color: '#00d8ff'
+                - decimals: 4
+
+            - type: custom:decluttering-card
+              template: mini-graph-card
+              variables:
+                - entity: energia_mensal
+                - name: Mensal
+                - line_color: '#00d8ff'
+                - decimals: 4
+
+            - type: custom:button-card
+              color_type: blank-card
+              aspect_ratio: 1/1
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px 
+                
+  # Download (Status da Rede) ------------------------------------------# 
+  - type: conditional
+    conditions:
+      - entity: input_select.geral
+        state: Download
+    card:
+      type: vertical-stack
+      cards:
+
+        - type: custom:decluttering-card
+          template: header_text
+          variables:
+            - content: '##### Download'
+
+        - type: horizontal-stack
+          cards:
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px 
+
+            - type: entities
+              style: |
+                ha-card {
+                  background: var(--homekit-white);
+                  border-radius: 12px;
+                  color: black;
+                  --paper-item-icon-color: black;
+                }
+
+              entities:
+                - entity: sensor.speedtest_download
+                  icon: 'mdi:download'
+                  name: Download
+
+                - entity: sensor.speedtest_ping
+                  icon: 'mdi:format-list-bulleted'
+                  name: Ping
+
+                - entity: sensor.speedtest_upload
+                  icon: 'mdi:arrow-left-bold'
+                  name: Upload
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

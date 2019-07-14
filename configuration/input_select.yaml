@@ -1,0 +1,81 @@
+# Máquina de Lavar ################################
+  opcoes_maquina_de_lavar:
+    name: Opções da Máquina de Lavar
+    options:
+      - Desligada
+      - Enchendo
+      - Batendo
+      - Molho
+      - Esvaziando
+      - Centrifugando
+    initial: Desligada
+    icon: mdi:washing-machine
+
+# Luana ################################
+  luana:
+    name: Categorias
+    options:
+      - Agenda
+      - Geral
+      - Localização
+      - Emails
+    initial: Agenda
+
+# Douglas ################################
+  douglas:
+    name: Categorias
+    options:
+      - Agenda
+      - Geral
+      - Localização
+      - Emails
+    initial: Agenda
+
+# Geral ################################
+  geral:
+    name: Categorias
+    options:
+      - Datas
+      - Climatização
+      - Links
+      - Download
+      - Lavanderia
+      - Energia
+      - Home
+
+# Destinos Waze ################################
+  destinos_waze:
+    name: Destinos
+    options:
+      - Casa
+      - Senai
+      - Bekko
+
+# Controle Remoto ################################
+  remoto:
+    name: Controle Remoto
+    options:
+      - Quarto
+      - Sala
+    initial: Sala
+
+# Consumo ################################
+  consumo:
+    name: Consumo
+    options:
+      - Total
+      - Hoje
+      - Ontem
+    initial: Total
+
+# Aspirador ################################
+  zonas_de_aspiracao:
+    name: Áreas de Aspiração
+    options:
+      - Banheiro
+      - Casa Toda
+      - Corredor
+      - Cozinha
+      - Escritório
+      - Quarto    
+      - Sala

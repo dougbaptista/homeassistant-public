@@ -1,0 +1,30 @@
+  - name: "Suíte Romantica"
+    entities:
+      light.luz_quarto:
+        state: true
+        rgb_color: [255, 0, 255]
+        brightness: 255
+
+  - name: "Luz Alarme"
+    entities:
+      light.yeelight:
+        state: on
+        brightness: 255
+        effect: Police2
+      light.led:
+        state: on
+        brightness: 255
+        effect: rb_cross_fade
+
+  - name: "Luzes Normais"
+    entities:
+      light.yeelight:
+        state: on
+        rgb_color: [255, 0, 0]
+        brightness: 50
+        transition: 2
+      light.led:
+        state: on
+        rgb_color: [255, 0, 0]
+        brightness: 50
+        transition: 2

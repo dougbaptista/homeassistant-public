@@ -1,0 +1,17 @@
+  accounts:
+    - username: !secret life360_email_doug
+      password: !secret life360_senha_doug
+
+    - username: !secret life360_email_luana
+      password: !secret life360_senha_luana
+
+    - username: !secret life360_email_joao
+      password: !secret life360_senha_joao
+  driving_speed: 30
+  interval_seconds: 10
+  max_gps_accuracy: 200
+  max_update_wait:
+    minutes: 45
+  show_as_state:
+    - driving
+    - moving

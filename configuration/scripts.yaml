@@ -1,0 +1,493 @@
+###########################################################################################################################################################
+# Desligar geral
+###########################################################################################################################################################
+desligar_geral:
+  alias: "Desligar Tudo"
+  sequence:
+    #switchs
+    - service: switch.turn_off
+      data:
+        entity_id: 
+          - switch.microondas
+          - switch.monitores
+#          - switch.carregador_douglas          
+#          - switch.carregador_luana          
+#          - switch.computador          
+#          - switch.maquina_de_lavar          
+    #climate
+    - service: climate.turn_off
+      data:
+        entity_id: 
+          - climate.ar_cozinha
+          - climate.ar_quarto            
+          - climate.ar_escritorio            
+    #desliga iluminação
+    - service: light.turn_off
+      data:
+        entity_id: group.all_lights
+    #mediaplayers
+    - service: media_player.turn_off
+      entity_id: 
+        - media_player.tv_samsung
+        - media_player.tv      
+
+###########################################################################################################################################################
+# Desligar geral
+###########################################################################################################################################################
+desligar_quarto:
+  alias: "Desligar Quarto"
+  sequence:
+    #switchs
+    - service: switch.turn_off
+      data:
+        entity_id: 
+          - switch.tv_samsung_6_series_58 
+    #climate
+    - service: climate.turn_off
+      data:
+        entity_id: 
+          - climate.ar_quarto            
+    #desliga iluminação
+    - service: light.turn_off
+      data:
+        entity_id: light.luzes_quarto
+    #media_players
+    - service: media_player.turn_off
+      entity_id: 
+        - media_player.tv_samsung
+        - media_player.tv
+
+###########################################################################################################################################################
+# Desligar AC Geral
+###########################################################################################################################################################
+desligar_ac_geral:
+  alias: "Desligar Todos AC"
+  sequence:
+    #climate
+    - service: climate.turn_off
+      data:
+        entity_id: 
+          - climate.ar_cozinha
+          - climate.ar_quarto     
+          - climate.ar_escritorio    
+
+###########################################################################################################################################################
+# Loop com iluminação geral
+###########################################################################################################################################################
+# START FLASH LUZES
+luzes_flash:
+  alias: Ligar Flash Luzes
+  sequence:
+    - service: homeassistant.turn_on
+      data:
+        entity_id: 
+        - light.normais  
+    - delay:
+        #### time for flash light on
+        seconds: .02
+    - service: homeassistant.turn_off
+      data:
+        entity_id: 
+        - light.normais
+    - service: script.turn_on
+      data:
+        entity_id: script.light_loop
+
+# LOOP BACK TO START FLASH AGAIN         
+light_loop:
+  alias: Loop Luzes
+  sequence:
+    - delay:
+        #### time for flash light off
+        seconds: .02
+    - service: script.turn_on
+      data:
+        entity_id: script.luzes_flash
+
+# CANCEL FLASHING 
+luzes_flash_cancel:
+  alias: Cancenlar Loop Luzes
+  sequence:
+    - service: script.turn_off
+      data:
+        entity_id: script.luzes_flash
+    - service: script.turn_off
+      data:
+        entity_id: script.light_loop       
+    - service: light.turn_off
+      data:
+        entity_id: group.all_lights
+
+###########################################################################################################################################################
+# Loop Sirene
+###########################################################################################################################################################
+# START FLASH SIRENE
+sirene_flash:
+  alias: Ligar Alarme Sirene
+  sequence:
+    - service: xiaomi_aqara.play_ringtone
+      data:
+        gw_mac: !secret mac_xiaomi_gateway
+        ringtone_id: 0
+        ringtone_vol: 200
+    - delay:
+        #### time for flash light on
+        seconds: 12
+    - service: script.turn_on
+      data:
+        entity_id: script.sirene_loop
+    # toca mp3 nos google homes
+    - service: media_player.play_media
+      entity_id: media_player.musics
+      data_template:
+        media_content_id: !secret url_sirene_policia
+        media_content_type: 'music'
+    # toca mp3 na tv (chromecast)
+    - service: media_player.play_media
+      entity_id: media_player.tv
+      data_template:
+        media_content_id: !secret url_sirene_policia
+        media_content_type: 'music'
+
+# LOOP BACK TO START FLASH AGAIN         
+sirene_loop:
+  alias: Loop Sirene
+  sequence:
+    - delay:
+        #### time for flash light off
+        seconds: .02
+    - service: script.turn_on
+      data:
+        entity_id: script.sirene_flash
+
+# CANCEL FLASHING 
+sirene_flash_cancel:
+  alias: Cancelar Loop Sirene
+  sequence:
+    - service: script.turn_off
+      data:
+        entity_id: script.sirene_flash
+    - service: script.turn_off
+      data:
+        entity_id: script.sirene_loop     
+
+###########################################################################################################################################################
+# Alarme
+###########################################################################################################################################################        
+
+# Ativar alarme #################################################
+ativar_alarme:
+  alias: "Ativar Alarme"
+  sequence:
+    #google-home
+    - service: media_player.volume_set
+      data_template:
+        entity_id: media_player.musics
+        volume_level: 1   
+    - service: tts.google_translate_say
+      data_template:
+        entity_id: media_player.musics
+        message: "Ladrão. Ladrão. Ladrão. Ladrão. Ladrão. Alarme ativado."
+    #iluminação-colorida
+    - service: scene.turn_on
+      entity_id: scene.luz_alarme
+    #flash-iluminção-normal
+    - service: script.turn_on
+      entity_id: script.luzes_flash
+    #sirene
+    - delay:
+        #### time for flash light on
+        seconds: 5
+    - service: script.turn_on
+      entity_id: script.sirene_flash
+
+# Desativar Alarme #################################################
+desativar_alarme:
+  alias: "Desativar Alarme"
+  sequence:
+    #desativar sirene
+    - service: script.turn_on
+      entity_id: script.sirene_flash_cancel
+    #desativar luzes
+    - service: script.turn_on
+      entity_id: script.luzes_flash_cancel     
+
+###########################################################################################################################################################
+# Capturar imagens pelas cameras
+###########################################################################################################################################################          
+
+#camera cozinha
+cozinha_camera_snapshot:
+  sequence:
+  - service: camera.snapshot
+    data:
+      entity_id: camera.cozinha_stream
+      filename: '/config/www/imgs/cameras/cozinha.cgi'   
+  - service: notify.telegramgrupo
+    data_template:
+      message: "Foto da cozinha."
+      data:
+        photo:
+          file: "/config/www/imgs/cameras/cozinha.cgi"
+          caption: "Foto da cozinha."
+
+#camera garagem
+garagem_camera_snapshot:
+  sequence:
+  - delay:
+      seconds: 1             
+    #captura imagem 1
+  - service: camera.snapshot
+    data:
+      entity_id: camera.garagem
+      filename: '/config/www/imgs/cameras/garagem1.cgi'   
+  - delay:
+      seconds: 2             
+  #notifica via telegram
+  - service: notify.telegramgrupo
+    data_template:
+      message: >
+        "Foto da garagem."
+      data:
+        photo:
+          - file: "/config/www/imgs/cameras/garagem1.cgi"
+            caption: "Foto garagem"
+
+#camera quintal
+quintal_camera_snapshot:
+  sequence:
+  - service: camera.snapshot
+    data:
+      entity_id: camera.fundos
+      filename: '/config/www/imgs/cameras/quintal.cgi'   
+  - service: notify.telegramgrupo
+    data_template:
+      message: "Foto quintal."
+      data:
+        photo:
+          file: "/config/www/imgs/cameras/quintal.cgi"
+          caption: "Foto do quintal."
+
+#camera garagem
+cameras_snapshot:
+  sequence:  
+    #captura imagem 1
+  - service: camera.snapshot
+    data:
+      entity_id: camera.garagem
+      filename: '/config/www/imgs/cameras/garagem.cgi'                
+  - service: camera.snapshot
+    data:
+      entity_id: camera.cozinha_stream
+      filename: '/config/www/imgs/cameras/cozinha.cgi'      
+  - service: camera.snapshot
+    data:
+      entity_id: camera.fundos
+      filename: '/config/www/imgs/cameras/quintal.cgi'   
+
+#telegram fotos de garagem
+telegram_snapshot:
+  sequence:  
+  - service: notify.telegramgrupo
+    data_template:
+      message: >
+        "Fotos"
+      data:
+        photo:
+          - file: "/config/www/imgs/cameras/garagem.cgi"
+            caption: "Foto garagem"
+          - file: "/config/www/imgs/cameras/quintal.cgi"
+            caption: "Foto quintal"
+          - file: "/config/www/imgs/cameras/cozinha.cgi"
+            caption: "Foto cozinha"
+
+###########################################################################################################################################################
+# Stream cameras
+###########################################################################################################################################################          
+
+#camera cozinha stream
+cozinha_camera_stream:
+  sequence:
+  - service: camera.play_stream
+    data:
+      entity_id: camera.cozinha_stream
+      media_player: media_player.tv
+
+
+###########################################################################################################################################################
+# Efeitos Luzes
+###########################################################################################################################################################          
+
+# tipos de efeito para yeelight
+# Disco, Slow Temp, Strobe epilepsy, Strobe color, Alarm, Police, Police2, Christmas, RGB, Random Loop, Fast Random Loop, Slowdown, WhatsApp, Facebook, Twitter, Stop
+
+# tipos de efeito para Flux Led/MagicLight
+# colorloop, colorjump, colorstrobe, rg_cross_fade, rb_cross_fade, gb_cross_fade, random, custom
+# red_fade, green_fade, blue_fade, yellow_fade, cyan_fade, purple_fade, white_fad
+# red_strobe, green_strobe, blue_strobe, yellow_strobe, cyan_strobe, purple_strobe, white_strobe
+
+luz_quarto_efeito_disco:
+  alias: Efeito Suíte
+  sequence:
+  - service: homeassistant.turn_on
+    entity_id: light.yeelight_color2_04cf8c909635
+    data:
+      effect: 'Disco'
+
+luzes_escritorio_efeito_disco:
+  alias: Efeito Escritório
+  sequence:
+  - service: homeassistant.turn_on
+    entity_id: light.yeelight_color2_04cf8c91a674
+    data:
+      effect: 'Disco'            
+  - service: homeassistant.turn_on
+    entity_id: light.led_escritorio
+    data:
+      effect: 'colorstrobe'                  
+
+###########################################################################################################################################################
+# Vídeos
+###########################################################################################################################################################          
+
+radio_cross:
+  alias: "Rádio Cross"
+  sequence:
+  - service: media_player.play_media
+    entity_id: media_player.tv
+    data_template:
+      media_content_id: 'http://mixaac.crossradio.com.br:10000/stream/1;?920628.6893239912'
+      media_content_type: 'music'
+
+###########################################################################################################################################################
+# TV Samsung - Comandos
+###########################################################################################################################################################  
+
+#samsung - diminuir volume
+tv_samsung_diminuir_volume:
+  sequence:
+  - service: broadlink.send     
+    data:
+      host: !secret ip_broadmini_quarto_principal
+      packet:
+      - "JgBGAJSVEjgSOBI4EhMRFBETEhMSExM3EjgSOBMSEhMSExITEhMSNxI4EhMSOBITEhMSExITEhMSExI4EhMSNxI4EjgSOBIADQUAAA=="
+
+#samsung - aumentar volume
+tv_samsung_aumentar_volume:
+  sequence:
+  - service: broadlink.send     
+    data:
+      host: !secret ip_broadmini_quarto_principal
+      packet:
+      - "JgCMAJWUEzcSOBM3EhMSExITEhMSExI4EjcTNxITEhMSExITEhMSOBI4EzcSExETEhMSExITEhMSExITEjgTNxM3EjgROBIABgiUlRM3EjgSOBMSEhMSExITEhMROBI4EjgSExITEhMSExITEjgSNxI4EhMSExITEhMSExITEhMSExI4EjgSNxI4EjgSAA0FAAAAAAAAAAAAAAAA"
+
+#samsung - mutar (silenciar)
+tv_samsung_mute:
+  sequence:
+  - service: broadlink.send     
+    data:
+      host: !secret ip_broadmini_quarto_principal
+      packet:
+      - "JgBGAJSVEjgSOBI4EhMSExITEhISExI4EjgSOBITEhMSExITEhMSOBI4EjcSOBITEhMSExITEhMSExITEhMSOBI4EjcSOBIADQUAAA=="
+
+#samsung - seta esquerda <-
+tv_samsung_esquerda:
+  sequence:
+  - service: broadlink.send     
+    data:
+      host: !secret ip_broadmini_quarto_principal
+      packet:
+      - "JgAYAZWUEjgSOBI4ExISExITEhMSExI4EjcSOBITEhMTEhITEhMSExI4EhMSExITEjgROBITEjgSExI4EjgSOBITEhMSNxMABgeVkRU4EjgSOBITEhMSExITEhMSOBI3EjgSExITEhMSExITEhMSOBITEhMSExI3EjgSExI4EhMSOBI4EjgSExITETgSAAYIlJUSOBI4EjgSExITEhMSExITETgSOBM3EhMSExITEhMSExITEjcSExITEhMSOBI4EhMTNxITEjgROBI4EhMSExI4EgAGB5WVEjcSOBI4EhMSExITEhMSExI4EjcSOBITEhMSExITEhMSExI4EhMSExETEzcSOBITEjgTEhI4EjcSOBITEhMSOBIADQU="
+
+#samsung - seta direita ->
+tv_samsung_direita:
+  sequence:
+  - service: broadlink.send     
+    data:
+      host: !secret ip_broadmini_quarto_principal
+      packet:
+      - "JgBGAJWVEjgSNxI4EhMSExITEhMSExI4EjgSOBETEhMSExITEhMSExI4EhMSExITEjgSOBETEjgSExM3EjgSOBITEhMSOBIADQUAAA=="      
+
+#samsung - seta cima
+tv_samsung_cima:
+  sequence:
+  - service: broadlink.send     
+    data:
+      host: !secret ip_broadmini_quarto_principal
+      packet:
+      - "JgCMAJSVEzcTNxI4EhMSExITEhMSExE4EjgSOBITExISExITExISExITEhMSExETEjgSOBITEjgSOBI4EjcSOBITEhMSOBIABgiUlRM3EjgSOBITEhMSExETEhMSOBI4EjgSExITEhMSExITEhMSExETEhMSExI4EjgTEhI4EjgSOBI3EzcSExMSEjgSAA0FAAAAAAAAAAAAAAAA"     
+
+#samsung - seta cima
+tv_samsung_baixo:
+  sequence:
+  - service: broadlink.send     
+    data:
+      host: !secret ip_broadmini_quarto_principal
+      packet:
+      - "JgAYAZSVEjgSOBI4EhMSExITEhMSExI3EjgSOBITEhMSExITEhMSOBITEhMSExITEjcSOBITEhMSOBI4EjgSOBITEhMROBIABgmUlRI4EjgSNxITEhMSExITEhMSOBI4EjgSExITEhMSExITETgSExITEhMSExI4EjgSExITEjgSOBI3EjgTEhITEjgSAAYIlJUSOBI4EzcSExITEhMSExITEjcSOBI4EhMSExITEhMSExI4EhMSExITERMSOBI4EhMSExI4EjgTNxI3EhMSExI4EgAGCJWUEzUUOBI4EhMSExITEhMSExI3EjgTNxITEhMSExITEhMSOBITEhMSExITETgSOBITEhMSOBM3EjgSOBISEhMSOBMADQU="           
+
+
+
+###########################################################################################################################################################
+# TV Samsung - Comandos
+###########################################################################################################################################################  
+
+aspirador_cozinha:
+  sequence:
+      service: vacuum.send_command
+      data:
+        entity_id: vacuum.aspirador_xiaomi_vacuum
+        command: app_zoned_clean
+        params: [[18712,22800,23262,25950,1]]
+        
+aspirador_sala:
+  sequence:
+      service: vacuum.send_command
+      data:
+        entity_id: vacuum.aspirador_xiaomi_vacuum
+        command: app_zoned_clean
+        params: [[23196,22647,26396,25847,1]]
+
+aspirador_quarto:
+  sequence:
+      service: vacuum.send_command
+      data:
+        entity_id: vacuum.aspirador_xiaomi_vacuum
+        command: app_zoned_clean
+        params: [[23722,26077,26422,29477,1]]
+
+aspirador_banheiro:
+  sequence:
+      service: vacuum.send_command
+      data:
+        entity_id: vacuum.aspirador_xiaomi_vacuum
+        command: app_zoned_clean
+        params: [[21454,26907,23204,29457,1]] 
+
+aspirador_escritorio:
+  sequence:
+      service: vacuum.send_command
+      data:
+        entity_id: vacuum.aspirador_xiaomi_vacuum
+        command: app_zoned_clean
+        params: [[19114,26080,21264,29580,1]]
+
+aspirador_corredor:
+  sequence:
+      service: vacuum.send_command
+      data:
+        entity_id: vacuum.aspirador_xiaomi_vacuum
+        command: app_zoned_clean
+        params: [[21207,25909,23507,26909,1]]
+
+aspirador_casa_toda:
+  sequence:
+      service: vacuum.start
+      data:
+        entity_id: vacuum.aspirador_xiaomi_vacuum
+
+aspirador_desligar:
+  sequence:
+      service: vacuum.return_to_base
+      data:
+        entity_id: vacuum.aspirador_xiaomi_vacuum

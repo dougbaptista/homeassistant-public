@@ -1,0 +1,33 @@
+  # controle do consumo total - mesal          
+  energia_mensal:
+    source: sensor.sonoff_energia_energy_total
+    cycle: monthly
+
+  # controle do consumo por equipamento - mesal          
+  energia_ar_cozinha_mes:
+    source: sensor.ar_cozinha_energy_total
+    cycle: monthly
+
+  energia_ar_escritorio_mes:
+    source: sensor.ar_escritorio_energy_total
+    cycle: monthly
+
+  energia_ar_suite_mes:
+    source: sensor.ar_suite_energy_total
+    cycle: monthly
+
+  energia_maquina_de_lavar_mes:
+    source: sensor.maquina_lavar_energy_total
+    cycle: monthly
+
+  energia_monitores_mes:
+    source: sensor.sonoff_pow_monitores_energy_total
+    cycle: monthly
+
+  energia_pc_mes:
+    source: sensor.sonoff_pc_energy_today
+    cycle: monthly
+
+  energia_refrigerador_mes:
+    source: sensor.refrigerador_energy_total
+    cycle: monthly      

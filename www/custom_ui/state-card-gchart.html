@@ -1,0 +1,149 @@
+<!--
+Google Charts state card for Home Assistant
+.
+Visit  https://developers.google.com/chart/ for more information, chart options, new charts etc.
+.
+version 20180208
+-->
+
+<link rel='import' href='../../bower_components/google-apis/google-legacy-loader.html'>
+<dom-module id="state-card-gchart">
+<template>
+<style>
+#selectforms {
+   position: relative;
+   float: right;
+   z-index:100;
+   top: -20px;
+   right: -10px;
+}
+#myChart {
+   height: calc(100% + 32px); 
+   width: calc(100% + 32px); 
+   margin: -16px;
+}
+</style>
+<google-legacy-loader on-api-load='googleApiLoaded'></google-legacy-loader>
+<div id="selectforms" on-tap='cardTapped'>
+<select id="selectchartType" on-tap='drawChart'>
+  <option value="ColumnChart">Columns</option>
+  <option value="BarChart">Bars</option>
+  <option value="PieChart">Donut</option>
+<!-- <option value="LineChart">Line</option> -->       Uncomment/comment to enable/disable more options
+<!-- <option value="SteppedAreaChart">Stepped</option> -->
+<!-- <option value="AreaChart">Area</option> -->
+</select>
+<select id="sortorder" on-tap='drawChart'>
+  <option value="true">Desc</option>
+  <option value="false">Asc</option>
+</select>
+<select id="sortname" on-tap='drawChart'>
+  <option value="1">Value</option>
+  <option value="0">Name</option>
+</select>
+</div>
+<div id="myChart" on-tap='cardTapped'></div>
+</template>
+</dom-module>
+<script>
+class ChartG extends Polymer.Element {
+  static get is() { return 'state-card-gchart'; }
+  static get properties() {
+    return {
+        hass: {
+          type: Object,
+          observer: 'Obs'
+        },
+    };
+  }
+/*-----------------------------------------
+This part redraws the chart on state change.
+-----------------------------------------*/
+  Obs() {
+      if (!this.hass) {
+        return;
+      }
+      if (!window.google || !window.google.visualization) {
+        return;
+      }
+      if (!this.chartEngine) {
+        var chartType = this.$.selectchartType.value;
+        this.chartEngine = new window.google.visualization[chartType](this.$.myChart);
+      }
+      this.drawChart();
+    }
+  drawChart() {
+/*-----------------------------------------
+Add here your entities as variables. The variable name is yours to choose. Proceed to add new lines to the data array below.
+parseInt() is also an option to remove the decimals.
+-----------------------------------------*/
+      var ar_escritorio = parseFloat(this.hass.states['sensor.ar_escritorio_hoje_r'].state);
+      var refrigerador = parseFloat(this.hass.states['sensor.refrigerador_hoje_r'].state);
+/*-----------------------------------------
+Add or remove new lines.
+First column: Name of device;
+Second column: variable name pointing to the entity state (value) - see variables above;
+Third column (optional): annotation (what is shown on the bar - anything can be shown here);
+Forth column (optional): color/styling for the bar and column charts - the pie chart ignores this for now (I am using http://colorbrewer2.org for the color range). More options here: https://developers.google.com/chart/interactive/docs/roles#stylerole
+--
+More column types can be added - more info here: https://developers.google.com/chart/interactive/docs/roles 
+-----------------------------------------*/
+      var data = google.visualization.arrayToDataTable([
+        ['Dispositivo', 'Potência',{ role: 'annotation' },  { role: 'style' }],
+        ['AR Escritório', ar_escritorio, ar_escritorio, '#a6cee3'],
+        ['Refrigerador', refrigerador, refrigerador, '#1f78b4'],
+      ]);
+/*-----------------------------------------
+Define here the options for the charts. Each chart type has different options so test after you add something new.
+All kind of options for each type of chart can be found on the Google charts webpage. e.g. https://developers.google.com/chart/interactive/docs/gallery/columnchart 
+-----------------------------------------*/
+      var options = {
+        title: "Potência instantânea em W",
+        height: 300,                                     //chart heigh in pixels
+        bar: {groupWidth: '69%'},                        //bar/column width - 69% is the golden ratio
+        legend: { position: 'none'},                     //if enabled the chartArea option should be modified
+        titleTextStyle: {fontSize: 13, bold: false},
+        chartArea: {left:35,top:25,right: 5, width:'100%',height:'82%'},
+        tooltip: {trigger: 'selection'},                // 'focus'/'selection'/'none'
+        vAxis: {minorGridlines: {count: 2, color: '#F4F4F4'}, gridlines: {count: 6}},       //for the column chart 
+        hAxis: {minorGridlines: {count: 2, color: '#F4F4F4'}, gridlines: {count: 6}},       //font the bar chart
+        // just a commnent for the vAxis/hAxis - if gridlines: {count: x} is set to x=-1(auto) the axis maximum value will change and the chart bars will be most of the time static. I recomend setting it to 5 or more.
+        dataOpacity: 0.9,
+        fontSize: 11,                                   //font size throughout the chart
+        pieHole: 0.4,                                   //from pie to donut - comment or set to 0 to change to pie 
+        pieSliceText: 'label',                          //'percentage', 'value' ,'label' ,'none'
+        pieSliceTextStyle: {fontSize:10},
+        is3D: false,                                     // set to true for 3D pie chart
+        backgroundColor: { fill: 'white' },
+        //explorer: {}                                   // uncomment to enable pan and zoom in the chart - right click resets
+      };
+/*-----------------------------------------
+Delete the following 3 lines and the corresponding select forms above to remove sorting options. 
+-----------------------------------------*/
+      var sortname = eval(this.$.sortname.value);
+      var sortorder = eval(this.$.sortorder.value);
+      data.sort([{column: sortname, desc: sortorder}]);
+      var chartType = this.$.selectchartType.value;
+      this.chartEngine = new window.google.visualization[chartType](this.$.myChart);
+      this.chartEngine.draw(data, options);      
+    }
+/*-----------------------------------------
+Load Google charts API. You can add here more packages to enable more charts e.g. ['corechart', 'gauge']
+-----------------------------------------*/
+  googleApiLoaded() {
+      window.google.load('visualization', '1', {
+        packages: ['corechart'],
+        callback: function () {
+          this.Obs();
+        }.bind(this),
+      });
+    }
+/*-----------------------------------------
+Dirty disable for the more-info card in HASS
+-----------------------------------------*/
+  cardTapped(ev) {
+      ev.stopPropagation();
+  }
+}   
+customElements.define(ChartG.is, ChartG);
+</script>

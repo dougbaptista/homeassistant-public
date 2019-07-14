@@ -1,0 +1,8 @@
+# yeelight - https://www.home-assistant.io/components/yeelight/
+  devices:
+    !secret ip_yeelight_quarto_principal:
+      name: Luz Quarto
+    !secret ip_yeelight_corredor:
+      name: Luz Corredor
+    !secret ip_yeelight_escritorio:
+      name: Luz Escritório

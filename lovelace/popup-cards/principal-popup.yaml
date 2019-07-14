@@ -1,0 +1,2423 @@
+
+  ###########################################################################################################################                           
+  # Controles Remotos
+  ###########################################################################################################################  
+  input_boolean.lovelace_remoto:
+    title: Controles Remoto (TV's)
+    style:
+      border-radius: 12px
+      background: var(--background-image)
+
+    card:
+      type: vertical-stack
+      cards:
+
+        # TV Samsung -----------------------------# 
+        - type: conditional
+          conditions:
+            - entity: input_select.remoto
+              state: Quarto 
+          card:
+
+            type: vertical-stack
+            cards:
+
+              # TV #
+              - type: horizontal-stack
+                cards:
+
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px   
+
+                  - type: 'custom:decluttering-card'
+                    template: switch_button_card
+                    variables:
+                      - entity: input_select.remoto
+                      - name: TV Samsung
+                      - icon: remote
+                      - aspect_ratio: 4/1
+                      - show_label: false
+                      - show_state: false
+                      - show_icon: false
+                      - tap_action:
+                          action: call-service
+                          service: input_select.select_option
+                          service_data:
+                            option: Sala
+                            entity_id: input_select.remoto
+                          haptic: light 
+
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+
+              # CONTROLES #
+              - type: horizontal-stack
+                cards:
+
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+
+                  # Diminuir Volume
+                  - type: 'custom:decluttering-card'
+                    template: switch_button_card
+                    variables:
+                      - entity: input_boolean.lovelace_remoto
+                      - name: Volume
+                      - label: Diminuir
+                      - background_color: rgb(73,73,73)
+                      - icon: volume-low
+                      - show_state: false
+                      - off_icon_color: white
+                      - off_name_color: white
+                      - margin-right: 40px
+                      - opacity: 0.9
+                      - tap_action:
+                          action: call-service
+                          service: script.tv_samsung_diminuir_volume
+
+                  # Aumentar Volume
+                  - type: 'custom:decluttering-card'
+                    template: switch_button_card
+                    variables:
+                      - entity: input_boolean.lovelace_remoto
+                      - name: Volume
+                      - label: Aumentar
+                      - background_color: rgb(73,73,73)
+                      - icon: volume-high
+                      - off_icon_color: white
+                      - off_name_color: white
+                      - show_state: false
+                      - margin-right: 40px
+                      - opacity: 0.9
+                      - tap_action:
+                          action: call-service
+                          service: script.tv_samsung_aumentar_volume
+                          haptic: light
+
+                  # Mutar Volume
+                  - type: 'custom:decluttering-card'
+                    template: switch_button_card
+                    variables:
+                      - entity: input_boolean.lovelace_remoto
+                      - name: Volume
+                      - label: Mutar
+                      - background_color: rgb(73,73,73)
+                      - icon: volume-off
+                      - off_icon_color: white
+                      - off_name_color: white
+                      - show_state: false
+                      - margin-right: 40px
+                      - opacity: 0.9 
+                      - tap_action:
+                          action: call-service
+                          service: script.tv_samsung_mute
+                          haptic: light
+
+                  # Power (Liga / Desliga)
+                  - type: 'custom:decluttering-card'
+                    template: switch_button_card
+                    variables:
+                      - entity: switch.samsung_tv
+                      - name: TV
+                      - icon: power
+                      - label: Samsung
+                      - off_icon_color: white
+                      - off_name_color: white
+                      - show_state: false
+                      - margin-right: 40px
+                      - opacity: 0.9
+                      - background_color: rgb(73,73,73)
+                      - tap_action:
+                          action: call-service
+                          service: switch.toggle
+                          service_data:
+                            entity_id: switch.tv_quarto_principal
+                          haptic: light
+
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+
+              - type: horizontal-stack
+                cards:
+
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+
+                  # Plex
+                  - type: 'custom:decluttering-card'
+                    template: switch_button_card
+                    variables:
+                      - entity: input_boolean.lovelace_manutencao
+                      - name: Plex
+                      - label: App
+                      - icon: plex
+                      - off_icon_color: gold
+                      - off_name_color: white
+                      - show_state: false
+                      - background_color: rgb(73,73,73)
+                      - margin-right: 40px
+                      - opacity: 0.9
+                      - tap_action: 
+                          action: url
+                          url: plex://
+                          haptic: light
+                  
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    aspect_ratio: 1/1
+
+                  # Seta para Cima
+                  - type: 'custom:decluttering-card'
+                    template: switch_button_card
+                    variables:
+                      - entity: media_player.tv_samsung
+                      - name: ' '
+                      - icon: arrow-up-drop-circle
+                      - margin-right: 40px
+                      - show_state: false
+                      - show_label: false
+                      - color: gray
+                      - opacity: 0.9
+                      - tap_action:
+                          action: call-service
+                          service: remote.send_command
+
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    aspect_ratio: 1/1
+
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+
+              - type: horizontal-stack
+                cards:
+
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+
+                  # Netflix
+                  - type: 'custom:decluttering-card'
+                    template: switch_button_card
+                    variables:
+                      - entity: input_boolean.lovelace_manutencao
+                      - name: Netflix
+                      - label: App
+                      - icon: netflix
+                      - off_icon_color: red
+                      - off_name_color: white
+                      - show_state: false
+                      - background_color: rgb(73,73,73)
+                      - margin-right: 40px
+                      - opacity: 0.9
+                      - tap_action: 
+                          action: url
+                          url: nflx://
+                          haptic: light
+
+                  # Seta para Esquerda
+                  - type: 'custom:decluttering-card'
+                    template: switch_button_card
+                    variables:
+                      - entity: media_player.tv_samsung
+                      - name: ' '
+                      - icon: arrow-left-drop-circle
+                      - margin-right: 40px
+                      - show_state: false
+                      - show_label: false
+                      - color: gray
+                      - opacity: 0.9
+                      - tap_action:
+                          action: call-service
+                          service: remote.send_command
+                  
+                  # Menu Meio
+                  - type: 'custom:decluttering-card'
+                    template: switch_button_card
+                    variables:
+                      - entity: media_player.tv_samsung
+                      - name: ' '
+                      - icon: xbox-controller-menu
+                      - margin-right: 40px
+                      - show_state: false
+                      - show_label: false
+                      - color: gray
+                      - opacity: 0.9
+                      - tap_action:
+                          action: call-service
+                          service: remote.send_command
+                            
+                  # Seta para Direita
+                  - type: 'custom:decluttering-card'
+                    template: switch_button_card
+                    variables:
+                      - entity: media_player.tv_samsung
+                      - name: ' '
+                      - icon: arrow-right-drop-circle
+                      - margin-right: 40px
+                      - show_state: false
+                      - show_label: false
+                      - color: gray
+                      - opacity: 0.9
+                      - tap_action:
+                          action: call-service
+                          service: remote.send_command
+
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+
+              - type: horizontal-stack
+                cards:
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+
+                  # Spotify
+                  - type: 'custom:decluttering-card'
+                    template: switch_button_card
+                    variables:
+                      - entity: input_boolean.lovelace_manutencao
+                      - name: Spotify
+                      - label: Música
+                      - icon: spotify
+                      - off_icon_color: Deeppink
+                      - off_name_color: white
+                      - show_state: false
+                      - background_color: rgb(73,73,73)
+                      - margin-right: 40px
+                      - opacity: 0.9
+                      - tap_action: 
+                          action: url
+                          url: music://
+                          haptic: light
+                          
+                  # Menu Source
+                  - type: 'custom:decluttering-card'
+                    template: switch_button_card
+                    variables:
+                      - entity: media_player.tv_samsung
+                      - name: ' '
+                      - icon: menu
+                      - margin-right: 40px
+                      - show_state: false
+                      - show_label: false
+                      - color: gray
+                      - opacity: 0.9
+                      - tap_action:
+                          action: call-service
+                          service: remote.send_command
+
+                  # Seta para Baixo
+                  - type: 'custom:decluttering-card'
+                    template: switch_button_card
+                    variables:
+                      - entity: media_player.tv_samsung
+                      - name: ' '
+                      - icon: arrow-down-drop-circle
+                      - margin-right: 40px
+                      - show_state: false
+                      - show_label: false
+                      - color: gray
+                      - opacity: 0.9
+                      - tap_action:
+                          action: call-service
+                          service: remote.send_command
+
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    aspect_ratio: 1/1
+
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+
+              - type: horizontal-stack
+                cards:
+
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+
+                  # Media Player
+                  - type: 'custom:mini-media-player'
+                    style: |
+                      ha-card {
+                        border-radius: 12px;
+                        overflow: hidden;
+                        background: rgb(73, 73, 73)
+                      }
+                    entity: media_player.tv_samsung
+                    hide:
+                      icon: true
+                      power: true
+                    artwork: cover
+
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+
+              - type: 'custom:button-card'
+                color_type: blank-card
+                styles:
+                  card:
+                    - height: 10px 
+        
+        # TV LG -----------------------------# 
+        - type: conditional
+          conditions:
+            - entity: input_select.remoto
+              state: Sala 
+          card:
+            type: vertical-stack
+            cards:
+
+              # TV #
+              - type: horizontal-stack
+                cards:
+
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px   
+
+                  - type: 'custom:decluttering-card'
+                    template: switch_button_card
+                    variables:
+                      - image: tv-lg.jpg
+                      - entity: input_select.remoto
+                      - name: TV LG
+                      - aspect_ratio: 4/1
+                      - show_label: false
+                      - show_state: false
+                      - show_icon: false
+                      - tap_action:
+                          action: call-service
+                          service: input_select.select_option
+                          service_data:
+                            option: Quarto
+                            entity_id: input_select.remoto
+                          haptic: light 
+
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+
+              # CONTROLES #
+              - type: horizontal-stack
+                cards:
+
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+
+                  # Diminuir Volume
+                  - type: 'custom:decluttering-card'
+                    template: switch_button_card
+                    variables:
+                      - entity: input_boolean.lovelace_remoto
+                      - name: Volume
+                      - label: Diminuir
+                      - background_color: rgb(73,73,73)
+                      - icon: volume-low
+                      - show_state: false
+                      - off_icon_color: white
+                      - off_name_color: white
+                      - margin-right: 40px
+                      - opacity: 0.9
+                      - tap_action:
+                          action: call-service
+                          service: remote.send_command
+
+                  # Aumentar Volume
+                  - type: 'custom:decluttering-card'
+                    template: switch_button_card
+                    variables:
+                      - entity: input_boolean.lovelace_remoto
+                      - name: Volume
+                      - label: Aumentar
+                      - background_color: rgb(73,73,73)
+                      - icon: volume-high
+                      - off_icon_color: white
+                      - off_name_color: white
+                      - show_state: false
+                      - margin-right: 40px
+                      - opacity: 0.9
+                      - tap_action:
+                          action: call-service
+                          service: remote.send_command
+
+                  # Mutar Volume
+                  - type: 'custom:decluttering-card'
+                    template: switch_button_card
+                    variables:
+                      - entity: input_boolean.lovelace_remoto
+                      - name: Volume
+                      - label: Mutar
+                      - background_color: rgb(73,73,73)
+                      - icon: volume-off
+                      - off_icon_color: white
+                      - off_name_color: white
+                      - show_state: false
+                      - margin-right: 40px
+                      - opacity: 0.9 
+                      - tap_action:
+                          action: call-service
+                          service: remote.send_command
+
+                  # Power (Liga / Desliga)
+                  - type: 'custom:decluttering-card'
+                    template: switch_button_card
+                    variables:
+                      - entity: switch.tv_quarto_principal
+                      - name: TV
+                      - icon: power
+                      - label: LG
+                      - off_icon_color: white
+                      - off_name_color: white
+                      - show_state: false
+                      - margin-right: 40px
+                      - opacity: 0.9
+                      - background_color: rgb(73,73,73)
+                      - tap_action:
+                          action: call-service
+                          service: switch.toggle
+                          service_data:
+                            entity_id: switch.tv_quarto_principal
+                          haptic: light
+
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+
+              - type: horizontal-stack
+                cards:
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+
+                  # Plex
+                  - type: 'custom:decluttering-card'
+                    template: switch_button_card
+                    variables:
+                      - entity: input_boolean.lovelace_manutencao
+                      - name: Plex
+                      - label: App
+                      - icon: plex
+                      - off_icon_color: gold
+                      - off_name_color: white
+                      - show_state: false
+                      - background_color: rgb(73,73,73)
+                      - margin-right: 40px
+                      - opacity: 0.9
+                      - tap_action: 
+                          action: url
+                          url: plex://
+                          haptic: light
+
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    aspect_ratio: 1/1
+
+                  # Menu para Cima
+                  - type: 'custom:decluttering-card'
+                    template: switch_button_card
+                    variables:
+                      - entity: media_player.tv_lg
+                      - name: ' '
+                      - icon: arrow-up-drop-circle
+                      - margin-right: 40px
+                      - show_state: false
+                      - show_label: false
+                      - color: gray
+                      - opacity: 0.9
+                      - tap_action:
+                          action: call-service
+                          service: remote.send_command
+
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    aspect_ratio: 1/1
+
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+
+              - type: horizontal-stack
+                cards:
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+
+                  # Netflix
+                  - type: 'custom:decluttering-card'
+                    template: switch_button_card
+                    variables:
+                      - entity: input_boolean.lovelace_manutencao
+                      - name: Netflix
+                      - label: App
+                      - icon: netflix
+                      - off_icon_color: red
+                      - off_name_color: white
+                      - show_state: false
+                      - background_color: rgb(73,73,73)
+                      - margin-right: 40px
+                      - opacity: 0.9
+                      - tap_action: 
+                          action: url
+                          url: nflx://
+                          haptic: light
+
+                  # Menu para Esquerda
+                  - type: 'custom:decluttering-card'
+                    template: switch_button_card
+                    variables:
+                      - entity: media_player.tv_lg
+                      - name: ' '
+                      - icon: arrow-left-drop-circle
+                      - margin-right: 40px
+                      - show_state: false
+                      - show_label: false
+                      - color: gray
+                      - opacity: 0.9
+                      - tap_action:
+                          action: call-service
+                          service: remote.send_command
+
+                  # Menu Meio
+                  - type: 'custom:decluttering-card'
+                    template: switch_button_card
+                    variables:
+                      - entity: media_player.tv_lg
+                      - name: ' '
+                      - icon: xbox-controller-menu
+                      - margin-right: 40px
+                      - show_state: false
+                      - show_label: false
+                      - color: gray
+                      - opacity: 0.9
+                      - tap_action:
+                          action: call-service
+                          service: remote.send_command
+
+                  # Menu Direita
+                  - type: 'custom:decluttering-card'
+                    template: switch_button_card
+                    variables:
+                      - entity: media_player.tv_lg
+                      - name: ' '
+                      - icon: arrow-right-drop-circle
+                      - margin-right: 40px
+                      - show_state: false
+                      - show_label: false
+                      - color: gray
+                      - opacity: 0.9
+                      - tap_action:
+                          action: call-service
+                          service: remote.send_command
+
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+
+              - type: horizontal-stack
+                cards:
+
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+
+                  # Spotfy
+                  - type: 'custom:decluttering-card'
+                    template: switch_button_card
+                    variables:
+                      - entity: input_boolean.lovelace_manutencao
+                      - name: Spotify
+                      - label: Música
+                      - icon: spotify
+                      - off_icon_color: Deeppink
+                      - off_name_color: white
+                      - show_state: false
+                      - background_color: rgb(73,73,73)
+                      - margin-right: 40px
+                      - opacity: 0.9
+                      - tap_action: 
+                          action: url
+                          url: music://
+                          haptic: light
+
+                  # Menu Source
+                  - type: 'custom:decluttering-card'
+                    template: switch_button_card
+                    variables:
+                      - entity: media_player.tv_lg
+                      - name: ' '
+                      - icon: menu
+                      - margin-right: 40px
+                      - show_state: false
+                      - show_label: false
+                      - color: gray
+                      - opacity: 0.9
+                      - tap_action:
+                          action: call-service
+                          service: remote.send_command
+
+                  # Menu para Baixo
+                  - type: 'custom:decluttering-card'
+                    template: switch_button_card
+                    variables:
+                      - entity: media_player.tv_lg
+                      - name: ' '
+                      - icon: arrow-down-drop-circle
+                      - margin-right: 40px
+                      - show_state: false
+                      - show_label: false
+                      - color: gray
+                      - opacity: 0.9
+                      - tap_action:
+                          action: call-service
+                          service: remote.send_command
+
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    aspect_ratio: 1/1
+
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+
+              - type: horizontal-stack
+                cards:
+
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+
+                  # Media Player
+                  - type: 'custom:mini-media-player'
+                    style: |
+                      ha-card {
+                        border-radius: 12px;
+                        overflow: hidden;
+                        background: rgb(73, 73, 73)
+                      }
+                    entity: media_player.tv_lg
+                    hide:
+                      icon: true
+                      power: true
+                    artwork: cover
+
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+
+              - type: 'custom:button-card'
+                color_type: blank-card
+                styles:
+                  card:
+                    - height: 10px 
+
+  ###########################################################################################################################                           
+  # Douglas
+  ###########################################################################################################################  
+  person.doug:
+    title: Douglas
+    style:
+      border-radius: 12px
+      background: var(--background-image)
+    card:
+      type: vertical-stack
+      cards: 
+
+        # Botões
+        - type: horizontal-stack
+          cards:
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px 
+
+            # Agenda ---------------------------
+            
+            # off
+            - type: conditional
+              conditions:
+                - entity: input_select.douglas
+                  state_not: Agenda
+              card:
+                type: custom:decluttering-card
+                template: switch_button_card
+                variables:
+                  - entity: input_select.douglas
+                  - name: Agenda
+                  - icon: calendar
+                  - color: gray
+                  - show_state: false
+                  - margin-right: 40px
+                  - tap_action:
+                      action: call-service
+                      service: input_select.select_option
+                      service_data:
+                        option: Agenda
+                        entity_id: input_select.douglas
+                      haptic: light
+
+            # on
+            - type: conditional
+              conditions:
+                - entity: input_select.douglas
+                  state: Agenda
+              card:
+                type: custom:decluttering-card
+                template: switch_button_card
+                variables:
+                  - entity: input_select.douglas
+                  - name: Agenda
+                  - icon: calendar
+                  - color: orange
+                  - opacity: 1.0
+                  - show_state: false
+                  - margin-right: 40px
+                  - tap_action:
+                      action: call-service
+                      service: input_select.select_option
+                      service_data:
+                        option: Agenda
+                        entity_id: input_select.douglas
+                      haptic: light
+
+            # E-mails ---------------------------
+
+            # off
+            - type: conditional
+              conditions:
+                - entity: input_select.douglas
+                  state_not: Emails 
+              card:
+                type: custom:decluttering-card
+                template: switch_button_card
+                variables:
+                  - entity: input_select.douglas
+                  - name: E-mails
+                  - icon: mailbox
+                  - color: gray
+                  - show_state: false
+                  - margin-right: 40px
+                  - tap_action:
+                      action: call-service
+                      service: input_select.select_option
+                      service_data:
+                        option: Emails
+                        entity_id: input_select.douglas
+                      haptic: light
+                      
+            # on
+            - type: conditional
+              conditions:
+                - entity: input_select.douglas
+                  state: Emails 
+              card:
+                type: custom:decluttering-card
+                template: switch_button_card
+                variables:
+                  - entity: input_select.douglas
+                  - name: E-mails
+                  - icon: mailbox
+                  - color: orange
+                  - opacity: 1.0
+                  - show_state: false
+                  - margin-right: 40px
+                  - tap_action:
+                      action: call-service
+                      service: input_select.select_option
+                      service_data:
+                        option: Emails
+                        entity_id: input_select.douglas
+                      haptic: light
+
+            # Localização ---------------------------
+
+            # off
+            - type: conditional
+              conditions:
+                - entity: input_select.douglas
+                  state_not: Localização 
+
+              card:
+                type: custom:decluttering-card
+                template: switch_button_card
+                variables:
+                  - entity: input_select.douglas
+                  - name: Local
+                  - icon: map-marker
+                  - color: gray
+                  - show_state: false
+                  - margin-right: 40px
+                  - tap_action:
+                      action: call-service
+                      service: input_select.select_option
+                      service_data:
+                        option: Localização
+                        entity_id: input_select.douglas
+                      haptic: light
+
+            # on
+            - type: conditional
+              conditions:
+                - entity: input_select.douglas
+                  state: Localização 
+
+              card:
+                type: custom:decluttering-card
+                template: switch_button_card
+                variables:
+                  - entity: input_select.douglas
+                  - name: Local
+                  - icon: map-marker
+                  - color: orange
+                  - opacity: 1.0
+                  - show_state: false
+                  - margin-right: 40px
+                  - tap_action:
+                      action: call-service
+                      service: input_select.select_option
+                      service_data:
+                        option: Localização
+                        entity_id: input_select.douglas
+                      haptic: light
+
+            # Geral ---------------------------
+
+            # off
+            - type: conditional
+              conditions:
+                - entity: input_select.douglas
+                  state_not: Geral 
+              card: 
+                type: custom:decluttering-card
+                template: switch_button_card
+                variables:
+                  - entity: input_select.douglas
+                  - name: Info
+                  - icon: information
+                  - color: gray
+                  - show_state: false
+                  - margin-right: 40px
+                  - tap_action:
+                      action: call-service
+                      service: input_select.select_option
+                      service_data:
+                        option: Geral
+                        entity_id: input_select.douglas
+                      haptic: light
+
+            # on
+            - type: conditional
+              conditions:
+                - entity: input_select.douglas
+                  state: Geral 
+              card: 
+                type: custom:decluttering-card
+                template: switch_button_card
+                variables:
+                  - entity: input_select.douglas
+                  - name: Info
+                  - icon: information
+                  - color: orange
+                  - opacity: 1.0
+                  - show_state: false
+                  - margin-right: 40px
+                  - tap_action:
+                      action: call-service
+                      service: input_select.select_option
+                      service_data:
+                        option: Geral
+                        entity_id: input_select.douglas
+                      haptic: light
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px 
+
+        ###########################################################################################################################
+
+        # Informações Gerais
+        - type: conditional
+          conditions:
+            - entity: input_select.douglas
+              state: Geral 
+          card: 
+            type: vertical-stack   
+            cards:
+
+              - type: custom:decluttering-card
+                template: header_text
+                variables:
+                  - content: '##### Informações Gerais'
+
+              - type: horizontal-stack
+                cards:
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px
+
+                  - type: entities
+                    style: |
+                      ha-card {
+                        border-radius: 12px;
+                        background: var(--homekit-white);
+                        font-family: Helvetica;
+                        font-size: 12px;
+                        color: black;
+                        --paper-item-icon-color: gray;
+                      }
+                    entities:
+
+                      - entity: sensor.bateria_douglas
+                        name: Nível da Bateria
+
+                      - entity: sensor.bateria_status_douglas
+                        name: Status da Bateria
+
+                      - entity: sensor.dirigindo_douglas_status
+                        name: Dirigindo?
+
+                      - entity: sensor.velocidade_douglas
+                        name: Velocidade
+
+                      - entity: sensor.douglas_caminho_para_casa
+                        name: Distância de casa 
+
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px
+
+              - type: 'custom:button-card'
+                color_type: blank-card
+                styles:
+                  card:
+                    - height: 10px
+
+        # Mapa e Localização
+        - type: conditional
+          conditions:
+            - entity: input_select.douglas
+              state: Localização 
+          card:
+            type: vertical-stack
+            cards:
+
+              - type: custom:decluttering-card
+                template: header_text
+                variables:
+                  - content: '##### Mapa e Localização'
+
+              - type: horizontal-stack
+                cards:
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+                  - type: history-graph
+                    style: |
+                      ha-card {
+                        border-radius: 12px;
+                        font-family: Helvetica;
+                        font-size: 12px;
+                        color: black;
+                        --paper-item-icon-color: black;
+                        background: var(--homekit-white);
+                      }
+                    entities:
+                      - person.doug
+
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+
+              - type: horizontal-stack
+                cards:
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+                  - type: map
+                    style: |
+                      ha-card {
+                        border-radius: 12px;
+                        font-family: Helvetica;
+                        font-size: 12px;
+                        color: black;
+                        --paper-item-icon-color: black;
+                        background: var(--homekit-white);
+                        overflow: hidden;
+                        position: relative;
+                      }
+                    aspect_ratio: 4x4
+                    default_zoom: 15
+                    entities:
+                      - person.doug
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+              - type: 'custom:button-card'
+                color_type: blank-card
+                styles:
+                  card:
+                    - height: 10px 
+
+        # Agenda Douglas
+        - type: conditional
+          conditions:
+            - entity: input_select.douglas
+              state: Agenda 
+          card:
+            type: vertical-stack
+            cards:
+              - type: custom:decluttering-card
+                template: header_text
+                variables:
+                  - content: "##### Agenda Douglas"
+                  
+              - type: horizontal-stack
+                cards:
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+                  - type: custom:calendar-card
+                    style: |
+                      ha-card {
+                        border-radius: 12px;
+                        font-family: Helvetica;
+                        font-size: 12px;
+                        color: black;
+                        --paper-item-icon-color: black;
+                        background: var(--homekit-white);
+                      }
+                    numberOfDays: 5
+                    entities:
+                      - calendar.minha_agenda
+                    showColors: true
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+              - type: 'custom:button-card'
+                color_type: blank-card
+                styles:
+                  card:
+                    - height: 10px 
+
+        # E-mails Douglas
+        - type: conditional
+          conditions:
+            - entity: input_select.douglas
+              state: Emails 
+          card:
+            type: vertical-stack
+            cards:
+              - type: custom:decluttering-card
+                template: header_text
+                variables:
+                  - content: "##### E-mails Douglas (Em breve)"
+              - type: horizontal-stack
+                cards:
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+
+                  
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+              - type: 'custom:button-card'
+                color_type: blank-card
+                styles:
+                  card:
+                    - height: 10px 
+
+  ###########################################################################################################################                           
+  # Luana
+  ###########################################################################################################################  
+  person.lu:
+    title: Luana
+    style:
+      border-radius: 12px
+      background: var(--background-image)
+    card:
+      type: vertical-stack
+      cards: 
+        - type: horizontal-stack
+          cards:
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px 
+
+            - type: conditional
+              conditions:
+                - entity: input_select.luana
+                  state_not: Agenda
+              card:
+                type: custom:decluttering-card
+                template: switch_button_card
+                variables:
+                  - entity: input_select.luana
+                  - name: Agenda
+                  - icon: calendar
+                  - color: gray
+                  - show_state: false
+                  - margin-right: 40px
+                  - tap_action:
+                      action: call-service
+                      service: input_select.select_option
+                      service_data:
+                        option: Agenda
+                        entity_id: input_select.luana
+                      haptic: light
+
+            - type: conditional
+              conditions:
+                - entity: input_select.luana
+                  state: Agenda
+              card:
+                type: custom:decluttering-card
+                template: switch_button_card
+                variables:
+                  - entity: input_select.luana
+                  - name: Agenda
+                  - icon: calendar
+                  - color: orange
+                  - opacity: 1.0
+                  - show_state: false
+                  - margin-right: 40px
+                  - tap_action:
+                      action: call-service
+                      service: input_select.select_option
+                      service_data:
+                        option: Agenda
+                        entity_id: input_select.luana
+                      haptic: light
+
+            - type: conditional
+              conditions:
+                - entity: input_select.luana
+                  state_not: Emails 
+              card:
+                type: custom:decluttering-card
+                template: switch_button_card
+                variables:
+                  - entity: input_select.luana
+                  - name: E-mails
+                  - icon: mailbox
+                  - color: gray
+                  - show_state: false
+                  - margin-right: 40px
+                  - tap_action:
+                      action: call-service
+                      service: input_select.select_option
+                      service_data:
+                        option: Emails
+                        entity_id: input_select.luana
+                      haptic: light
+
+            - type: conditional
+              conditions:
+                - entity: input_select.luana
+                  state: Emails 
+              card:
+                type: custom:decluttering-card
+                template: switch_button_card
+                variables:
+                  - entity: input_select.luana
+                  - name: E-mails
+                  - icon: mailbox
+                  - color: orange
+                  - opacity: 1.0
+                  - show_state: false
+                  - margin-right: 40px
+                  - tap_action:
+                      action: call-service
+                      service: input_select.select_option
+                      service_data:
+                        option: Emails
+                        entity_id: input_select.luana
+                      haptic: light
+
+            - type: conditional
+              conditions:
+                - entity: input_select.luana
+                  state_not: Localização 
+              card:
+                type: custom:decluttering-card
+                template: switch_button_card
+                variables:
+                  - entity: input_select.luana
+                  - name: Local
+                  - icon: map-marker
+                  - color: gray
+                  - show_state: false
+                  - margin-right: 40px
+                  - tap_action:
+                      action: call-service
+                      service: input_select.select_option
+                      service_data:
+                        option: Localização
+                        entity_id: input_select.luana
+                      haptic: light
+
+            - type: conditional
+              conditions:
+                - entity: input_select.luana
+                  state: Localização 
+              card:
+                type: custom:decluttering-card
+                template: switch_button_card
+                variables:
+                  - entity: input_select.luana
+                  - name: Local
+                  - icon: map-marker
+                  - color: orange
+                  - opacity: 1.0
+                  - show_state: false
+                  - margin-right: 40px
+                  - tap_action:
+                      action: call-service
+                      service: input_select.select_option
+                      service_data:
+                        option: Localização
+                        entity_id: input_select.luana
+                      haptic: light
+
+            - type: conditional
+              conditions:
+                - entity: input_select.luana
+                  state_not: Geral 
+              card: 
+                type: custom:decluttering-card
+                template: switch_button_card
+                variables:
+                  - entity: input_select.luana
+                  - name: Info
+                  - icon: information
+                  - color: gray
+                  - show_state: false
+                  - margin-right: 40px
+                  - tap_action:
+                      action: call-service
+                      service: input_select.select_option
+                      service_data:
+                        option: Geral
+                        entity_id: input_select.luana
+                      haptic: light
+
+            - type: conditional
+              conditions:
+                - entity: input_select.luana
+                  state: Geral 
+              card: 
+                type: custom:decluttering-card
+                template: switch_button_card
+                variables:
+                  - entity: input_select.luana
+                  - name: Info
+                  - icon: information
+                  - color: orange
+                  - opacity: 1.0
+                  - show_state: false
+                  - margin-right: 40px
+                  - tap_action:
+                      action: call-service
+                      service: input_select.select_option
+                      service_data:
+                        option: Geral
+                        entity_id: input_select.luana
+                      haptic: light
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px 
+
+        # Informações Gerais
+        - type: conditional
+          conditions:
+            - entity: input_select.luana
+              state: Geral 
+          card: 
+            type: vertical-stack   
+            cards:
+              - type: custom:decluttering-card
+                template: header_text
+                variables:
+                  - content: '##### Informações Gerais'
+              - type: horizontal-stack
+                cards:
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px
+                  - type: entities
+                    style: |
+                      ha-card {
+                        border-radius: 12px;
+                        background: var(--homekit-white);
+                        font-family: Helvetica;
+                        font-size: 12px;
+                        color: black;
+                        --paper-item-icon-color: gray;
+                      }
+                    entities:
+
+                      - entity: sensor.bateria_luana
+                        name: Nível da Bateria
+
+                      - entity: sensor.bateria_status_luana
+                        name: Status da Bateria
+
+                      - entity: sensor.dirigindo_luana_status
+                        name: Dirigindo?
+
+                      - entity: sensor.velocidade_luana
+                        name: Velocidade
+
+                      - entity: sensor.luana_caminho_para_casa
+                        name: Distância de casa
+
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px
+              - type: 'custom:button-card'
+                color_type: blank-card
+                styles:
+                  card:
+                    - height: 10px
+
+        # Mapa e Localização       
+        - type: conditional
+          conditions:
+            - entity: input_select.luana
+              state: Localização 
+          card:
+            type: vertical-stack
+            cards:
+              - type: custom:decluttering-card
+                template: header_text
+                variables:
+                  - content: '##### Mapa e Localização'
+
+              - type: horizontal-stack
+                cards:
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+                  - type: history-graph
+                    style: |
+                      ha-card {
+                        border-radius: 12px;
+                        font-family: Helvetica;
+                        font-size: 12px;
+                        color: black;
+                        --paper-item-icon-color: black;
+                        background: var(--homekit-white);
+                      }
+                    entities:
+                      - person.lu
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+
+              - type: horizontal-stack
+                cards:
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+                  - type: map
+                    style: |
+                      ha-card {
+                        border-radius: 12px;
+                        font-family: Helvetica;
+                        font-size: 12px;
+                        color: black;
+                        --paper-item-icon-color: black;
+                        background: var(--homekit-white);
+                        overflow: hidden;
+                        position: relative;
+                      }
+                    aspect_ratio: 4x4
+                    default_zoom: 15
+                    entities:
+                      - person.lu
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+              - type: 'custom:button-card'
+                color_type: blank-card
+                styles:
+                  card:
+                    - height: 10px 
+        
+        # Agenda Luana
+        - type: conditional
+          conditions:
+            - entity: input_select.luana
+              state: Agenda 
+          card:
+            type: vertical-stack
+            cards:
+              - type: custom:decluttering-card
+                template: header_text
+                variables:
+                  - content: "##### Agenda Luana"
+              - type: horizontal-stack
+                cards:
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+                  - type: custom:calendar-card
+                    style: |
+                      ha-card {
+                        border-radius: 12px;
+                        font-family: Helvetica;
+                        font-size: 12px;
+                        color: black;
+                        --paper-item-icon-color: black;
+                        background: var(--homekit-white);
+                      }
+                    numberOfDays: 5
+                    entities:
+                      - calendar.luanafelipe_baptista_gmail_com
+                    showColors: true
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+              - type: 'custom:button-card'
+                color_type: blank-card
+                styles:
+                  card:
+                    - height: 10px 
+        
+        # E-mails Luana
+        - type: conditional
+          conditions:
+            - entity: input_select.luana
+              state: Emails 
+          card:
+            type: vertical-stack
+            cards:
+              - type: custom:decluttering-card
+                template: header_text
+                variables:
+                  - content: "##### Emails Luana (Em breve)"
+              - type: horizontal-stack
+                cards:
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px 
+
+              - type: 'custom:button-card'
+                color_type: blank-card
+                styles:
+                  card:
+                    - height: 10px 
+
+  ###########################################################################################################################                           
+  # Clima
+  ###########################################################################################################################  
+  weather.dark_sky:
+    title: Clima
+    style:
+      border-radius: 12px
+      background: var(--background-image)
+    card:
+      type: vertical-stack
+      cards:
+
+        - type: horizontal-stack
+          cards:
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px
+
+            - type: 'custom:sun-card'
+              style: |
+                ha-card {
+                  border-radius: 12px;
+                }
+              name: Sol
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px
+
+        - type: horizontal-stack
+          cards:
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px
+
+            - type: iframe
+              style: |
+                ha-card {
+                  border-radius: 12px;
+                  overflow: hidden;
+                  box-shadow: none;
+                }
+              aspect_ratio: 110%
+              url: https://embed.windy.com/embed2.html?lat=-28.487&lon=-49.012&zoom=11&level=surface&overlay=wind&menu=&message=true&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=-28.563&detailLon=-48.945&metricWind=default&metricTemp=default&radarRange=-1
+            
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px
+
+        - type: custom:button-card
+          color_type: blank-card
+          styles:
+            card:
+              - height: 10px
+
+  ###########################################################################################################################                           
+  # Alarme
+  ###########################################################################################################################  
+  alarm_control_panel.alarme_casa:
+    title: Alarme
+    style:
+      border-radius: 12px
+      background: var(--background-image)
+    card:
+      type: vertical-stack
+      cards:
+        - type: horizontal-stack
+          cards: 
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px
+            - type: alarm-panel
+              style: |
+                ha-card {
+                  border-radius: 12px;
+                  background: var(--homekit-white);
+                  opacity: 0.7;
+                  --label-badge-text-color: '#000000';
+                  color: black;
+                }
+              entity: alarm_control_panel.alarme_casa
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px
+        - type: 'custom:button-card'
+          color_type: blank-card
+          styles:
+            card:
+              - height: 10px
+
+  ###########################################################################################################################                           
+  # Consumo
+  ###########################################################################################################################  
+  input_boolean.lovelace_consumo:
+    title: Consumo
+    style:
+      border-radius: 12px
+      background: var(--background-image)
+    card:
+      type: vertical-stack
+      cards:
+
+        # Valores em Botões ------------------------------------------------ #
+        - type: horizontal-stack
+          cards:
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px
+
+            # Total
+            - type: markdown
+              style: |
+                ha-card {
+                  background: rgba(255,0,0,0.0);
+                  border-radius: 12px;
+                  font-size: 13px;
+                  font-family: Helvetica;
+                  background-size: cover;
+                  background-position: 50% 50%;
+                  color: '#FFFFFF';
+                  height: 100px;
+                  vertical-align: baseline;
+                  margin-bottom: 2px;
+                  overflow: hidden;
+                }
+              content: |
+                Mês (R$)
+                ## **[[ sensor.consumo_mensal_reais.state ]]**
+
+            # Hoje
+            - type: markdown
+              style: |
+                ha-card {
+                  background: rgba(255,0,0,0.0);
+                  border-radius: 12px;
+                  font-size: 13px;
+                  font-family: Helvetica;
+                  background-size: cover;
+                  background-position: 50% 50%;
+                  color: '#FFFFFF';
+                  height: 100px;
+                  vertical-align: baseline;
+                  margin-bottom: 2px;
+                  overflow: hidden;
+                }
+              content: |
+                Hoje (R$)
+                ## **[[ sensor.consumo_total_diario_r.state ]]**
+ 
+            # Ontem
+            - type: markdown
+              style: |
+                ha-card {
+                  background: rgba(255,0,0,0.0);
+                  border-radius: 12px;
+                  font-size: 13px;
+                  font-family: Helvetica;
+                  background-size: cover;
+                  background-position: 50% 50%;
+                  color: '#FFFFFF';
+                  height: 100px;
+                  vertical-align: baseline;
+                  margin-bottom: 2px;
+                  overflow: hidden;
+                }
+              content: |
+                Ontem (R$)
+                ## **[[ sensor.consumo_total_anterior_r.state ]]**
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px
+
+        # Valores em Lista ------------------------------------------------ #
+        - type: 'custom:swipe-card'
+          cards:
+
+          # Mensal
+          - type: vertical-stack
+            cards:
+
+              - type: custom:decluttering-card
+                template: header_text
+                variables:
+                  - content: '##### Consumo por equipamento - Mensal'
+
+              - type: horizontal-stack
+                cards:
+
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px
+
+                  - type: entities
+                    style: |
+                      ha-card {
+                        border-radius: 12px;
+                        background: var(--homekit-white);
+                        font-family: Helvetica;
+                        font-size: 12px;
+                        color: black;
+                        --paper-item-icon-color: gray;
+                      }
+                    entities:  
+
+                      - entity: sensor.pc_mes_r
+                        name: PC Principal
+                        icon: 'mdi:desktop-classic'
+
+                      - entity: sensor.monitores_mes_r
+                        name: Monitores 
+                        icon: 'mdi:monitor-multiple'
+
+                      - entity: sensor.ar_cozinha_mes_r
+                        name: Ar Cozinha 
+                        icon: 'mdi:air-conditioner'
+
+                      - entity: sensor.ar_escritorio_mes_r
+                        name: Ar Escritório 
+                        icon: 'mdi:air-conditioner'
+
+                      - entity: sensor.ar_suite_mes_r
+                        name: Ar Quarto Principal 
+                        icon: 'mdi:air-conditioner'
+
+                      - entity: sensor.refrigerador_mes_r
+                        name: Refrigerador 
+                        icon: 'mdi:fridge-outline'
+
+                      - entity: sensor.maquina_de_lavar_mes_r
+                        name: Máquina de Lavar 
+                        icon: 'mdi:washing-machine'
+
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px
+                    
+              - type: 'custom:button-card'
+                color_type: blank-card
+                styles:
+                  card:
+                    - height: 10px 
+        
+          # Hoje
+          - type: vertical-stack
+            cards:
+
+              - type: custom:decluttering-card
+                template: header_text
+                variables:
+                  - content: '##### Consumo por equipamento - Hoje'
+
+              - type: horizontal-stack
+                cards:
+
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px
+
+                  - type: entities
+                    style: |
+                      ha-card {
+                        border-radius: 12px;
+                        background: var(--homekit-white);
+                        font-family: Helvetica;
+                        font-size: 12px;
+                        color: black;
+                        --paper-item-icon-color: gray;
+                      }
+                    entities:  
+
+                      - entity: sensor.pc_hoje_r
+                        name: PC Principal
+                        icon: 'mdi:desktop-classic'
+
+                      - entity: sensor.monitores_hoje_r
+                        name: Monitores 
+                        icon: 'mdi:monitor-multiple'
+
+                      - entity: sensor.ar_cozinha_hoje_r
+                        name: Ar Cozinha 
+                        icon: 'mdi:air-conditioner'
+
+                      - entity: sensor.ar_escritorio_hoje_r
+                        name: Ar Escritório 
+                        icon: 'mdi:air-conditioner'
+
+                      - entity: sensor.ar_suite_hoje_r
+                        name: Ar Quarto Principal 
+                        icon: 'mdi:air-conditioner'
+
+                      - entity: sensor.refrigerador_hoje_r
+                        name: Refrigerador 
+                        icon: 'mdi:fridge-outline'
+
+                      - entity: sensor.maquina_de_lavar_hoje_r
+                        name: Máquina de Lavar 
+                        icon: 'mdi:washing-machine'
+
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px
+                    
+              - type: 'custom:button-card'
+                color_type: blank-card
+                styles:
+                  card:
+                    - height: 10px 
+
+          # Ontem
+          - type: vertical-stack
+            cards:
+
+              - type: custom:decluttering-card
+                template: header_text
+                variables:
+                  - content: '##### Consumo por equipamento - Ontem'
+
+              - type: horizontal-stack
+                cards:
+
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px
+
+                  - type: entities
+                    style: |
+                      ha-card {
+                        border-radius: 12px;
+                        background: var(--homekit-white);
+                        font-family: Helvetica;
+                        font-size: 12px;
+                        color: black;
+                        --paper-item-icon-color: gray;
+                      }
+                    entities:  
+
+                      - entity: sensor.pc_ontem_r
+                        name: PC Principal
+                        icon: 'mdi:desktop-classic'
+
+                      - entity: sensor.monitores_ontem_r
+                        name: Monitores 
+                        icon: 'mdi:monitor-multiple'
+
+                      - entity: sensor.ar_cozinha_ontem_r
+                        name: Ar Cozinha 
+                        icon: 'mdi:air-conditioner'
+
+                      - entity: sensor.ar_escritorio_ontem_r
+                        name: Ar Escritório 
+                        icon: 'mdi:air-conditioner'
+
+                      - entity: sensor.ar_suite_ontem_r
+                        name: Ar Quarto Principal 
+                        icon: 'mdi:air-conditioner'
+
+                      - entity: sensor.refrigerador_ontem_r
+                        name: Refrigerador 
+                        icon: 'mdi:fridge-outline'
+
+                      - entity: sensor.maquina_de_lavar_ontem_r
+                        name: Máquina de Lavar 
+                        icon: 'mdi:washing-machine'
+
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px
+                    
+              - type: 'custom:button-card'
+                color_type: blank-card
+                styles:
+                  card:
+                    - height: 10px 
+
+        - type: 'custom:button-card'
+          color_type: blank-card
+          styles:
+            card:
+              - height: 10px
+
+  ###########################################################################################################################                           
+  # Manutenção
+  ###########################################################################################################################  
+  input_boolean.lovelace_manutencao:
+    title: Manutenção (Em breve)
+    style:
+      border-radius: 12px
+      background: var(--background-image)
+    card:
+      type: vertical-stack
+      cards: 
+
+        - type: horizontal-stack
+          cards:
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px 
+
+  ###########################################################################################################################                           
+  # Dispositrivos Ligados Agora
+  ###########################################################################################################################  
+  input_boolean.lovelace_ligados_agora:
+    title: Ligados agora
+    style: 
+      border-radius: 12px
+      background: var(--background-image)
+    card:
+      type: vertical-stack
+      cards: 
+
+        # Geral
+        - type: horizontal-stack
+          cards:
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px 
+
+            - type: entity-filter
+              card:
+                type: glance
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    background: var(--homekit-white);
+                    color: black;
+                    opacity: 0.7;
+                    font-size: 12px;
+                    font-family: Helvetica;
+                  }
+              show_empty: true
+              columns: 4
+              entities:
+
+                - entity: switch.tv_quarto_principal
+                  name: Samsung TV
+                  icon: 'mdi:television'
+                - entity: climate.ar_quarto
+                  icon: 'mdi:cup-water'
+                  name: AR Quarto
+
+                - entity: binary_sensor.pc_principal
+                  icon: 'mdi:desktop-classic'
+                  name: PC Principal
+                - entity: sensor.monitores_status
+                  icon: 'mdi:monitor-multiple'
+                  name: Monitores
+
+                - entity: switch.microondas
+                  icon: 'mdi:microwave'
+                  name: Microondas
+                - entity: switch.refrigerador
+                  icon: 'mdi:fridge-outline'
+                  name: Refrigerador
+
+                - entity: light.luz_garagem
+                  icon: 'mdi:floor-lamp'
+                  name: Garagem
+                - entity: light.luz_frente
+                  icon: 'mdi:floor-lamp'
+                  name: Frente
+                - entity: light.luz_quintal
+                  icon: 'mdi:floor-lamp'
+                  name: Quintal
+                - entity: light.led_escritorio
+                  icon: 'mdi:led-variant-outline'
+                  name: Led Escritório
+                - entity: light.led_quarto
+                  icon: 'mdi:led-variant-outline'
+                  name: Led Quarto                   
+
+                - entity: light.luz_cozinha
+                  icon: 'mdi:floor-lamp'
+                  name: Cozinha
+                - entity: light.luz_quarto
+                  icon: 'mdi:floor-lamp'
+                  name: Quarto
+                - entity: light.luz_corredor
+                  icon: 'mdi:floor-lamp'
+                  name: Corredor
+                - entity: light.luz_escritorio
+                  icon: 'mdi:floor-lamp'
+                  name: Escritório
+
+                - entity: light.gateway_light_7c49eb19486c
+                  icon: 'mdi:floor-lamp'
+                  name: Gateway
+
+                - entity: binary_sensor.door_window_sensor_158d0002890f27
+                  icon: 'mdi:door'
+                  name: Cozinha
+                - entity: binary_sensor.door_window_sensor_158d000106f81f
+                  icon: 'mdi:door'
+                  name: Garagem
+
+                - entity: switch.maquina_de_lavar
+                  icon: 'mdi:washing-machine'
+                  
+                - entity: media_player.tv_lg
+                  icon: 'mdi:television'
+                  name: TV LG
+
+
+              state_filter:
+                - 'on'
+            
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px
+
+        # Media Players
+        - type: horizontal-stack
+          cards:
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px 
+
+            - type: entity-filter
+              card:
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    background: var(--homekit-white);
+                    color: black;
+                    opacity: 0.7;
+                    font-size: 12px;
+                    font-family: Helvetica;
+                  }
+              entities:
+
+                - entity: media_player.tv
+                  type: media-player
+                  icon: 'mdi:television'
+
+                - entity: media_player.gh_cozinha
+                  type: media-player
+                  icon: 'mdi:google-home'
+
+                - entity: media_player.gh_quarto
+                  type: media-player
+                  icon: 'mdi:google-home'
+
+              state_filter:
+                - 'on'
+                - idle
+                - playing
+                - paused
+            
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px
+
+        # Broadlinks
+        - type: horizontal-stack
+          cards:
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px 
+
+            - type: entity-filter
+              card:
+                type: glance
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    background: var(--homekit-white);
+                    color: black;
+                    opacity: 0.7;
+                    font-size: 12px;
+                    font-family: Helvetica;
+                  }
+              show_empty: true
+              columns: 3
+              entities:
+
+                - entity: binary_sensor.broadlink_pro_cozinha
+                  name: Broadlink Pró Cozinha
+                  icon: 'mdi:vector-triangle'
+
+                - entity: binary_sensor.broadlink_mini_escritorio
+                  name: Broadlink Mini Escritório
+                  icon: 'mdi:remote'
+
+                - entity: binary_sensor.broadlink_mini_quarto
+                  name: Broadlink Mini Quarto
+                  icon: 'mdi:remote'
+
+              state_filter:
+                - 'on'
+            
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px
+        
+        - type: 'custom:button-card'
+          color_type: blank-card
+          styles:
+            card:
+              - height: 10px
+  
+  ###########################################################################################################################                           
+  # Cenas
+  ###########################################################################################################################  
+  input_boolean.lovelace_scenes:
+    title: Cenas
+    style:
+      border-radius: 12px
+      background: var(--background-image)
+    card:
+      type: vertical-stack
+      cards:
+
+        - type: horizontal-stack
+          cards:
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px
+
+            - type: custom:decluttering-card
+              template: switch_button_card
+              variables:
+                - entity: scene.luz_alarme
+                - name: Luz Alarme
+                - icon: weather-sunny
+                - label: Pisca todas as luzes
+                - show_state: false
+                - tap_action:
+                    action: call-service
+                    service: scene.turn_on
+                    service_data:
+                      entity_id: scene.luz_alarme
+                    haptic: light
+
+            - type: custom:decluttering-card
+              template: switch_button_card
+              variables:
+                - entity: scene.luzes_normais
+                - name: Luzes Normais
+                - icon: weather-sunset
+                - label: Não lembro
+                - show_state: false
+                - tap_action:
+                    action: call-service
+                    service: scene.turn_on
+                    service_data:
+                      entity_id: scene.luzes_normais
+                    haptic: light
+
+            - type: custom:decluttering-card
+              template: switch_button_card
+              variables:
+                - entity: scene.suite_romantica
+                - name: Quanrto Romantico
+                - icon: weather-night
+                - label: Clima
+                - show_state: false
+                - tap_action:
+                    action: call-service
+                    service: scene.turn_on
+                    service_data:
+                      entity_id: scene.suite_romantica
+                    haptic: light
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px
+
+        - type: 'custom:button-card'
+          color_type: blank-card
+          styles:
+            card:
+              - height: 10px
+
+  ###########################################################################################################################                           
+  # Vacuum - Aspirador
+  ###########################################################################################################################  
+  input_boolean.lovelace_vacuum_cleaner:
+    title: Aspirador
+    style:
+      border-radius: 12px
+      background: var(--background-image)
+    card:
+      type: vertical-stack
+      cards:
+        - type: horizontal-stack
+          cards: 
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px
+
+            - type: custom:xiaomi-vacuum-card
+              style: |
+                ha-card {
+                  border-radius: 12px;
+                }
+              entity: vacuum.aspirador_xiaomi_vacuum
+              image: /local/imgs/vacuum.png
+              name: Xiaomi Robot Vacuum
+              buttons:
+                spot: true
+              labels:
+                sensor: Sensors
+
+            - type: 'custom:button-card'
+              color_type: blank-card
+              styles:
+                card:
+                  - width: 10px
+
+        - type: 'custom:button-card'
+          color_type: blank-card
+          styles:
+            card:
+              - height: 10px
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

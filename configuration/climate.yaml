@@ -1,0 +1,30 @@
+
+# Ar Condicionado Cozinha
+- platform: smartir
+  name: AR Cozinha
+  unique_id: ar_cozinha
+  device_code: 1381
+  controller_data: !secret ip_broadpro_cozinha
+  temperature_sensor: sensor.temperature_158d00031b049b
+  humidity_sensor: sensor.humidity_158d00031b049b
+  power_sensor: switch.ar_cozinha
+
+# Ar Condicionado Quanrto Principal
+- platform: smartir
+  name: AR Quarto
+  unique_id: ar_quarto
+  device_code: 1400
+  controller_data: !secret ip_broadmini_quarto_principal
+  temperature_sensor: sensor.temperature_158d00020e355a
+  humidity_sensor: sensor.humidity_158d00020e355a
+  power_sensor: switch.ar_condicionado
+
+# Ar Condicionado Escritório
+- platform: smartir
+  name: AR Escritório
+  unique_id: ar_escritorio
+  device_code: 1381
+  controller_data: !secret ip_broadmini_escritorio
+  temperature_sensor: sensor.temperature_158d0002d778da
+  humidity_sensor: sensor.humidity_158d0002d778da
+  power_sensor: switch.ar_escritorio  

@@ -1,0 +1,11 @@
+  - platform: google_maps
+    username: !secret gmail_user_doug
+    password: !secret gmail_senha_doug
+
+  - platform: tile
+    username: !secret tile_email
+    password: !secret tile_senha
+
+  - platform: ping
+    hosts:
+      hostone: !secret ip_cel_mae

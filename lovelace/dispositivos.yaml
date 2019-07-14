@@ -1,0 +1,252 @@
+###########################################################################################################################
+# ██████╗ ██╗███████╗██████╗  ██████╗ ███████╗██╗████████╗██╗██╗   ██╗ ██████╗ ███████╗                                   #
+# ██╔══██╗██║██╔════╝██╔══██╗██╔═══██╗██╔════╝██║╚══██╔══╝██║██║   ██║██╔═══██╗██╔════╝                                   #
+# ██║  ██║██║███████╗██████╔╝██║   ██║███████╗██║   ██║   ██║██║   ██║██║   ██║███████╗                                   #
+# ██║  ██║██║╚════██║██╔═══╝ ██║   ██║╚════██║██║   ██║   ██║╚██╗ ██╔╝██║   ██║╚════██║                                   #
+# ██████╔╝██║███████║██║     ╚██████╔╝███████║██║   ██║   ██║ ╚████╔╝ ╚██████╔╝███████║                                   #
+# ╚═════╝ ╚═╝╚══════╝╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═╝   ╚═╝  ╚═══╝   ╚═════╝ ╚══════╝                                   #
+###########################################################################################################################
+title: Dispositivos
+icon: 'mdi:power-plug'
+path: dispositivos
+
+cards:
+  - type: vertical-stack
+    cards:
+
+      # Cozinha ------------------------------------# 
+      - type: custom:decluttering-card
+        template: header_text
+        variables:
+          - content: '##### Cozinha'
+
+      - type: horizontal-stack
+        cards:
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+
+          - type: custom:decluttering-card
+            template: switch_button_card
+            variables:
+              - entity: climate.ar_cozinha
+              - name: Ar Cond.
+              - icon: fan
+              - color: DodgerBlue
+              - spin: true
+
+          - type: custom:decluttering-card
+            template: switch_button_card
+            variables:
+              - entity: switch.refrigerador
+              - name: Refrigerador
+              - icon: fridge-outline
+              - lock: true
+
+          - type: custom:decluttering-card
+            template: switch_button_card
+            variables:
+              - entity: switch.microondas
+              - name: Microondas
+              - icon: microwave
+
+          - type: custom:decluttering-card
+            template: switch_button_card
+            variables:
+              - entity: switch.carregador_tablet_hyundai
+              - name: Carreg. Tablet
+              - icon: power-socket-us
+
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+      
+      # Quarto Principal ------------------------------------# 
+      - type: custom:decluttering-card
+        template: header_text
+        variables:
+          - content: '##### Quarto Principal'
+      
+      - type: horizontal-stack
+        cards:
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+
+          - type: custom:decluttering-card
+            template: switch_button_card
+            variables:
+              - entity: climate.ar_quarto
+              - name: Ar Cond.
+              - icon: fan
+              - color: DodgerBlue
+              - spin: true
+
+          - type: custom:decluttering-card
+            template: switch_button_card
+            variables:
+              - entity: media_player.tv_samsung
+              - name: TV Samsung
+              - icon: television
+
+          - type: custom:decluttering-card
+            template: switch_button_card
+            variables:
+              - entity: switch.carregador_douglas
+              - name: Carreg. Doug
+              - icon: power-socket-us
+
+          - type: custom:decluttering-card
+            template: switch_button_card
+            variables:
+              - entity: switch.carregador_luana
+              - name: Carreg. Luana
+              - icon: power-socket-us
+
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+      
+      # Escritório ------------------------------------# 
+      - type: custom:decluttering-card
+        template: header_text
+        variables:
+          - content: '##### Escritório'
+      
+      - type: horizontal-stack
+        cards:
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+
+          - type: custom:decluttering-card
+            template: switch_button_card
+            variables:
+              - entity: climate.ar_escritorio
+              - name: Ar Cond.
+              - icon: fan
+              - color: DodgerBlue
+              - spin: true
+              
+          - type: custom:decluttering-card
+            template: switch_button_card
+            variables:
+              - entity: switch.pc_principal
+              - name: PC Principal
+              - icon: desktop-tower-monitor
+              - lock: true
+
+          - type: custom:decluttering-card
+            template: switch_button_card
+            variables:
+              - entity: switch.sonoff_pow_monitores
+              - name: Monitores
+              - icon: monitor-multiple
+
+          - type: 'custom:button-card'
+            color_type: blank-card
+            aspect_ratio: 1/1
+
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+  
+  - type: vertical-stack
+    cards:
+
+      # Sala ------------------------------------# 
+      - type: custom:decluttering-card
+        template: header_text
+        variables:
+          - content: '##### Sala'
+
+      - type: horizontal-stack
+        cards:
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+
+          - type: custom:decluttering-card
+            template: switch_button_card
+            variables:
+              - entity: media_player.tv_lg
+              - name: TV LG
+              - icon: television
+
+          - type: 'custom:button-card'
+            color_type: blank-card
+            aspect_ratio: 1/1
+
+          - type: 'custom:button-card'
+            color_type: blank-card
+            aspect_ratio: 1/1
+
+          - type: 'custom:button-card'
+            color_type: blank-card
+            aspect_ratio: 1/1
+
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+      
+      # Outras Áreas ------------------------------------# 
+      - type: custom:decluttering-card
+        template: header_text
+        variables:
+          - content: '##### Outras Áreas'
+      
+      - type: horizontal-stack
+        cards:
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+
+          - type: custom:decluttering-card
+            template: switch_button_card
+            variables:
+              - entity: switch.maquina_de_lavar
+              - name: Máquina Lavar
+              - icon: washing-machine
+
+          - type: 'custom:button-card'
+            color_type: blank-card
+            aspect_ratio: 1/1
+
+          - type: 'custom:button-card'
+            color_type: blank-card
+            aspect_ratio: 1/1
+
+          - type: 'custom:button-card'
+            color_type: blank-card
+            aspect_ratio: 1/1
+
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+      
+      - type: 'custom:button-card'
+        color_type: blank-card
+        styles:
+          card:
+            - height: 10px
+

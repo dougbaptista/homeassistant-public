@@ -1,0 +1,27 @@
+###########################################################################################################################################################
+# IFTTT
+###########################################################################################################################################################
+# Avisa que o HA foi reiniciado/iniciado no meu celular por IFTTT e no Google Home
+- alias: Home Assistant Inicializado
+  initial_state: true
+
+  # dispara sempre que o HA for iniciado
+  trigger:
+    platform: homeassistant
+    event: start
+  action:
+
+    # ação com ifttt
+    - service: ifttt.trigger
+      data: {"event":"HA_inicializado"}      
+
+    # ação para notificar no GH
+    - service: tts.google_translate_say
+      data_template:
+        entity_id: media_player.musics
+        message: "Home Assistant Reiniciado."
+
+    # ação para setar o tema do HA
+    - service: frontend.set_theme
+      data:
+        name: azul     

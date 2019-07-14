@@ -1,0 +1,92 @@
+ ###########################################################################################################################################################
+# Grupos
+###########################################################################################################################################################
+  - platform: group
+    name: Luzes Externas
+    entities:
+      - light.luz_garagem
+      - light.luz_frente
+      - light.luz_quintal
+
+  - platform: group
+    name: Luzes Internas
+    entities:
+      - light.luz_cozinha
+      - light.led_escritorio
+      - light.gateway_light_7c49eb19486c
+      - light.luz_escritorio
+      - light.luz_quarto
+      - light.luz_corredor
+
+  - platform: group
+    name: Luzes Cozinha
+    entities:
+      - light.luz_cozinha
+
+  - platform: group
+    name: Luzes Escritório
+    entities:
+      - light.led_escritorio 
+      - light.gateway_light_7c49eb19486c
+      - light.luz_escritorio
+
+  - platform: group
+    name: Luzes Quarto
+    entities:
+      - light.led_quarto
+      - light.luz_quarto
+
+  - platform: group
+    name: Luzes Corredor
+    entities:
+      - light.luz_corredor
+
+###########################################################################################################################################################
+# Grupo por Tipo
+###########################################################################################################################################################
+  - platform: group
+    name: Yeelight
+    entities:
+      - light.luz_escritorio
+      - light.luz_quarto
+      - light.luz_corredor
+
+  - platform: group
+    name: Led
+    entities:
+      - light.led_quarto
+      - light.led_escritorio 
+
+  - platform: group
+    name: Normais
+    entities:
+      - light.luz_garagem
+      - light.luz_frente
+      - light.luz_quintal
+      - light.luz_cozinha
+      - light.gateway_light_7c49eb19486c
+
+  - platform: group
+    name: Coloridas
+    entities:
+      - light.luz_escritorio
+      - light.luz_quarto
+      - light.luz_corredor
+      - light.gateway_light_7c49eb19486c
+      - light.led_quarto
+      - light.led_escritorio 
+
+###########################################################################################################################################################
+# Fitas Leds
+###########################################################################################################################################################
+  - platform: flux_led
+    devices:
+      !secret ip_led_escritorio:
+        name: Led Escritório
+        mode: "rgbw"
+      !secret ip_led_quarto_principal:
+        name: Led Quarto
+        mode: "rgbw"
+
+
+

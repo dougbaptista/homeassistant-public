@@ -1,0 +1,290 @@
+
+###########################################################################################################################                           
+# ██████╗ ██████╗ ██╗███╗   ██╗ ██████╗██╗██████╗  █████╗ ██╗                                                             #
+# ██╔══██╗██╔══██╗██║████╗  ██║██╔════╝██║██╔══██╗██╔══██╗██║                                                             #
+# ██████╔╝██████╔╝██║██╔██╗ ██║██║     ██║██████╔╝███████║██║                                                             #
+# ██╔═══╝ ██╔══██╗██║██║╚██╗██║██║     ██║██╔═══╝ ██╔══██║██║                                                             #
+# ██║     ██║  ██║██║██║ ╚████║╚██████╗██║██║     ██║  ██║███████╗                                                        #
+# ╚═╝     ╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝ ╚═════╝╚═╝╚═╝     ╚═╝  ╚═╝╚══════╝                                                        #
+###########################################################################################################################                           
+title: Home
+icon: 'mdi:home'
+path: home
+
+popup_cards:
+  !include popup-cards/principal-popup.yaml
+
+cards:
+  - type: vertical-stack
+
+    cards:
+
+      ###########################################################################################################################                           
+      # Clima
+      ###########################################################################################################################  
+      - type: horizontal-stack
+
+        cards:
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+
+          - type: custom:simple-weather-card
+            style: |
+              ha-card {
+                border-radius: 12px;
+                background: rgba(11, 11, 11, 0.6);
+              }
+            entity: weather.dark_sky
+            name: "Tubarão/SC"
+            backdrop: false
+
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+
+      ###########################################################################################################################                           
+      # Personas
+      ###########################################################################################################################  
+      - type: horizontal-stack
+        cards:
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+
+          #---------------------# 
+          # Luana
+          #---------------------# 
+
+          # Ausente
+          - type: conditional
+            conditions:
+              - entity: sensor.luana_status_local
+                state_not: "Casa"
+            card:
+              type: custom:decluttering-card
+              template: person_elements
+              variables:
+                - direction: left
+                - name: lu
+                - caminho: sensor.luana_caminho_para_casa
+                - image: '/local/imgs/luana.jpg'
+                - bateria: sensor.bateria_luana
+                - icon: home
+          
+          # Casa
+          - type: conditional
+            conditions:
+              - entity: sensor.luana_status_local
+                state: "Casa"
+            card:
+              type: custom:decluttering-card
+              template: person_elements
+              variables:
+                - direction: left
+                - name: lu
+                - caminho: sensor.luana_caminho_para_bekko
+                - image: '/local/imgs/luana.jpg'
+                - bateria: sensor.bateria_luana
+                - icon: office-building
+          
+          #---------------------# 
+          # Douglas
+          #---------------------# 
+
+          # Ausente
+          - type: conditional
+            conditions:
+              - entity: sensor.douglas_status_local
+                state_not: "Casa"
+            card:
+              type: custom:decluttering-card
+              template: person_elements
+              variables:
+                - direction: right
+                - name: doug
+                - caminho: sensor.douglas_caminho_para_casa
+                - image: '/local/imgs/douglas.jpg'
+                - bateria: sensor.bateria_douglas
+                - icon: home
+          
+          # Casa
+          - type: conditional
+            conditions:
+              - entity: sensor.douglas_status_local
+                state: "Casa"
+            card:
+              type: custom:decluttering-card
+              template: person_elements
+              variables:
+                - direction: right
+                - name: doug
+                - caminho: sensor.douglas_caminho_para_o_senai
+                - image: '/local/imgs/douglas.jpg'
+                - bateria: sensor.bateria_douglas
+                - icon: office-building
+          
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+      
+      ###########################################################################################################################                           
+      # Botões
+      ###########################################################################################################################  
+      - type: vertical-stack
+        cards:
+
+          # Parte Superior
+          - type: horizontal-stack
+            cards:
+              - type: 'custom:button-card'
+                color_type: blank-card
+                styles:
+                  card:
+                    - width: 10px
+
+              - type: custom:decluttering-card
+                template: switch_button_card
+                variables:
+                  - name: Controles
+                  - label: Remotos
+                  - icon: remote
+                  - show_state: false
+                  - tap_action: 
+                      action: more-info
+                      haptic: light
+                  - entity: input_boolean.lovelace_remoto
+                  - margin-right: 40px
+                  - opacity: 0.7
+
+              - type: custom:decluttering-card
+                template: switch_button_card
+                variables:
+                  - name: Consumo
+                  - label: Energia
+                  - icon: cash-multiple
+                  - show_state: false
+                  - tap_action: 
+                      action: more-info
+                      haptic: light
+                  - entity: input_boolean.lovelace_consumo
+                  - margin-right: 40px
+                  - opacity: 0.7
+
+              - type: custom:decluttering-card
+                template: switch_button_card
+                variables:
+                  - name: Segurança
+                  - label: Câmera
+                  - icon: cctv
+                  - show_state: false
+                  - tap_action: 
+                      action: more-info
+                      haptic: light
+                  - entity: camera.cozinha
+                  - margin-right: 40px
+                  - opacity: 0.7
+
+              - type: custom:decluttering-card
+                template: switch_button_card
+                variables:
+                  - name: Alarme
+                  - label: Camera
+                  - icon: shield-check
+                  - show_label: false
+                  - tap_action: 
+                      action: more-info
+                      haptic: light
+                  - entity: alarm_control_panel.alarme_casa
+                  - margin-right: 40px
+                  - opacity: 0.7
+
+              - type: 'custom:button-card'
+                color_type: blank-card
+                styles:
+                  card:
+                    - width: 10px
+          
+          # Parte Inferior
+          - type: horizontal-stack
+            cards:
+              - type: 'custom:button-card'
+                color_type: blank-card
+                styles:
+                  card:
+                    - width: 10px
+
+              - type: custom:decluttering-card
+                template: switch_button_card
+                variables:
+                  - name: Limpeza
+                  - label: Manutenção
+                  - icon: broom
+                  - show_state: false
+                  - tap_action: 
+                      action: more-info
+                      haptic: light
+                  - entity: input_boolean.lovelace_manutencao
+                  - margin-right: 40px
+                  - opacity: 0.7
+
+              - type: custom:decluttering-card
+                template: switch_button_card
+                variables:
+                  - name: Dispositivos
+                  - label: Ligados agora
+                  - icon: power-cycle
+                  - show_state: false
+                  - tap_action: 
+                      action: more-info
+                      haptic: light
+                  - entity: input_boolean.lovelace_ligados_agora
+                  - margin-right: 40px
+                  - opacity: 0.7
+
+              - type: custom:decluttering-card
+                template: switch_button_card
+                variables:
+                  - name: Cenas
+                  - label: Disponíveis
+                  - icon: google-pages
+                  - show_state: false
+                  - tap_action: 
+                      action: more-info
+                      haptic: light
+                  - entity: input_boolean.lovelace_scenes
+                  - margin-right: 40px
+                  - opacity: 0.7
+
+              - type: custom:decluttering-card
+                template: switch_button_card
+                variables:
+                  - name: Vacuum
+                  - label: Aspirador
+                  - icon: robot-vacuum
+                  - show_state: false
+                  - tap_action: 
+                      action: more-info
+                      haptic: light
+                  - entity: input_boolean.lovelace_vacuum_cleaner
+                  - margin-right: 40px
+                  - opacity: 0.7
+
+              - type: 'custom:button-card'
+                color_type: blank-card
+                styles:
+                  card:
+                    - width: 10px
+
+  ###########################################################################################################################                           
+  # Notificações
+  ###########################################################################################################################  
+  - !include gerais/notificacoes.yaml

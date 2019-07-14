@@ -1,0 +1,19 @@
+# volume GH (media pleyar)
+gh_volume:
+  name: Volume
+  icon: mdi:timer
+  initial: 0.60
+  min: 0
+  max: 0.99
+  step: 0.10
+  mode: slider
+
+# contador de caractres para usar a voz do watson
+watson_tts:
+  name: Contador Watson TTS
+  initial: 0
+  min: 0
+  max: 2000
+  step: 1  
+  mode: slider
+

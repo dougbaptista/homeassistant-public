@@ -1,0 +1,17 @@
+  - name: telegramdoug
+    platform: telegram
+    chat_id: !secret tg_chat_id_doug
+
+  - name: telegramluana
+    platform: telegram
+    chat_id: !secret tg_chat_id_luana
+
+  - name: telegramsenai
+    platform: telegram
+    chat_id: !secret tg_chat_id_senai
+
+  - name: telegramgrupo
+    platform: group
+    services: 
+      - service: telegramdoug
+      - service: telegramluana

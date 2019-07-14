@@ -1,0 +1,11 @@
+  portas:
+    name: 'Portas'
+    entities:
+      - binary_sensor.door_window_sensor_158d0002890f27 #cozinha
+      - binary_sensor.door_window_sensor_158d000106f81f #garagem
+
+  device_status:
+    name: Status e localização
+    entities:
+      - person.doug
+      - person.lu

@@ -1,0 +1,313 @@
+type: vertical-stack
+cards:
+
+  - type: custom:decluttering-card
+    template: header_text
+    variables:
+      - content: '##### Notificações e Eventos'
+
+  # Alarme Armado - Em Casa     
+  - type: conditional
+    conditions:
+      - entity: alarm_control_panel.alarme_casa
+        state: armed_home
+    card:
+      type: custom:decluttering-card
+      template: notification_card
+      variables:
+        - color: rgba(255, 0, 0, 0.5);
+        - icon: alert
+        - content: ATENÇÃO! O alarme está ligado!
+
+  # Alarme Armado - Ausente     
+  - type: conditional
+    conditions:
+      - entity: alarm_control_panel.alarme_casa
+        state: armed_away
+    card:
+      type: custom:decluttering-card
+      template: notification_card
+      variables:
+        - color: rgba(255, 0, 0, 0.5);
+        - icon: alert
+        - content: ATENÇÃO! O alarme está ligado!
+        
+  # Alarme Acionado   
+  - type: conditional
+    conditions:
+      - entity: alarm_control_panel.alarme_casa
+        state: "triggered"
+    card:
+      type: custom:decluttering-card
+      template: notification_card
+      variables:
+        - color: rgba(255, 0, 0, 0.5);
+        - icon: alert
+        - content: O alarme foi acionado!
+
+  # Alarme Desarmado - Sem ninguém em casa 
+  - type: conditional
+    conditions:
+      - entity: alarm_control_panel.alarme_casa
+        state: disarmed
+      - entity: input_boolean.pessoas_em_casa
+        state: "off"
+    card:
+      type: custom:decluttering-card
+      template: notification_card
+      variables:
+        - color: rgba(255, 110, 0, 0.5);
+        - icon: alert
+        - content: Ninguém está mais em casa, ligue o alarme!
+
+  # Alarme Pendente - Sendo ligado
+  - type: conditional
+    conditions:
+      - entity: alarm_control_panel.alarme_casa
+        state: pending
+    card:
+      type: custom:decluttering-card
+      template: notification_card
+      variables:
+        - color: rgba(255, 166, 45, 0.5);
+        - icon: clock-alert-outline
+        - content: O alarme está sendo ligado agora, deixe a casa agora!
+
+  # Porta da Cozinha
+  - type: conditional
+    conditions:
+      - entity: binary_sensor.door_window_sensor_158d0002890f27
+        state: "on"
+    card:
+      type: custom:decluttering-card
+      template: notification_card
+      variables:
+        - color: rgba(193, 0, 29, 0.5);
+        - icon: door-open
+        - content: Porta da cozinha está aberta.
+
+  # Portão da Garagem
+  - type: conditional
+    conditions:
+      - entity: binary_sensor.door_window_sensor_158d000106f81f
+        state: "on"
+    card:
+      type: custom:decluttering-card
+      template: notification_card
+      variables:
+        - color: rgba(193, 0, 29, 0.5);
+        - icon: door-open
+        - content: Portão da garagem está aberto.
+
+  # Movimento na Garagem
+  - type: conditional
+    conditions:
+      - entity: binary_sensor.motion_sensor_158d0002ecf633
+        state: "on"
+    card:
+      type: custom:decluttering-card
+      template: notification_card
+      variables:
+        - color: rgba(255, 255, 0, 0.5)
+        - icon: motion-sensor
+        - content: Há movimento na garagem.
+
+  # Movimento na Cozinha
+  - type: conditional
+    conditions:
+      - entity: binary_sensor.motion_sensor_158d00032bd286
+        state: "on"
+    card:
+      type: custom:decluttering-card
+      template: notification_card
+      variables:
+        - color: rgba(255, 255, 0, 0.5)
+        - icon: motion-sensor
+        - content: Há movimento na cozinha.
+
+  # Movimento no Quarto Principal
+  - type: conditional
+    conditions:
+      - entity: binary_sensor.motion_sensor_158d00026726e9
+        state: "on"
+    card:
+      type: custom:decluttering-card
+      template: notification_card
+      variables:
+        - color: rgba(255, 255, 0, 0.5)
+        - icon: motion-sensor
+        - content: Há movimento no quarto principal.
+
+  # Movimento no Corredor   
+  - type: conditional
+    conditions:
+      - entity: binary_sensor.motion_sensor_158d0002fd5556
+        state: "on"
+    card:
+      type: custom:decluttering-card
+      template: notification_card
+      variables:
+        - color: rgba(255, 255, 0, 0.5)
+        - icon: motion-sensor
+        - content: Há movimento no corredor.
+
+  # Sensor de Água ativado
+  - type: conditional
+    conditions:
+      - entity: binary_sensor.water_leak_sensor_158d00028a0c55
+        state: "on"
+    card:
+      type: custom:decluttering-card
+      template: notification_card
+      variables:
+        - color: rgba(51, 99, 140, 0.5);
+        - icon: water-off
+        - content: O sensor de água disparou! Tome uma atitude!
+
+  # Máquina de Lavar - Enchendo
+  - type: conditional
+    conditions:
+      - entity: input_select.opcoes_maquina_de_lavar
+        state: Enchendo
+    card:
+      type: custom:decluttering-card
+      template: notification_card
+      variables:
+        - color: rgba(126, 255, 0, 0.5);
+        - icon: washing-machine
+        - content: A máquina de lavar está enchendo
+
+  # Máquina de Lavar - Batendo
+  - type: conditional
+    conditions:
+      - entity: input_select.opcoes_maquina_de_lavar
+        state: Batendo
+    card:
+      type: custom:decluttering-card
+      template: notification_card
+      variables:
+        - color: rgba(126, 255, 0, 0.5);
+        - icon: washing-machine
+        - content: A máquina de lavar está batendo
+
+  # Máquina de Lavar - Batendo
+  - type: conditional
+    conditions:
+      - entity: input_select.opcoes_maquina_de_lavar
+        state: Molho
+    card:
+      type: custom:decluttering-card
+      template: notification_card
+      variables:
+        - color: rgba(126, 255, 0, 0.5);
+        - icon: washing-machine
+        - content: A máquina de lavar está de molho
+  
+  # Máquina de Lavar - Batendo
+  - type: conditional
+    conditions:
+      - entity: input_select.opcoes_maquina_de_lavar
+        state: Esvaziando
+    card:
+      type: custom:decluttering-card
+      template: notification_card
+      variables:
+        - color: rgba(126, 255, 0, 0.5);
+        - icon: washing-machine
+        - content: A máquina de lavar está esvaziando
+  
+  # Máquina de Lavar - Centrifugando
+  - type: conditional
+    conditions:
+      - entity: input_select.opcoes_maquina_de_lavar
+        state: Centrifugando
+    card:
+      type: custom:decluttering-card
+      template: notification_card
+      variables:
+        - color: rgba(126, 255, 0, 0.5);
+        - icon: washing-machine
+        - content: A máquina de lavar está centrifugando
+
+  # Aspirador - Pausado
+  - type: conditional
+    conditions:
+      - entity: vacuum.aspirador_xiaomi_vacuum
+        state: paused
+    card:
+      type: custom:decluttering-card
+      template: notification_card
+      variables:
+        - color: rgba(56, 43, 230, 0.5)
+        - icon: robot-vacuum
+        - content: O aspirador está pausado
+
+  # Aspirador - Retornando
+  - type: conditional
+    conditions:
+      - entity: vacuum.aspirador_xiaomi_vacuum
+        state: returning
+    card:
+      type: custom:decluttering-card
+      template: notification_card
+      variables:
+        - color: rgba(56, 43, 230, 0.5)
+        - icon: robot-vacuum
+        - content: O aspirador está retornando
+
+  # Aspirador - Preso
+  - type: conditional
+    conditions:
+      - entity: sensor.vacuum_cleaner_error_sensor
+        state_not: 'Sem erros'
+    card:
+      type: custom:decluttering-card
+      template: notification_card
+      variables:
+        - color: rgba(187, 168, 63, 0.5);
+        - icon: robot-vacuum
+        - content: O aspirador está preso
+
+  # Cubo Xiaomi - Alert
+  - type: conditional
+    conditions:
+      - entity: binary_sensor.cube_158d00027d44ee
+        state: 'alert'
+    card:
+      type: custom:decluttering-card
+      template: notification_card
+      variables:
+        - color: rgba(80, 119, 12, 0.5);
+        - icon: cube-send
+        - content: Cubo foi mexido
+
+  # Tudo desligado / inativo
+  - type: conditional
+    conditions:
+      - entity: binary_sensor.door_window_sensor_158d0002890f27 
+        state: "off"
+      - entity: binary_sensor.door_window_sensor_158d000106f81f
+        state: "off"
+      - entity: binary_sensor.motion_sensor_158d00026726e9
+        state: "off"
+      - entity: binary_sensor.motion_sensor_158d00032bd286
+        state: "off"
+      - entity: binary_sensor.motion_sensor_158d0002fd5556
+        state: "off"  
+      - entity: binary_sensor.motion_sensor_158d0002ecf633
+        state: "off"  
+      - entity: alarm_control_panel.alarme_casa
+        state: "disarmed"
+      - entity: input_boolean.pessoas_em_casa
+        state: "on"
+      - entity: input_select.opcoes_maquina_de_lavar
+        state: "Desligada"
+      - entity: binary_sensor.cube_158d00027d44ee
+        state_not: "alert"
+    card:
+      type: custom:decluttering-card
+      template: notification_card
+      variables:
+        - color: rgba(150, 77, 77, 0.5);
+        - icon: check-circle
+        - content: Tudo está quieto, não há notificações.        

@@ -1,0 +1,248 @@
+###########################################################################################################################
+#  ██████╗██╗     ██╗███╗   ███╗ █████╗ ████████╗██╗███████╗ █████╗  ██████╗                                              #
+# ██╔════╝██║     ██║████╗ ████║██╔══██╗╚══██╔══╝██║╚══███╔╝██╔══██╗██╔═══██╗                                             #
+# ██║     ██║     ██║██╔████╔██║███████║   ██║   ██║  ███╔╝ ███████║██║   ██║                                             #
+# ██║     ██║     ██║██║╚██╔╝██║██╔══██║   ██║   ██║ ███╔╝  ██╔══██║██║   ██║                                             #
+# ╚██████╗███████╗██║██║ ╚═╝ ██║██║  ██║   ██║   ██║███████╗██║  ██║╚██████╔╝                                             #
+#  ╚═════╝╚══════╝╚═╝╚═╝     ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝╚══════╝╚═╝  ╚═╝ ╚═════╝                                              #                              
+###########################################################################################################################
+                                    
+  title: Climatização
+  icon: 'mdi:air-filter'
+  path: climatizacao
+
+  cards:
+
+  - type: vertical-stack
+    cards:
+
+      - type: custom:decluttering-card
+        template: header_text
+        variables:
+          - content: '##### Climatização'
+
+      #---------------------# 
+      # Graus
+      #---------------------#   
+      - type: horizontal-stack
+        cards:
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+
+          # Cozinha #           
+          - type: custom:decluttering-card
+            template: climate_card
+            variables:
+              - entity: climate.ar_cozinha
+              - ambient_temperature: sensor.temperature_158d00031b049b
+
+          # Quarto Principal #           
+          - type: custom:decluttering-card
+            template: climate_card
+            variables:
+              - entity: climate.ar_quarto
+              - ambient_temperature: sensor.temperature_158d00020e355a
+          
+          # Escritório #           
+          - type: custom:decluttering-card
+            template: climate_card
+            variables:
+              - entity: climate.ar_escritorio
+              - ambient_temperature: sensor.temperature_158d0002d778da
+
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+
+      #---------------------# 
+      # Botões
+      #---------------------#   
+      - type: horizontal-stack
+        cards:
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+
+          # cozinha
+          - type: custom:decluttering-card
+            template: switch_button_card
+            variables:
+              - entity: climate.ar_cozinha
+              - name: Ar Cozinha
+              - icon: radiator
+              - aspect_ratio: 2/1
+              - show_label: false
+              - margin-right: 120px
+              - size: 15%
+
+          # quarto
+          - type: custom:decluttering-card
+            template: switch_button_card
+            variables:
+              - entity: climate.ar_quarto
+              - name: Ar Quarto
+              - icon: radiator
+              - aspect_ratio: 2/1
+              - show_label: false
+              - margin-right: 120px
+              - size: 15%
+
+          # escritorio
+          - type: custom:decluttering-card
+            template: switch_button_card
+            variables:
+              - entity: climate.ar_escritorio
+              - name: Ar Escritório
+              - icon: radiator
+              - aspect_ratio: 2/1
+              - show_label: false
+              - margin-right: 120px
+              - size: 15%
+
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+      
+  #---------------------# 
+  # Gráficos
+  #---------------------#       
+  - type: vertical-stack
+    cards:
+      - type: custom:decluttering-card
+        template: header_text
+        variables:
+          - content: '##### Temperatura'
+
+      - type: horizontal-stack
+        cards:
+
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px 
+
+          - type: custom:decluttering-card
+            template: mini-graph-card
+            variables:
+              - entity: temperature_158d00031b049b
+              - name: Cozinha
+              - line_color: '#ffb414'
+
+          - type: custom:decluttering-card
+            template: mini-graph-card
+            variables:
+              - entity: temperature_158d00020e355a
+              - name: Quarto Principal
+              - line_color: '#ffb414'
+
+          - type: custom:decluttering-card
+            template: mini-graph-card
+            variables:
+              - entity: temperature_158d0002d778da
+              - name: Escritório
+              - line_color: '#ffb414'
+
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px 
+
+      - type: custom:decluttering-card
+        template: header_text
+        variables:
+          - content: '##### Umidade'
+
+      - type: horizontal-stack
+        cards:
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px 
+
+          - type: custom:decluttering-card
+            template: mini-graph-card
+            variables:
+              - entity: humidity_158d00031b049b
+              - name: Cozinha
+              - line_color: '#1427ff'
+
+          - type: custom:decluttering-card
+            template: mini-graph-card
+            variables:
+              - entity: humidity_158d00020e355a
+              - name: Quarto Principal
+              - line_color: '#1427ff'
+
+          - type: custom:decluttering-card
+            template: mini-graph-card
+            variables:
+              - entity: humidity_158d0002d778da
+              - name: Escritório
+              - line_color: '#1427ff'
+
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+
+      - type: custom:decluttering-card
+        template: header_text
+        variables:
+          - content: '##### Pressão do Ar'
+
+      - type: horizontal-stack
+        cards:
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px 
+
+          - type: custom:decluttering-card
+            template: mini-graph-card
+            variables:
+              - entity: pressure_158d00031b049b
+              - name: Cozinha
+              - line_color: '#00d8ff'
+              - font_size: 53
+              - height: 120
+
+          - type: custom:decluttering-card
+            template: mini-graph-card
+            variables:
+              - entity: pressure_158d0002d778da
+              - name: Escritório
+              - line_color: '#00d8ff'
+              - font_size: 53
+              - height: 120
+
+          - type: custom:button-card
+            color_type: blank-card
+            aspect_ratio: 1/1
+
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+
+      - type: 'custom:button-card'
+        color_type: blank-card
+        styles:
+          card:
+            - height: 10px      
+      
+      

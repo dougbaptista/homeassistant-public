@@ -1,0 +1,28 @@
+  - platform: smartir
+    name: TV Samsung
+    unique_id: tv_samsung_smartir
+    device_code: 1060
+    controller_data: !secret ip_broadmini_quarto_principal
+    power_sensor: binary_sensor.tv_samsung
+
+  - platform: spotify
+    client_id: !secret spotify_client_id
+    client_secret: !secret spotify_client_secret
+
+  - platform: plex
+
+  - platform: webostv
+    host: !secret ip_tv_lg
+    name: TV LG
+    timeout: 5
+    filename: webostv.conf
+    turn_on_action:
+      service: wake_on_lan.send_magic_packet
+      data:
+        mac: !secret mac_tv_lg
+    customize:
+      sources:
+        - livetv
+        - youtube
+        - netflix        
+        - hdmi 1                

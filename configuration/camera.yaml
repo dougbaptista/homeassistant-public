@@ -1,0 +1,25 @@
+  # Câmera Cozinha
+  - platform: ffmpeg
+    name: Cozinha
+    input: !secret rtsp_cozinha_stream
+
+  # Câmera Garagem
+  - platform: ffmpeg
+    name: Garagem
+    input: !secret rtsp_garagem
+
+  # Câmera Fundos/Quintal
+  - platform: ffmpeg
+    name: Fundos
+    input: !secret rtsp_fundos
+
+  # Stream Câmera Cozinha
+  - platform: generic
+    name: Cozinha Stream
+    still_image_url: !secret still_image_url_cozinha
+    stream_source: !secret rtsp_cozinha_stream
+    verify_ssl: false
+    username: !secret cam_user_xiaofang
+    password: !secret cam_senha_xiaofang
+    authentication: basic
+

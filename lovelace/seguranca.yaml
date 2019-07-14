@@ -1,0 +1,260 @@
+###########################################################################################################################
+# ███████╗███████╗ ██████╗ ██╗   ██╗██████╗  █████╗ ███╗   ██╗ ██████╗ █████╗                                             #
+# ██╔════╝██╔════╝██╔════╝ ██║   ██║██╔══██╗██╔══██╗████╗  ██║██╔════╝██╔══██╗                                            #
+# ███████╗█████╗  ██║  ███╗██║   ██║██████╔╝███████║██╔██╗ ██║██║     ███████║                                            #
+# ╚════██║██╔══╝  ██║   ██║██║   ██║██╔══██╗██╔══██║██║╚██╗██║██║     ██╔══██║                                            #
+# ███████║███████╗╚██████╔╝╚██████╔╝██║  ██║██║  ██║██║ ╚████║╚██████╗██║  ██║                                            #
+# ╚══════╝╚══════╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝╚═╝  ╚═╝                                            #
+###########################################################################################################################                                                                            
+title: Segurança
+icon: 'mdi:cctv'
+path: seguranca
+
+cards:
+  - type: vertical-stack
+    cards:
+
+      # Cameras -----------------------------------------# 
+      - type: custom:decluttering-card
+        template: header_text
+        variables:
+          - content: "##### Camera's"
+
+      # Cozinha #
+      - type: horizontal-stack
+        cards:
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+
+          - type: picture-entity
+            style: |
+              ha-card {
+                border-radius: 12px;
+                overflow: hidden;
+              }
+            entity: camera.cozinha_stream
+            title: Camera's  
+            aspect_ratio: 16x9
+
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+
+      # Garagem #
+      - type: horizontal-stack
+        cards:
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+
+          - type: picture-entity
+            style: |
+              ha-card {
+                border-radius: 12px;
+                overflow: hidden;
+              }
+            entity: camera.garagem
+            title: Camera's
+            aspect_ratio: 16x9
+
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+
+  - type: vertical-stack
+    cards:
+
+      # Cameras -----------------------------------------# 
+      - type: custom:decluttering-card
+        template: header_text
+        variables:
+          - content: "##### Camera's"
+
+      # Quintal #
+      - type: horizontal-stack
+        cards:
+
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+
+          - type: 'custom:swipe-card'
+            cards:
+
+              - type: picture-entity
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    overflow: hidden;
+                  }
+                entity: camera.fundos
+                title: Camera's  
+                aspect_ratio: 16x9
+
+              - type: iframe
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    overflow: hidden;
+                    box-shadow: none;
+                  }
+                aspect_ratio: 56%
+                url: https://www.youtube.com/embed/_kssWwS3loQ
+              
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+
+  - type: vertical-stack
+    cards:
+    
+      - type: horizontal-stack
+        cards:
+
+          - type: vertical-stack
+            cards:
+
+                  # Portas -----------------------------------------# 
+                  - type: custom:decluttering-card
+                    template: header_text
+                    variables:
+                      - content: '##### Portas'
+
+                  - type: horizontal-stack
+                    cards:
+
+                      - type: 'custom:button-card'
+                        color_type: blank-card
+                        styles:
+                          card:
+                            - width: 10px
+
+                      # Cozinha #
+                      - type: custom:decluttering-card
+                        template: switch_button_card
+                        variables:
+                          - entity: binary_sensor.door_window_sensor_158d0002890f27
+                          - name: Cozinha
+                          - icon: door
+                          - show_last_changed: true
+                          - tap_action: more-info
+                          - variable: icon
+                          - spin: 'mdi:door-open'
+
+                      # Garagem #
+                      - type: custom:decluttering-card
+                        template: switch_button_card
+                        variables:
+                          - entity: binary_sensor.door_window_sensor_158d000106f81f
+                          - name: Garagem
+                          - icon: door
+                          - show_last_changed: true
+                          - tap_action: more-info
+                          - variable: icon
+                          - spin: 'mdi:door-open'
+
+          - type: vertical-stack
+            cards:
+
+              # Alarmes -----------------------------------------# 
+              - type: custom:decluttering-card
+                template: header_text
+                variables:
+                  - content: '##### Alarmes'
+
+              - type: horizontal-stack
+                cards:
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    styles:
+                      card:
+                        - width: 10px
+
+                  # Água #
+                  - type: custom:decluttering-card
+                    template: switch_button_card
+                    variables:
+                      - entity: binary_sensor.water_leak_sensor_158d00028a0c55
+                      - name: Sensor Água
+                      - icon: water
+                      - show_last_changed: true
+                      - tap_action: more-info
+
+                  - type: 'custom:button-card'
+                    color_type: blank-card
+                    aspect_ratio: 1/1
+
+
+      # Movimento -----------------------------------------# 
+      - type: custom:decluttering-card
+        template: header_text
+        variables:
+          - content: '##### Movimento'
+
+      - type: horizontal-stack
+        cards:
+
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px
+
+          # Cozinha #
+          - type: custom:decluttering-card
+            template: switch_button_card
+            variables:
+              - entity: binary_sensor.motion_sensor_158d00032bd286
+              - name: Cozinha
+              - icon: motion-sensor
+              - show_last_changed: true
+              - tap_action: more-info
+
+          # Quarto #
+          - type: custom:decluttering-card
+            template: switch_button_card
+            variables:
+              - entity: binary_sensor.motion_sensor_158d00026726e9
+              - name: Quarto
+              - icon: motion-sensor
+              - show_last_changed: true
+              - tap_action: more-info
+
+          # Corredor #
+          - type: custom:decluttering-card
+            template: switch_button_card
+            variables:
+              - entity: binary_sensor.motion_sensor_158d0002fd5556
+              - name: Corredor
+              - icon: motion-sensor
+              - show_last_changed: true
+              - tap_action: more-info              
+
+          # Garagem #
+          - type: custom:decluttering-card
+            template: switch_button_card
+            variables:
+              - entity: binary_sensor.motion_sensor_158d0002ecf633
+              - name: Garagen
+              - icon: motion-sensor
+              - show_last_changed: true
+              - tap_action: more-info   
+
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - width: 10px

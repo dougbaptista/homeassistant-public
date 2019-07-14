@@ -1,0 +1,109 @@
+light.luz_garagem:
+  title: Garagem
+  style:
+    border-radius: 12px
+    background: var(--background-image)
+  card:
+    type: custom:decluttering-card
+    template: light_popup_card
+    variables:
+      - entity: light.luz_garagem
+
+light.luz_frente:
+  title: Frente
+  style:
+    border-radius: 12px
+    background: var(--background-image)
+  card:
+    type: custom:decluttering-card
+    template: light_popup_card
+    variables:
+      - entity: light.luz_frente
+
+light.luz_quintal:
+  title: Quintal
+  style:
+    border-radius: 12px
+    background: var(--background-image)
+  card:
+    type: custom:decluttering-card
+    template: light_popup_card
+    variables:
+      - entity: light.luz_quintal
+
+light.luz_cozinha:
+  title: Cozinha
+  style:
+    border-radius: 12px
+    background: var(--background-image)
+  card:
+    type: custom:decluttering-card
+    template: light_popup_card
+    variables:
+      - entity: light.luz_cozinha
+
+light.led_escritorio:
+  title: Led Escritório
+  style:
+    border-radius: 12px
+    background: var(--background-image)
+  card:
+    type: custom:decluttering-card
+    template: light_popup_card
+    variables:
+      - entity: light.led_escritorio
+
+light.gateway_light_7c49eb19486c:
+  title: Xiaomi Gateway LED
+  style:
+    border-radius: 12px
+    background: var(--background-image)
+  card:
+    type: custom:decluttering-card
+    template: light_popup_card
+    variables:
+      - entity: light.gateway_light_7c49eb19486c
+
+light.luz_escritorio:
+  title: Escritório
+  style:
+    border-radius: 12px
+    background: var(--background-image)
+  card:
+    type: custom:decluttering-card
+    template: light_popup_card
+    variables:
+      - entity: light.luz_escritorio
+
+switch.luz_quarto:
+  title: Quarto
+  style:
+    border-radius: 12px
+    background: var(--background-image)
+  card:
+    type: custom:decluttering-card
+    template: light_popup_card
+    variables:
+      - entity: switch.luz_quarto
+
+light.led_quarto:
+  title: Led Quarto
+  style:
+    border-radius: 12px
+    background: var(--background-image)
+  card:
+    type: custom:decluttering-card
+    template: light_popup_card
+    variables:
+      - entity: light.led_quarto
+
+light.luz_corredor:
+  title: Corredor
+  style:
+    border-radius: 12px
+    background: var(--background-image)
+  card:
+    type: custom:decluttering-card
+    template: light_popup_card
+    variables:
+      - entity: light.luz_corredor
