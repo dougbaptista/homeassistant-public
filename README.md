@@ -64,6 +64,8 @@ Vídeo em breve.
 
 Por favor, se você tiver dúvida entre no grupo do [telegram](https://t.me/HomeAssistantbrasil) onde eu e várias outras pessoas compartilham conhecimentos sobre o HA e ajudam na medida do possível nas questões.
 
+Também foi criado uma página para compartilhar informações através de artigos. [https://www.home-assistant.wiki.br/](https://www.home-assistant.wiki.br/)
+
 ### Agradecimentos
 
 - @remontti - Por me ajudar muito a entrar no mundo do Home Assistant, através do seu projeto é que entendi o "poder" do HA.
