@@ -36,7 +36,7 @@ Nem todos os cards estarão disponíveis no HACS, porém você pode instalar man
 - [Lovelace Xiaomi Vacuum Card](https://github.com/benct/lovelace-xiaomi-vacuum-card): Instalação pelo HACS. Apenas para gerenciar as ações do aspirador Vacuum da Xiaomi. Se você não vai aplicar, não é necessário. Futuramente pretendo experimentar o mesmo cartão que o jimz011 está utilizando no projeto dele.
 - [Swipe Card](https://github.com/bramkragten/swipe-card): Instalação pelo HACS. Estou utilizando esse card para arrastar e mostrar outras informações. No meu projeto utilizo por exemplo na página principal com o consumo e arrasto para ver o consumo dos equipamentos por mês, por dia e total. Não é necessário.
 
-#### Lista de Cards do meu projeto- Não suportado pelo HACS (Necessita de instalação manual)
+#### Lista de Cards do meu projeto - Não suportado pelo HACS (Necessita de instalação manual)
 
 - [Card-Tools](https://github.com/thomasloven/lovelace-card-tools): Instalação manual através do HACS. É um requisito para utilizar outros cartões. É obrigado a ter esse cartão instalado.
 - [Popup-Card](https://github.com/thomasloven/lovelace-card-tools): Instalação manual através do HACS. Esse cartão é o que faz a mágica para abrir as janelas/modais no meu projeto. Sem isso, os botões da página principal não irão funcionar.
