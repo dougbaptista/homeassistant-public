@@ -58,7 +58,7 @@ Nem todos os cards estarão disponíveis no HACS, porém você pode instalar man
 
 Para que quiser ver algumas telas do meu projeto, pode ser visualizado no vídeo abaixo. Recomendo assistir se realmente tiver interesse em copiar alguma parte do projeto.
 
-Vídeo em breve.
+[https://youtu.be/PNBdhkziJXI](https://youtu.be/PNBdhkziJXI)
 
 ### Dúvidas
 
