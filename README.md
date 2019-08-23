@@ -39,8 +39,8 @@ Nem todos os cards estarão disponíveis no HACS, porém você pode instalar man
 #### Lista de Cards do meu projeto - Não suportado pelo HACS (Necessita de instalação manual)
 
 - [Card-Tools](https://github.com/thomasloven/lovelace-card-tools): Instalação manual através do HACS. É um requisito para utilizar outros cartões. É obrigado a ter esse cartão instalado.
-- [Popup-Card](https://github.com/thomasloven/lovelace-card-tools): Instalação manual através do HACS. Esse cartão é o que faz a mágica para abrir as janelas/modais no meu projeto. Sem isso, os botões da página principal não irão funcionar.
-- [Thermostat-Card](https://github.com/thomasloven/lovelace-card-tools): Instalação manual. Esse cartão é uma exceção para realizar a instalação. Não é possível instalar manualmente pelo HACS, nesse caso será preciso voltar a moda "antiga" e baixar os arquivos para instalar manualmente. Esse cartão serve para mostrar a temperatura do ar condicionado. Não é necessário, você pode substituir por outros modelos de climatização.
+- [Popup-Card](https://github.com/thomasloven/lovelace-popup-card): Instalação manual através do HACS. Esse cartão é o que faz a mágica para abrir as janelas/modais no meu projeto. Sem isso, os botões da página principal não irão funcionar.
+- [Thermostat-Card](https://github.com/ciotlosm/custom-lovelace/tree/master/thermostat-card): Instalação manual. Esse cartão é uma exceção para realizar a instalação. Não é possível instalar manualmente pelo HACS, nesse caso será preciso voltar a moda "antiga" e baixar os arquivos para instalar manualmente. Esse cartão serve para mostrar a temperatura do ar condicionado. Não é necessário, você pode substituir por outros modelos de climatização.
 - [Sun-Card](https://github.com/mishaaq/sun-card): Instalação manual através do HACS. Esse cartão é onde mostra as informações do sol (pôr do sol e nascer do sol). Se você não vai utilizar, não é necessário.
 
 ### Imagens e Vídeo
